@@ -1,0 +1,108 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 200, 210, 220;
+  --background-end-rgb: 255, 255, 255;
+  --primary: 0, 0, 255;
+  --fade-start: 53,172,255;
+  --fade-end: 72, 34, 245;
+  --primary: 53, 172, 252;
+  --primary-2: 37, 101, 250;
+  --primary-3: 72, 34, 245;
+  --text-dark: 100, 100, 120;
+  --text-light: 240, 240, 250;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 50;
+    --text-dark: 120, 120, 120;
+    --text-light: 160, 160, 160;
+
+  }
+
+  .bg-fade-outline {
+    color: rgb(var(--fade-end));
+  }
+}
+
+
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      20deg,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+}
+
+nav {
+  color: rgb(var(--foreground-rgb));
+  background: rgb(var(--background-end-rgb));
+}
+
+.text-primary {
+  color: rgb(var(--primary));
+}
+
+.bg-primary{
+  background: rgb(var(--primary));
+}
+
+.text-dark{
+  color: rgb(var(--text-dark));
+}
+
+.text-light{
+  color: rgb(var(--text-light));
+}
+
+
+.bg-fade {
+  background: linear-gradient(
+      to left,
+      rgb(var(--fade-end)),
+      rgb(var(--fade-start))
+    )
+    rgb(var(--fade-end));
+}
+
+.bg-fade-outline {
+  border-style: solid;
+  border-width: 2px;
+  border-color: rgb(var(--fade-start));
+  color: rgb(var(--fade-start));
+  /* border-image: linear-gradient(
+    to left,
+    rgb(var(--fade-end)),
+    rgb(var(--fade-start))
+    ) 1; */
+}
+
+.p-_1 {
+  padding: 1px;
+}
+.p-_2 {
+  padding: 2px;
+}
+.p-_3 {
+  padding: 3px;
+}
+.p-_4 {
+  padding: 4px;
+}
+
+
+
+@layer utilities {
+  .active-link {
+    @apply font-medium; /* Change the font weight as desired */
+  }
+}
