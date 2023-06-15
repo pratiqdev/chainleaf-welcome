@@ -7,7 +7,7 @@
   --background-start-rgb: 200, 210, 220;
   --background-end-rgb: 255, 255, 255;
   --primary: 0, 0, 255;
-  --fade-start: 53,172,255;
+  --fade-start: 10, 200, 255;
   --fade-end: 72, 34, 245;
   --primary: 53, 172, 252;
   --primary-2: 37, 101, 250;
@@ -51,6 +51,9 @@ nav {
 .text-primary {
   color: rgb(var(--primary));
 }
+.text-primary-dark {
+  color: rgb(var(--primary-3));
+}
 
 .bg-primary{
   background: rgb(var(--primary));
@@ -72,6 +75,24 @@ nav {
       rgb(var(--fade-start))
     )
     rgb(var(--fade-end));
+}
+.bg-fade-to-transparent {
+  background: linear-gradient(
+      to left,
+      transparent,
+      rgb(var(--fade-end)),
+      rgb(var(--fade-start))
+    );
+}
+.bg-center-fade-to-transparent {
+  background: linear-gradient(
+      to left,
+      transparent,
+      rgb(var(--fade-end)),
+      rgb(var(--fade-start)),
+      rgb(var(--fade-end)),
+      transparent
+    );
 }
 
 .bg-fade-outline {

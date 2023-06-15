@@ -10,10 +10,10 @@ const useHash = () => {
           setHash(typeof window !== 'undefined' ? window?.location?.hash ?? '' : '');
         };
     
-        window.addEventListener('hashchange', handleHashChange);
+        window && window.addEventListener('hashchange', handleHashChange);
     
         return () => {
-          window.removeEventListener('hashchange', handleHashChange);
+          window && window.removeEventListener('hashchange', handleHashChange);
         };
     }, []);
 

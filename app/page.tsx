@@ -23,15 +23,15 @@ export default function Home() {
     </nav>
     <main className="flex min-h-screen flex-col items-center justify-between p-6 pt-32 w-full">
 
-      <div className="flex flex-col md:flex-row py-20 items-center justify-evenly w-full max-w-1200">
-        <div className="flex-col flex-1">
+      <div className="flex flex-col-reverse lg:flex-row py-20 items-center justify-evenly w-full max-w-1200">
+        <div className="flex-col flex-1 text-center lg:text-left">
           <h3 className="text-dark font-semibold mb-2">{truth.hero.supheading}</h3>
-          <h1 className="text-4xl font-bold leading-26">{truth.hero.heading}</h1>
-          <h2 className="text-primary font-bold text-4xl mb-12">{truth.hero.subheading}</h2>
+          <h1 className="text-4xl font-bold leading-26 mb-10">{truth.hero.heading} <span className="text-primary font-bold text-4xl mb-12">{truth.hero.subheading}</span></h1>
+         
           <a href={truth.hero.link.href} className="bg-fade py-3 px-6 rounded-md bg-fade  text-white font-semibold text-md">{truth.hero.link.text} -&gt;</a>
         </div>
         <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert flex-1 z-10"
+          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert flex-1 z-10 mb-20 w-auto lg:w-full mx-6 lg:mx-0"
           src="/next.svg"
           alt="Next.js Logo"
           width={120}
@@ -42,16 +42,16 @@ export default function Home() {
 
 
       <section className="w-full relative m-20 max-w-1200">
-        <h2 className="relative text-transparent bg-clip-text bg-gradient-to-b from-teal-200 to-indigo-900 inline-block text-7xl font-bold text-center uppercase w-full opacity-50 z-10">{truth.sections.problem.heading}</h2>
+        <h2 className="relative text-transparent bg-clip-text bg-gradient-to-b from-teal-200 to-indigo-900 inline-block text-7xl font-bold text-center uppercase w-full opacity-75 z-10">{truth.sections.problem.heading}</h2>
         <h3 className="relative text-center text-3xl -mt-6 z-10 font-semibold tracking-wide">{truth.sections.problem.subheading}</h3>
         <p className="text-dark text-center mt-6 mb-10">{truth.sections.problem.content}</p>
 
         <div className="flex flex-col md:flex-row">
           <div className="flex-col flex-1 gap-4">
             {truth.sections.problem.subsections.map(subsec => 
-              <div key={subsec.heading}  className="relative rounded-md p-_1 bg-fade  flex items-center mb-6">
+              <div key={subsec.heading}  className="relative rounded-md p-_1 bg-fade-to-transparent flex items-center mb-6">
                 <div className="h-auto px-4" >
-                  <subsec.icon className="h-16 w-16"/>
+                  <subsec.icon className="h-16 w-16 text-primary-dark"/>
                 </div>
                 <div className="p-6 bg-white dark:bg-gray-900 w-full rounded-md">
                   <h4>{subsec.heading}</h4>
@@ -62,7 +62,7 @@ export default function Home() {
           </div>
           <div className="flex-1 p-6">
             <Image
-              className="dark:invert"
+              className="dark:invert w-auto"
               src="/next.svg"
               alt="Next.js Logo"
               width={120}
@@ -75,15 +75,15 @@ export default function Home() {
       </section>
 
       <section className="w-full relative m-20 max-w-1200">
-        <h2 className="relative text-transparent bg-clip-text bg-gradient-to-b from-teal-200 to-indigo-900 inline-block text-7xl font-bold text-center uppercase w-full opacity-50 z-10">{truth.sections.vision.heading}</h2>
+        <h2 className="relative text-transparent bg-clip-text bg-gradient-to-b from-teal-200 to-indigo-900 inline-block text-7xl font-bold text-center uppercase w-full opacity-75 z-10">{truth.sections.vision.heading}</h2>
         <h3 className="relative text-center text-3xl -mt-6 z-10 font-semibold tracking-wide">{truth.sections.vision.subheading}</h3>
         <p className="text-dark text-center mt-6 mb-10">{truth.sections.vision.content}</p>
 
-        <div className="flex flex-col md:flex-row justify-evenly">
+        <div className="flex flex-col md:flex-row justify-evenly gap-0 md:gap-6">
             {truth.sections.vision.subsections.map(subsec => 
-              <div key={subsec.heading}  className="relative rounded-md p-_1 bg-fade  flex items-center mb-6" style={{minWidth: '250px'}}>
+              <div key={subsec.heading}  className="relative rounded-md p-_1 bg-center-fade-to-transparent  flex items-center mb-6" style={{minWidth: '250px'}}>
                 <div className="relative p-6 bg-white dark:bg-gray-900 w-full rounded-md overflow-hidden">
-                  <div className="absolute -bottom-3 -right-2 bg-gray-600 bg-opacity-25 p-4 rounded-full">
+                  <div className="absolute -bottom-3 -right-2 bg-indigo-100 dark:bg-indigo-900 p-4 rounded-full">
                     <subsec.icon className="h-10 w-10 text-indigo-500"/>
                   </div>
                   <h4>{subsec.heading}</h4>
