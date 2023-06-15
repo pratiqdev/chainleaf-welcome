@@ -3,12 +3,11 @@
 import { useState, useEffect } from "react";
 
 const useHash = () => {
-    const [hash, setHash] = useState(window?.location?.hash ?? '#home');
+    const [hash, setHash] = useState('');
 
     useEffect(() => {
         const handleHashChange = () => {
-          setHash(window?.location?.hash ?? '');
-          // Perform any actions based on the hash parameter
+          setHash(typeof window !== 'undefined' ? window?.location?.hash ?? '' : '');
         };
     
         window.addEventListener('hashchange', handleHashChange);
