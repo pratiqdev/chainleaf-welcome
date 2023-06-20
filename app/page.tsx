@@ -28,7 +28,7 @@ export default function Home() {
     </nav>
     <main className="flex min-h-screen flex-col items-center justify-between pt-32 w-full" id="home">
 
-      <div className="flex flex-col-reverse lg:flex-row lg:py-20 items-center justify-evenly w-full max-w-1200">
+      <div className="flex flex-col-reverse lg:flex-row lg:py-20 items-center justify-evenly w-full max-w-1200 pl-12">
         <div className="flex-col flex-1 text-center lg:text-left">
           <h3 className="text-dark font-semibold mb-2">{truth.hero.supheading}</h3>
           <h1 className="text-4xl font-bold leading-26 mb-10">{truth.hero.heading} <span className="text-primary-6 font-bold text-4xl mb-12">{truth.hero.subheading}</span></h1>
