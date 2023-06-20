@@ -94,7 +94,7 @@ export default function Home() {
         <h3 className="relative text-center text-3xl -mt-6 z-10 font-semibold tracking-wide">{truth.sections.vision.subheading}</h3>
         <p className="text-dark text-center mt-6 mb-10 dark:text-gray-300">{truth.sections.vision.content}</p>
 
-        <div className="flex flex-col md:flex-row justify-evenly items-center  gap-6 md:gap-6">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
             {truth.sections.vision.subsections.map(subsec => 
               <div key={subsec.heading}  className="rounded-md p-_1 bg-center-fade-to-transparent flex-1 h-full w-full"  >
                 <div className="relative p-8 bg-white dark:bg-gray-900 w-full rounded-md overflow-hidden h-full flex-1 " style={{minHeight: '14rem'}}>
