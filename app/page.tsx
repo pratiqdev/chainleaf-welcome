@@ -28,14 +28,14 @@ export default function Home() {
     </nav>
     <main className="flex min-h-screen flex-col items-center justify-between pt-32 w-full" id="home">
 
-      <div className="flex flex-col-reverse lg:flex-row lg:py-20 items-center justify-evenly w-full max-w-1200 pl-12">
-        <div className="flex-col flex-1 text-center lg:text-left">
+      <div className="flex flex-col-reverse lg:flex-row lg:py-20 items-center justify-evenly w-full max-w-1200 pl-0 lg:pl-12">
+        <div className="flex-col flex-1 text-center lg:text-left p-4">
           <h3 className="text-dark font-semibold mb-2">{truth.hero.supheading}</h3>
           <h1 className="text-4xl font-bold leading-26 mb-10">{truth.hero.heading} <span className="text-primary-6 font-bold text-4xl mb-12">{truth.hero.subheading}</span></h1>
          
           <a href={truth.hero.link.href} className="bg-fade py-3 px-6 rounded-md bg-fade  text-white font-semibold text-md">{truth.hero.link.text} -&gt;</a>
         </div>
-        <div className="flex-1 flex items-center justify-center">
+        <div className="flex-1 flex items-center justify-center ml-6 lg:ml-0">
           <Image
             className="absolute flex-1 z-20  banner-logo mr-8 opacity-30 w-200"
             src="/icons/logo_no_text_white.svg"
