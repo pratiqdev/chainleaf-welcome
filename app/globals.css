@@ -1,37 +1,45 @@
+@import 'tailwindcss/base';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import "~react-image-gallery/styles/css/image-gallery.css";
 
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 200, 210, 220;
   --background-end-rgb: 255, 255, 255;
   --primary: 0, 0, 255;
-  --fade-start: 10, 200, 255;
+  --fade-start: 0, 248, 233;
   --fade-end: 72, 34, 245;
   --primary: 53, 172, 252;
-  --primary-2: 37, 101, 250;
-  --primary-3: 72, 34, 245;
+  --primary-dark: #08209A;
+  --primary-dark-rgb: 8, 32, 154;
+  --primary-med: #1085C8;
+  --primary-med-rgb: 16, 133, 200;
+  --primary-light: #00F8E9;
+  --primary-light-rgb: 0, 248, 233;
   --text-dark: 100, 100, 120;
   --text-light: 240, 240, 250;
+
+  --primary-1: #00F8E9;
+  --primary-2: #06D4DF;
+  --primary-3: #0BACD3;
+  --primary-4: #1085C8;
+  --primary-5: #165DBC;
+  --primary-6: #08209A;
+
+  --primary-rgb-1: 0, 248, 233;
+  --primary-rgb-2: 6, 212, 223;
+  --primary-rgb-3: 11, 172, 211;
+  --primary-rgb-4: 16, 133, 200;
+  --primary-rgb-5: 22, 93, 188;
+  --primary-rgb-6: 8, 32, 154;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 50;
-    --text-dark: 120, 120, 120;
-    --text-light: 160, 160, 160;
 
-  }
-
-  .bg-fade-outline {
-    color: rgb(var(--fade-end));
-  }
+body, html {
+  scroll-behavior: smooth;
 }
-
-
 
 body {
   color: rgb(var(--foreground-rgb));
@@ -70,7 +78,7 @@ nav {
 
 .bg-fade {
   background: linear-gradient(
-      to left,
+      to right,
       rgb(var(--fade-end)),
       rgb(var(--fade-start))
     )
@@ -88,8 +96,8 @@ nav {
   background: linear-gradient(
       to left,
       transparent,
-      rgb(var(--fade-end)),
-      rgb(var(--fade-start)),
+      /* rgb(var(--fade-start)), */
+      rgb(var(--fade-start), .5),
       rgb(var(--fade-end)),
       transparent
     );
@@ -98,8 +106,8 @@ nav {
 .bg-fade-outline {
   border-style: solid;
   border-width: 2px;
-  border-color: rgb(var(--fade-start));
-  color: rgb(var(--fade-start));
+  border-color: rgb(var(--primary-rgb-6));
+  color: rgb(var(--primary-rgb-6));
   /* border-image: linear-gradient(
     to left,
     rgb(var(--fade-end)),
@@ -120,10 +128,66 @@ nav {
   padding: 4px;
 }
 
+.banner-logo {
+  max-height: 25rem;
+}
 
+.text-gradient {
+  background-image: linear-gradient(to right, var(--primary-6), var(--primary-2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
 
-@layer utilities {
-  .active-link {
-    @apply font-medium; /* Change the font weight as desired */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 50;
+    --text-dark: 120, 120, 120;
+    --text-light: 160, 160, 160;
+    --primary-dark: ;
+    --primary-dark-rgb: 8, 32, 154;
+    --primary-med: #1085C8;
+    --primary-med-rgb: 16, 133, 200;
+    --primary-light: #00F8E9;
+    --primary-light-rgb: 0, 248, 233;
+
+    --primary-6: #00F8E9;
+    --primary-5: #06D4DF;
+    --primary-4: #0BACD3;
+    --primary-3: #1085C8;
+    --primary-2: #165DBC;
+    --primary-1: #08209A;
+
+    --primary-rgb-6: 0, 248, 233;
+    --primary-rgb-5: 6, 212, 223;
+    --primary-rgb-4: 11, 172, 211;
+    --primary-rgb-3: 16, 133, 200;
+    --primary-rgb-2: 22, 93, 188;
+    --primary-rgb-1: 8, 32, 154;
   }
+
+}
+
+
+/* nav{
+  border-bottom: 4px;
+  border-style: solid;
+  border-color: #FFF0C8;
+} */
+
+.image-gallery {
+  flex: 1;
+}
+
+.gallery-bio {
+  /* background: green !important; */
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  white-space: normal;
+  line-height: normal;
+
 }
