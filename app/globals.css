@@ -39,6 +39,7 @@
 
 body, html {
   scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
 }
 
 body {
@@ -116,7 +117,7 @@ nav {
 }
 
 .p-_1 {
-  padding: 1px;
+  padding: 1px !important;
 }
 .p-_2 {
   padding: 2px;
@@ -137,6 +138,27 @@ nav {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+}
+
+.image-gallery-pseudo-container {
+  height: 30rem;
+  max-height: 30rem;
+}
+
+
+/* .image-gallery-bullets-container {
+  position: absolute;
+  bottom: -3rem !important;
+  width: 100%;
+} */
+
+.image-gallery-bullet {
+  background: var(--primary-6) !important;
+  box-shadow: none !important;
+  border: 0px !important;
+}
+.image-gallery-bullet.active{
+  background: var(--primary-1) !important;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -189,5 +211,6 @@ nav {
   right: 0;
   white-space: normal;
   line-height: normal;
-
+  background: linear-gradient(to bottom, #0000, #fffd 10%);
+  padding-top: 1rem;
 }

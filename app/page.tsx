@@ -26,7 +26,7 @@ export default function Home() {
           <a href={truth.nav.external.register} className="py-1 px-5 rounded-md bg-gradient-to-r from-primary-6 to-primary-1 text-sm text-white font-semibold">Sign Up</a>
         </div>
     </nav>
-    <main className="flex min-h-screen flex-col items-center justify-between p-6 pt-32 w-full" id="home">
+    <main className="flex min-h-screen flex-col items-center justify-between pt-32 w-full" id="home">
 
       <div className="flex flex-col-reverse lg:flex-row lg:py-20 items-center justify-evenly w-full max-w-1200">
         <div className="flex-col flex-1 text-center lg:text-left">
@@ -56,7 +56,7 @@ export default function Home() {
       </div>
 
 
-      <section className="w-full relative m-20 max-w-1200" id="problem">
+      <section className="w-full relative m-20 max-w-1200 p-6" id="problem">
         <h2 className="relative text-transparent bg-clip-text bg-gradient-to-b from-teal-200 to-indigo-900 inline-block text-7xl font-bold text-center uppercase w-full opacity-75 z-10">{truth.sections.problem.heading}</h2>
         <h3 className="relative text-center text-3xl -mt-6 z-10 font-semibold tracking-wide">{truth.sections.problem.subheading}</h3>
         <p className="text-dark text-center mt-6 mb-10 dark:text-gray-300">{truth.sections.problem.content}</p>
@@ -89,7 +89,7 @@ export default function Home() {
 
       </section>
 
-      <section className="w-full relative m-20 max-w-1200" id="vision">
+      <section className="w-full relative m-20 max-w-1200 p-6" id="vision">
         <h2 className="relative text-transparent bg-clip-text bg-gradient-to-b from-teal-200 to-indigo-900 inline-block text-7xl font-bold text-center uppercase w-full opacity-75 z-10">{truth.sections.vision.heading}</h2>
         <h3 className="relative text-center text-3xl -mt-6 z-10 font-semibold tracking-wide">{truth.sections.vision.subheading}</h3>
         <p className="text-dark text-center mt-6 mb-10 dark:text-gray-300">{truth.sections.vision.content}</p>
@@ -112,13 +112,13 @@ export default function Home() {
       </section>
 
 
-      <section className="w-full relative m-20 max-w-1200 mb-20" id="solution">
+      <section className="w-full relative m-20 max-w-1200 mb-20 p-6" id="solution">
         <h2 className="relative text-transparent bg-clip-text bg-gradient-to-b from-teal-200 to-indigo-900 inline-block text-7xl font-bold text-center uppercase w-full opacity-75 z-10">{truth.sections.solution.heading}</h2>
         <h3 className="relative text-center text-3xl -mt-6 z-10 font-semibold tracking-wide">{truth.sections.solution.subheading}</h3>
         <p className="text-dark text-center mt-6 mb-10 dark:text-gray-300">{truth.sections.solution.content}</p>
 
         <div className="flex flex-col md:flex-row-reverse items-center">
-          <div className="relative flex-col flex-1 gap-4 border">
+          <div className="relative flex-col flex-1 gap-4">
             <div className="bg-gradient-to-r from-transparent via-primary-6 to-transparent opacity-25 absolute top-12 left-9 bottom-12 w2">?</div>
             {truth.sections.solution.subsections.map(subsec => 
               <div key={subsec.heading}  className="relative flex items-center">
@@ -157,7 +157,7 @@ export default function Home() {
               alt="Next.js Logo"
               width={120}
               height={17}
-              />
+            />
           </div>
           <div className="flex-1 leading-8 text-lg">
             Duis elit id voluptate sint. Deserunt ullamco fugiat Lorem aute magna esse laborum. Consectetur tempor nostrud sint magna Lorem eiusmod velit nulla laborum ullamco. Est pariatur duis laboris enim pariatur deserunt ullamco. Voluptate enim anim voluptate ut.
@@ -169,10 +169,9 @@ export default function Home() {
 
 
 
-          <section className="w-full relative my-20 max-w-1200" id="about">
+          <section className="w-full relative my-20 max-w-1200 p-6" id="about">
         <h2 className="relative text-transparent bg-clip-text bg-gradient-to-b from-teal-200 to-indigo-900 inline-block text-7xl font-bold text-center uppercase w-full opacity-75 z-10">{truth.sections.about.heading}</h2>
-        <h3 className="relative text-center text-3xl -mt-6 z-10 font-semibold tracking-wide">{truth.sections.about.subheading}</h3>
-        <p className="text-dark text-center mt-6 mb-10 dark:text-gray-300">{truth.sections.about.content}</p>
+        <h3 className="relative text-center text-3xl -mt-6 z-10 font-semibold tracking-wide mb-10">{truth.sections.about.subheading}</h3>
 
         <div className="flex flex-col md:flex-row items-center gap-8">
           <div className="flex-1">
@@ -181,8 +180,7 @@ export default function Home() {
           <div className="flex flex-1 flex-col justify-between items-start h-full" >
             <div className="leading-8 h-full flex-1 text-lg">
             {truth.sections.about.content}
-              Duis elit id voluptate sint. Deserunt ullamco fugiat Lorem aute magna esse laborum. Consectetur tempor nostrud sint magna Lorem eiusmod velit nulla laborum ullamco. Est pariatur duis laboris enim pariatur deserunt ullamco. Voluptate enim anim voluptate ut.
-              Aliqua sunt cillum tempor ipsum. Sint mollit anim nostrud exercitation incididunt nisi ex ut exercitation voluptate. In deserunt aliquip consequat sint duis elit. Laboris reprehenderit eu Lorem cillum sint. Dolor id nisi ipsum id proident voluptate culpa quis incididunt dolore. Adipisicing ut aliquip cillum anim nostrud ea amet amet ea incididunt dolore. Laborum ea consectetur ea ad sit quis duis quis reprehenderit non ut.
+              
             </div>
             <a href={truth.hero.link.href} className="bg-fade py-3 px-6 rounded-md bg-fade  text-white font-semibold text-md mt-20">{truth.hero.link.text} -&gt;</a>
           </div>
@@ -195,75 +193,37 @@ export default function Home() {
 
 
 
-      <div className="mb-32 grid text-center lg:mb-0 lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Docs{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
+      <footer className="w-full flex flex-col bg-primary-6 dark:bg-gray-900 py-12 text-white">
+        <div className="w-full flex justify-center">
+        <div className="max-w-1200 w-full flex items-center justify-between">
+         <Image
+          className="relative"
+          src="/icons/white logo.svg"
+          alt="Chainleaf Labs Logo"
+          width={200}
+          height={200}
+          priority
+          />
+          <div className="flex gap-12 items-start">
+            {truth.footer.sections.map(sect => <div className="flex flex-col gap-4" key={sect.title}>
+              <div className="font-semibold text-primary-1 dark:text-primary-4">{sect.title}</div>
+              {sect.links.map(link => <a key={link.href} href={link.href} className="text-sm">{link.text}</a>)}</div>)}
+          </div>
+        </div>
+        </div>
+        <div className="bg-gradient-to-r from-transparent via-primary-4 to-transparent my-8 max-w-1200 mx-auto w-full" style={{height: '1px'}}></div>
+        <div className="w-full max-w-1200 mx-auto flex justify-between">
+          <div className="test-sm text-gray-300">{truth.footer.copyright}</div>
+          <div>
+            {truth.footer.socials.map(soc => <a key={soc.text} href=""></a>)}
+          </div>
+        </div>
+      </footer>
 
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800 hover:dark:bg-opacity-30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Learn{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
 
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Templates{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Explore the Next.js 13 playground.
-          </p>
-        </a>
 
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Deploy{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
+
+
     </main>
     </>
   )
