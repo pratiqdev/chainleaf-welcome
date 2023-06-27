@@ -186,7 +186,7 @@ export default function Home() {
               height={937}
             />
           </picture>
-
+ 
           <div   className=" mb-2 leading-8 tracking-wide text-lg max-w-auto lg:max-w-[500px] mx-6">
             {truth.sections.solution.content}
           </div>
