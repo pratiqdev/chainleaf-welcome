@@ -35,7 +35,7 @@ export default function Home() {
           <h2 className="text-dark font-semibold mb-2">{truth.hero.supheading}</h2>
           <h3 className="text-4xl font-bold leading-26 mb-10">{truth.hero.heading} <span className="text-primary-6 font-bold text-4xl mb-12">{truth.hero.subheading}</span></h3>
          
-          <a href={truth.hero.link.href} className="bg-fade py-3 px-6 rounded-md bg-fade  text-white font-semibold text-md" >{truth.hero.link.text} -&gt;</a>
+          <a href={truth.hero.link.href} className="bg-fade py-3 px-6 rounded-md bg-fade  text-white font-semibold text-lg" >{truth.hero.link.text} -&gt;</a>
         </div>
 
           <div className="flex-1 flex items-center justify-center ml-6 lg:ml-0 max-w-[20rem] md:max-w-[30rem]">
@@ -119,9 +119,9 @@ export default function Home() {
       </section>
 
 
-      <section className="w-full relative m-20 max-w-1200 mb-20 p-6" id="solution">
+      <section className="w-full relative m-20 max-w-1200 mb-0 p-6" id="solution">
         <h2 className="relative text-transparent bg-clip-text bg-gradient-to-b from-indigo-500 to-indigo-200 inline-block text-6xl lg:text-8xl font-bold text-center uppercase w-full opacity-75 z-10">{truth.sections.solution.heading}</h2>
-        <h3 className="relative text-center text-4xl -mt-6 z-10 font-semibold tracking-wide dark:text-primary-6">{truth.sections.solution.subheading}</h3>
+        <h3 className="relative text-center text-4xl -mt-6 -mb-12 z-10 font-semibold tracking-wide dark:text-primary-6">{truth.sections.solution.subheading}</h3>
         {/* <p className="text-dark text-center mt-6 mb-10 dark:text-gray-300">{truth.sections.solution.content}</p> */}
 
         <div className="flex flex-col-reverse lg:flex-row-reverse items-center mb-12">
@@ -160,13 +160,22 @@ export default function Home() {
           </div>
         </div>
 
+
+        </section>
+        
+
+
+
+
+        <section className="w-full relative m-20 max-w-1200 p-6" id="platform">
+
         <h2 className="relative text-transparent bg-clip-text bg-gradient-to-b from-indigo-500 to-indigo-200 inline-block text-6xl lg:text-8xl font-bold text-center uppercase w-full opacity-75 z-10">PLATFORM</h2>
         <h3 className="relative text-center text-4xl -mt-6 z-10 font-semibold tracking-wide dark:text-primary-6">Connecting the Pieces</h3>
 
 
 
-        <div className="flex flex-col lg:flex-row-reverse gap-12 mx-auto max-w-1200 justify-center items-center mt-24">
-          <picture  className="m-0 md:m-6 max-w-[400px] md:max-w-[600px]">
+        <div className="flex flex-col lg:flex-row-reverse gap-6 mx-auto max-w-[1200px] mt-12 justify-center items-center">
+          <picture  className="m-0 md:m-2 max-w-[400px] md:max-w-[600px]">
             <source srcSet='/images/diagram_large_darkmode.png' media="(prefers-color-scheme: dark)" />
        
             <Image
@@ -177,8 +186,12 @@ export default function Home() {
               height={937}
             />
           </picture>
-          <div className="flex-1 leading-8 tracking-wide m-6 mx-0 lg:mx-auto">
-          {truth.sections.solution.content}
+
+          <div   className=" mb-2 leading-8 tracking-wide text-lg max-w-auto lg:max-w-[500px] mx-6">
+            {truth.sections.solution.content}
+          </div>
+
+          <div className="flex-1 leading-8 tracking-wide m-6 mx-0 lg:mx-auto bg-white p-6 rounded-lg bg-center-fade-to-transparent p-_1">
 
           </div>
         </div>
@@ -199,7 +212,7 @@ export default function Home() {
             <Gallery />
           </div>
           <div className="flex flex-1 flex-col justify-between items-start mx-0" style={{minHeight:'30rem'}} >
-            <div className="flex-1 leading-8 tracking-wide">
+            <div className="flex-1 leading-8 tracking-wide text-lg">
               {truth.sections.about.content}
             </div>
               <a href={truth.hero.link.href} className="bg-fade py-3 px-6 rounded-md bg-fade  text-white font-semibold text-md mt-6 lg:mt-0 w-full text-center lg:w-auto lg:text-left">{truth.hero.link.text} -&gt;</a>
@@ -226,7 +239,7 @@ export default function Home() {
           <div className="flex gap-12 items-start">
             {truth.footer.sections.map(sect => <div className="flex flex-col gap-4 mx-1 lg:mx-8" key={sect.title}>
               <div className="font-semibold text-primary-1 dark:text-primary-4">{sect.title}</div>
-              {sect.links.map(link => <a key={link.href} href={link.href} className="text-sm">{link.text}</a>)}</div>)}
+              {sect.links.map(link => <a key={link.href} href={link.href} className="">{link.text}</a>)}</div>)}
           </div>
         </div>
         </div>
@@ -234,7 +247,7 @@ export default function Home() {
         <div className="w-full max-w-1200 mx-auto flex justify-between">
           <div className="text-[.7rem] text-gray-300 mx-6 md:mx-0">{truth.footer.copyright}</div>
           <div>
-            {truth.footer.socials?.length && truth.footer.socials.map(soc => <a key={soc.text} href="">{soc.text}</a>)}
+            {/* {truth.footer.socials.length && truth.footer.socials.map(soc => <a key={soc.text} href="">{soc.text}</a>)} */}
           </div>
         </div>
       </footer>
