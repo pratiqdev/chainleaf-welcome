@@ -3,6 +3,8 @@ import truth from '../lib/truth'
 import NavLinks from '@/components/NavLinks'
 import Button from '@/blocks/Button'
 import Gallery from '@/components/TeamGallery'
+import Wow from '@/components/Wow'
+
 
 export default function Home() {
   return (
@@ -18,7 +20,7 @@ export default function Home() {
           height={40}
           priority
           />
-        <h1 className="text-gradient text-lg">Chainleaf Labs</h1>
+        <h1 className="text-gradient text-xl">Chainleaf Labs</h1>
         </span>
         <NavLinks />
         <div className="flex gap-2">
@@ -35,53 +37,54 @@ export default function Home() {
          
           <a href={truth.hero.link.href} className="bg-fade py-3 px-6 rounded-md bg-fade  text-white font-semibold text-md">{truth.hero.link.text} -&gt;</a>
         </div>
-        <div className="flex-1 flex items-center justify-center ml-6 lg:ml-0">
-          <Image
-            className="absolute flex-1 z-20  banner-logo mr-8 opacity-30 w-200"
-            src="/icons/logo_no_text_white.svg"
-            alt="Chainleaf Labs Services"
-            width={200}
-            height={200}
-            priority
-          />
-          <Image
-            className="relative flex-1 z-10 w-full banner-logo"
-            src="/icons/banner-cube.svg"
-            alt="Chainleaf Labs Services"
-            width={300}
-            height={300}
-            priority
-          />
-        </div>
+
+          <div className="flex-1 flex items-center justify-center ml-6 lg:ml-0">
+            <Image
+              className="absolute flex-1 z-20  banner-logo mr-8 opacity-30 w-200"
+              src="/icons/logo_no_text_white.svg"
+              alt="Chainleaf Labs Services"
+              width={200}
+              height={200}
+              priority
+              />
+            <Image
+              className="relative flex-1 z-10 w-full banner-logo"
+              src="/icons/banner-cube.svg"
+              alt="Chainleaf Labs Services"
+              width={300}
+              height={300}
+              priority
+              />
+          </div>
       </div>
 
 
       <section className="w-full relative m-20 max-w-1200 p-6" id="problem">
-        <h2 className="relative text-transparent bg-clip-text bg-gradient-to-b from-teal-200 to-indigo-900 inline-block text-7xl font-bold text-center uppercase w-full opacity-75 z-10">{truth.sections.problem.heading}</h2>
-        <h3 className="relative text-center text-3xl -mt-6 z-10 font-semibold tracking-wide">{truth.sections.problem.subheading}</h3>
-        <p className="text-dark text-center mt-6 mb-10 dark:text-gray-300">{truth.sections.problem.content}</p>
+        <h2 className="relative text-transparent bg-clip-text bg-gradient-to-b from-indigo-500 to-indigo-200 inline-block text-6xl lg:text-8xl font-bold text-center uppercase w-full opacity-75 z-10">{truth.sections.problem.heading}</h2>
+        <h3 className="relative text-center text-4xl -mt-6 z-10 font-semibold tracking-wide dark:text-primary-6">{truth.sections.problem.subheading}</h3>
+        <p className="text-dark text-center mt-6 mb-10 mx-12 dark:text-gray-300">{truth.sections.problem.content}</p>
 
-        <div className="flex flex-col md:flex-row items-center">
+        <div className="flex flex-col-reverse lg:flex-row items-center">
           <div className="flex-col flex-1 gap-4">
             {truth.sections.problem.subsections.map(subsec => 
-              <div key={subsec.heading}  className="relative rounded-md p-_1 bg-gradient-to-r from-primary-6 via-primary-1 to-transparent flex items-center mb-6">
+              <div key={subsec.heading}  className="relative rounded-md p-_1 bg-gradient-to-r from-primary-6 via-primary-1 to-transparent flex items-center mb-6 leading-6 tracking-wide">
                 <div className="h-auto px-4" >
                   <subsec.icon className="h-16 w-16 text-primary-1"/>
                 </div>
-                <div className="p-8 bg-white dark:bg-gray-900 w-full rounded-md">
-                  <h4 className="text-primary-6">{subsec.heading}</h4>
+                <div className="p-6 bg-white dark:bg-gray-900 w-full rounded-md">
+                  <h4 className="text-primary-6 mb-2 text-lg text-semibold">{subsec.heading}</h4>
                   <p className="font-sm text-dark dark:text-gray-200">{subsec.content}</p>
                 </div>
               </div>
             )}
           </div>
-          <div className="flex-1 p-6">
+          <div className="flex-1 relative lg:pr-0 mb-6 lg:ml-12">
             <Image
-              className="dark:invert w-auto"
-              src="/icons/diagram-problem.svg"
+              className="w-60 lg:w-auto"
+              src="/images/Object(2).png"
               alt="Diagram of the supply chain issue"
-              width={120}
-              height={17}
+              width={545}
+              height={536}
             />
           </div>
         </div>
@@ -90,18 +93,18 @@ export default function Home() {
       </section>
 
       <section className="w-full relative m-20 max-w-1200 p-6" id="vision">
-        <h2 className="relative text-transparent bg-clip-text bg-gradient-to-b from-teal-200 to-indigo-900 inline-block text-7xl font-bold text-center uppercase w-full opacity-75 z-10">{truth.sections.vision.heading}</h2>
-        <h3 className="relative text-center text-3xl -mt-6 z-10 font-semibold tracking-wide">{truth.sections.vision.subheading}</h3>
+        <h2 className="relative text-transparent bg-clip-text bg-gradient-to-b from-indigo-500 to-indigo-200 inline-block text-6xl lg:text-8xl font-bold text-center uppercase w-full opacity-75 z-10">{truth.sections.vision.heading}</h2>
+        <h3 className="relative text-center text-4xl -mt-6 z-10 font-semibold tracking-wide dark:text-primary-6">{truth.sections.vision.subheading}</h3>
         <p className="text-dark text-center mt-6 mb-10 dark:text-gray-300">{truth.sections.vision.content}</p>
 
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
             {truth.sections.vision.subsections.map(subsec => 
-              <div key={subsec.heading}  className="rounded-md p-_1 bg-center-fade-to-transparent flex-1 h-full w-full"  >
-                <div className="relative p-8 bg-white dark:bg-gray-900 w-full rounded-md overflow-hidden h-full flex-1 " style={{minHeight: '14rem'}}>
-                  <div className="absolute -bottom-3 -right-2 bg-indigo-100 dark:bg-indigo-900 p-4 rounded-full">
-                    <subsec.icon className="h-12 w-12 text-primary-6"/>
+              <div key={subsec.heading}  className="rounded-md p-_1 bg-center-fade-to-transparent flex-1 h-full w-full leading-6 tracking-wide"  >
+                <div className="relative p-6 bg-white dark:bg-gray-900 w-full rounded-md overflow-hidden h-full flex-1 " style={{minHeight: '14rem'}}>
+                  <div className="absolute -bottom-4 -right-3 bg-indigo-100 dark:bg-indigo-900 p-4 rounded-full">
+                    <subsec.icon className="h-16 w-16 text-primary-6"/>
                   </div>
-                  <h4 className="mb-2 text-primary-6 text-lg">{subsec.heading}</h4>
+                  <h4 className="mb-2 text-primary-6 text-lg font-semibold">{subsec.heading}</h4>
                   <p className="font-sm text-dark">{subsec.content}</p>
                 </div>
               </div>
@@ -113,35 +116,60 @@ export default function Home() {
 
 
       <section className="w-full relative m-20 max-w-1200 mb-20 p-6" id="solution">
-        <h2 className="relative text-transparent bg-clip-text bg-gradient-to-b from-teal-200 to-indigo-900 inline-block text-7xl font-bold text-center uppercase w-full opacity-75 z-10">{truth.sections.solution.heading}</h2>
-        <h3 className="relative text-center text-3xl -mt-6 z-10 font-semibold tracking-wide">{truth.sections.solution.subheading}</h3>
+        <h2 className="relative text-transparent bg-clip-text bg-gradient-to-b from-indigo-500 to-indigo-200 inline-block text-6xl lg:text-8xl font-bold text-center uppercase w-full opacity-75 z-10">{truth.sections.solution.heading}</h2>
+        <h3 className="relative text-center text-4xl -mt-6 z-10 font-semibold tracking-wide dark:text-primary-6">{truth.sections.solution.subheading}</h3>
         <p className="text-dark text-center mt-6 mb-10 dark:text-gray-300">{truth.sections.solution.content}</p>
 
-        <div className="flex flex-col md:flex-row-reverse items-center">
-          <div className="relative flex-col flex-1 gap-4">
-            <div className="bg-gradient-to-r from-transparent via-primary-6 to-transparent opacity-25 absolute top-12 left-9 bottom-12 w2">?</div>
+        <div className="flex flex-col-reverse lg:flex-row-reverse items-center">
+          <div className="relative flex-col flex-1 gap-4 lg:mx-0  justify-center">
+            <div className="hidden lg:block bg-gradient-to-r from-transparent via-primary-6 to-transparent opacity-25 absolute top-12 left-9 bottom-12 w2">&nbsp;</div>
             {truth.sections.solution.subsections.map(subsec => 
-              <div key={subsec.heading}  className="relative flex items-center">
-                <div className="rounded-md bg-center-fade-to-transparent shadow-lg" style={{padding: '1px'}} >
-                  <div className="bg-white dark:bg-gray-900 rounded-md p-4" >
+              <div key={subsec.heading}  className="flex flex-col lg:flex-row justify-center items-center mb-6 lg:mb-0">
+                <div className="rounded-md bg-center-fade-to-transparent shadow-lg w-min" style={{padding: '1px'}} >
+                  <div className=" relative bg-white dark:bg-gray-900 rounded-md p-4 w-min" >
                   <subsec.icon className="h-12 w-12 text-primary-6 "/>
                   </div>
                 </div>
-                <div className="p-6 w-full">
-                  <h4 className="mb-2 text-primary-6">{subsec.heading}</h4>
-                  <p className="font-sm text-dark dark:text-gray-200">{subsec.content}</p>
+                <div className="p-6 w-full leading-6 tracking-wide text-center lg:text-left">
+                  <h4 className="mb-2 text-primary-6 text-lg font-semibold">{subsec.heading}</h4>
+                  <p className="font-sm text-dark dark:text-gray-200 mx-12 lg:mx-auto">{subsec.content}</p>
                 </div>
               </div>
             )}
           </div>
-          <div className="flex-1 p-6">
+          <div className="flex-1 mb-12 flex items-center justify-center">
+
+
+       <picture style={{maxWidth: '400px'}} className="mb-6">
+            <source srcSet='/images/diagram_large_darkmode.png' media="(prefers-color-scheme: dark)" />
+       
             <Image
-              className="dark:invert w-auto"
-              src="/icons/diagram-solution.svg"
+              className="w-full"
+              src="/images/diagram_large.png"
               alt="Next.js Logo"
-              width={120}
-              height={17}
+              width={713}
+              height={580}
             />
+          </picture>
+          </div>
+        </div>
+
+
+        <div className="flex flex-col lg:flex-row-reverse gap-12 mx-auto max-w-1200 justify-center items-center">
+          <picture style={{maxWidth: '400px'}}>
+            <source srcSet='/images/solution_darkmode.png' media="(prefers-color-scheme: dark)" />
+       
+            <Image
+              className="w-full"
+              src="/images/solution_lightmode.png"
+              alt="Next.js Logo"
+              width={713}
+              height={580}
+            />
+          </picture>
+          <div className="flex-1 leading-8 tracking-wide text-lg m-6 mx-12 lg:mx-auto">
+            Duis elit id voluptate sint. Deserunt ullamco fugiat Lorem aute magna esse laborum. Consectetur tempor nostrud sint magna Lorem eiusmod velit nulla laborum ullamco. Est pariatur duis laboris enim pariatur deserunt ullamco. Voluptate enim anim voluptate ut.
+            Aliqua sunt cillum tempor ipsum. Sint mollit anim nostrud exercitation incididunt nisi ex ut exercitation voluptate. In deserunt aliquip consequat sint duis elit. Laboris reprehenderit eu Lorem cillum sint. Dolor id nisi ipsum id proident voluptate culpa quis incididunt dolore. Adipisicing ut aliquip cillum anim nostrud ea amet amet ea incididunt dolore. Laborum ea consectetur ea ad sit quis duis quis reprehenderit non ut.
           </div>
         </div>
 
@@ -149,40 +177,22 @@ export default function Home() {
       </section>
 
 
-        <div className="flex flex-col lg:flex-row-reverse gap-12 mx-auto max-w-1200">
-          <div className="p-6 rounded-3xl bg-gray-950 flex-1">
-            <Image
-              className="w-auto mx-auto flex-1"
-              src="/icons/diagram-large.svg"
-              alt="Next.js Logo"
-              width={120}
-              height={17}
-            />
-          </div>
-          <div className="flex-1 leading-8 text-lg">
-            Duis elit id voluptate sint. Deserunt ullamco fugiat Lorem aute magna esse laborum. Consectetur tempor nostrud sint magna Lorem eiusmod velit nulla laborum ullamco. Est pariatur duis laboris enim pariatur deserunt ullamco. Voluptate enim anim voluptate ut.
-            Aliqua sunt cillum tempor ipsum. Sint mollit anim nostrud exercitation incididunt nisi ex ut exercitation voluptate. In deserunt aliquip consequat sint duis elit. Laboris reprehenderit eu Lorem cillum sint. Dolor id nisi ipsum id proident voluptate culpa quis incididunt dolore. Adipisicing ut aliquip cillum anim nostrud ea amet amet ea incididunt dolore. Laborum ea consectetur ea ad sit quis duis quis reprehenderit non ut.
-          </div>
-        </div>
 
 
 
+      <section className="w-full relative my-20 max-w-1200 p-6" id="about">
+        <h2 className="relative text-transparent bg-clip-text bg-gradient-to-b from-indigo-500 to-indigo-200 inline-block text-6xl lg:text-8xl font-bold text-center uppercase w-full opacity-75 z-10">{truth.sections.about.heading}</h2>
+        <h3 className="relative text-center text-4xl -mt-6 z-10 font-semibold tracking-wide mb-10 dark:text-primary-6">{truth.sections.about.subheading}</h3>
 
-
-          <section className="w-full relative my-20 max-w-1200 p-6" id="about">
-        <h2 className="relative text-transparent bg-clip-text bg-gradient-to-b from-teal-200 to-indigo-900 inline-block text-7xl font-bold text-center uppercase w-full opacity-75 z-10">{truth.sections.about.heading}</h2>
-        <h3 className="relative text-center text-3xl -mt-6 z-10 font-semibold tracking-wide mb-10">{truth.sections.about.subheading}</h3>
-
-        <div className="flex flex-col md:flex-row items-center gap-8">
-          <div className="flex-1">
+        <div className="flex flex-col lg:flex-row items-center justify-center lg:items-start gap-8">
+          <div className="">
             <Gallery />
           </div>
-          <div className="flex flex-1 flex-col justify-between items-start h-full" >
-            <div className="leading-8 h-full flex-1 text-lg">
-            {truth.sections.about.content}
-              
+          <div className="flex flex-1 flex-col justify-between items-start mx-6 lg:mx-0" style={{minHeight:'30rem'}} >
+            <div className="flex-1 leading-8 tracking-wide">
+              {truth.sections.about.content}
             </div>
-            <a href={truth.hero.link.href} className="bg-fade py-3 px-6 rounded-md bg-fade  text-white font-semibold text-md mt-20">{truth.hero.link.text} -&gt;</a>
+              <a href={truth.hero.link.href} className="bg-fade py-3 px-6 rounded-md bg-fade  text-white font-semibold text-md mt-6 lg:mt-0 w-full text-center lg:w-auto lg:text-left">{truth.hero.link.text} -&gt;</a>
           </div>
         </div>
 

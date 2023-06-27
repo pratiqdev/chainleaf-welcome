@@ -10,7 +10,7 @@ export default function NavLinks() {
         <div className="hidden lg:flex">
             {truth.nav.links.map(link => 
                     <a 
-                        className={hash.includes(link.href) ? "px-4 text-primary text-sm font-semibold" : "px-4 text-sm font-semibold"}
+                        className={hash.includes(link.href) ? "px-4 text-primary font-semibold" : "px-4 font-semibold"}
                         key={link.href} 
                         href={link.href}
                     >

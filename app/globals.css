@@ -18,7 +18,8 @@
   --primary-med-rgb: 16, 133, 200;
   --primary-light: #00F8E9;
   --primary-light-rgb: 0, 248, 233;
-  --text-dark: 100, 100, 120;
+
+  --text-dark: 50, 50, 60;
   --text-light: 240, 240, 250;
 
   --primary-1: #00F8E9;
@@ -140,34 +141,69 @@ nav {
   background-clip: text;
 }
 
-.image-gallery-pseudo-container {
+.image-gallery {
   height: 30rem;
-  max-height: 30rem;
+  max-width: max(80vw, 400px);
+  margin-bottom: 3rem;
+  border-radius: 1rem;
+}
+
+.image-gallery-image {
+  border-radius: 1rem;
+  width: 100%;
+  height: auto;
+  min-width: 100%;
+  min-height: 30rem !important;
+  max-height: 30rem !important;
+  overflow: hidden;
+  transition: 1000ms !important;
+}
+.image-gallery-slide {
+  transition: 1000ms !important;
+  opacity: 0 !important;
+}
+.image-gallery-center {
+  opacity: 1 !important;
 }
 
 
-/* .image-gallery-bullets-container {
+
+.image-gallery-bullets-container {
   position: absolute;
   bottom: -3rem !important;
   width: 100%;
-} */
+  gap: 1rem;
+  display: flex;
+  justify-content: center;
+}
 
 .image-gallery-bullet {
+  display: block;
+  position: relative;
   background: var(--primary-6) !important;
   box-shadow: none !important;
   border: 0px !important;
+  width: 4rem;
+  height: 2px;
+  overflow: hidden;
+  border-radius: .5rem !important;
 }
 .image-gallery-bullet.active{
   background: var(--primary-1) !important;
 }
+
+
+
 
 @media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 255, 255, 255;
     --background-start-rgb: 0, 0, 0;
     --background-end-rgb: 0, 0, 50;
-    --text-dark: 120, 120, 120;
+
+    --text-dark: 230, 230, 230;
     --text-light: 160, 160, 160;
+
     --primary-dark: ;
     --primary-dark-rgb: 8, 32, 154;
     --primary-med: #1085C8;
@@ -198,19 +234,3 @@ nav {
   border-style: solid;
   border-color: #FFF0C8;
 } */
-
-.image-gallery {
-  flex: 1;
-}
-
-.gallery-bio {
-  /* background: green !important; */
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  white-space: normal;
-  line-height: normal;
-  background: linear-gradient(to bottom, #0000, #fffd 10%);
-  padding-top: 1rem;
-}
