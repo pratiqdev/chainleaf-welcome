@@ -14,6 +14,9 @@ const Gallery = () => {
             showPlayButton={false}
             showNav={false}
             showBullets={true}
+            autoPlay={true}
+            // slideDuration={1000}
+            slideInterval={6000}
             renderItem={(item:any)=>
                 <div className="w-full h-auto relative rounded-b-lg image-gallery-pseudo-container overflow-hidden">
                     <Image className="image-gallery-image" alt="" src={item.original} width={800} height={800} style={{objectFit: "cover"}} />

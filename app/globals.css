@@ -160,7 +160,7 @@ nav {
 }
 .image-gallery-slide {
   transition: 1000ms !important;
-  opacity: 0 !important;
+  opacity: .5 !important;
 }
 .image-gallery-center {
   opacity: 1 !important;
@@ -172,7 +172,7 @@ nav {
   position: absolute;
   bottom: -3rem !important;
   width: 100%;
-  gap: 1rem;
+  gap: .2rem;
   display: flex;
   justify-content: center;
 }
@@ -183,8 +183,9 @@ nav {
   background: var(--primary-6) !important;
   box-shadow: none !important;
   border: 0px !important;
-  width: 4rem;
-  height: 2px;
+  /* width: 4rem; */
+  height: 1rem !important;
+  width: 1rem !important;
   overflow: hidden;
   border-radius: .5rem !important;
 }
