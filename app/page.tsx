@@ -1,11 +1,47 @@
+"use client"
+import { useState } from 'react'
 import Image from 'next/image'
 import truth from '../lib/truth'
 import NavLinks from '@/components/NavLinks'
+import Link from 'next/link'
 import Button from '@/blocks/Button'
 import Gallery from '@/components/TeamGallery'
 import SmallLogo from '@/public/icons/logo_no_text_color.svg'
+import { motion, AnimatePresence } from 'framer-motion'
 
 export default function Home() {
+  const animationVariants = {
+    hidden: {
+      scaleX: 0,
+      opacity: 0,
+      transition: {
+        type: "tween",
+        duration: 1,
+        delay: 0,
+      }
+    },
+    exit: {
+      scaleX: 0,
+      opacity: 0,
+      transition: {
+        type: "tween",
+        duration: .5,
+        delay: 0,
+      }
+    },
+    visible: {
+      scaleX: 1,
+      opacity: 1,
+      transition: {
+        type: "tween",
+        duration: .5,
+        delay: 0,
+      }
+    }
+  }
+
+  const [activeFilter, setActiveFilter] = useState('tech')
+
   return (
     <>
     <nav className="fixed w-screen flex items-center justify-between p-2 px-6 h-20 z-50">
@@ -35,7 +71,9 @@ export default function Home() {
           <h2 className="text-dark font-semibold mb-2">{truth.hero.supheading}</h2>
           <h3 className="text-4xl font-bold leading-26 mb-10">{truth.hero.heading} <span className="text-primary-6 font-bold text-4xl mb-12">{truth.hero.subheading}</span></h3>
          
-          <a href={truth.hero.link.href} className="bg-fade py-3 px-6 rounded-md bg-fade  text-white font-semibold text-lg" >{truth.hero.link.text} -&gt;</a>
+          <Link href={'/learn-more'} className="bg-slate-200 py-3 px-6 rounded-md  text-primary-6 font-semibold text-lg" >Learn More</Link>
+          <Link href={'/learn-more'} className="bg-slate-200 ml-2 py-3 px-6 rounded-md  text-primary-6 font-semibold text-lg" >Read Lightpaper</Link>
+          <a href={truth.hero.link.href} className="bg-fade py-3 px-6 ml-2 rounded-md bg-fade  text-white font-semibold text-lg" >{truth.hero.link.text} -&gt;</a>
         </div>
 
           <div className="flex-1 flex items-center justify-center ml-6 lg:ml-0 max-w-[20rem] md:max-w-[30rem]">
@@ -101,10 +139,23 @@ export default function Home() {
         <h3 className="relative text-center text-4xl -mt-6 z-10 font-semibold tracking-wide dark:text-primary-6">{truth.sections.vision.subheading}</h3>
         <p className="text-dark text-center mt-6 mb-10 dark:text-gray-300">{truth.sections.vision.content}</p>
 
+      <div className='flex justify-center gap-4 mb-5'>
+        <button className='bg-slate-200 hover:bg-slate-300 ml-2 py-3 px-6 rounded-md  text-primary-6 font-semibold text-lg' onClick={() => setActiveFilter('growers')}>For Growers</button>
+        <button className='bg-slate-200 hover:bg-slate-300 ml-2 py-3 px-6 rounded-md  text-primary-6 font-semibold text-lg' onClick={() => setActiveFilter('tech')}>For Techs</button>
+        <button className='bg-slate-200 hover:bg-slate-300 ml-2 py-3 px-6 rounded-md  text-primary-6 font-semibold text-lg' onClick={() => setActiveFilter('consumers')}>For Consumers</button>
+      </div>
+
         <div className="grid grid-cols-1 gap-6  lg:grid-cols-3">
-            {truth.sections.vision.subsections.map(subsec => 
-              <div key={subsec.heading}  className="rounded-md p-_1 bg-center-fade-to-transparent flex-1 h-full w-full leading-6 tracking-wide"  >
-                <div className="relative p-6 md:p-8 bg-white dark:bg-gray-900 w-full rounded-md overflow-hidden h-full flex-1 " style={{minHeight: '16rem'}}>
+          <AnimatePresence>
+            {truth.sections.vision.subsections.filter(x => x.tags.includes(activeFilter))?.map(subsec => 
+              <motion.div
+                key={subsec.heading} 
+                variants={animationVariants}
+                initial="hidden"
+                animate="visible"
+              >
+              <div className="rounded-md p-_1 bg-center-fade-to-transparent flex-1 h-full w-full leading-6 tracking-wide"  >
+                <div className="relative p-6 md:p-8 bg-white dark:bg-gray-900 w-full rounded-md overflow-hidden h-full flex-1 " style={{minHeight: '20rem'}}>
                   <div className="absolute -bottom-4 -right-3 bg-indigo-100 dark:bg-indigo-900 p-4 rounded-full">
                     <subsec.icon className="h-16 w-16 text-primary-6"/>
                   </div>
@@ -112,8 +163,11 @@ export default function Home() {
                   <p className="font-sm text-dark">{subsec.content}</p>
                 </div>
               </div>
+              </motion.div>
             )}
+          </AnimatePresence>
         </div>
+
 
 
       </section>
@@ -123,10 +177,11 @@ export default function Home() {
         <h2 className="relative text-transparent bg-clip-text bg-gradient-to-b from-indigo-500 to-indigo-200 inline-block text-6xl lg:text-8xl font-bold text-center uppercase w-full opacity-75 z-10">{truth.sections.solution.heading}</h2>
         <h3 className="relative text-center text-4xl -mt-6 -mb-12 z-10 font-semibold tracking-wide dark:text-primary-6">{truth.sections.solution.subheading}</h3>
         {/* <p className="text-dark text-center mt-6 mb-10 dark:text-gray-300">{truth.sections.solution.content}</p> */}
+    
 
-        <div className="flex flex-col-reverse lg:flex-row-reverse items-center mb-12">
+        <div className="flex flex-col-reverse lg:flex-row-reverse items-center">
           <div className="relative flex-col flex-1 gap-4 lg:mx-0  justify-center">
-            <div className="hidden lg:block bg-gradient-to-r from-transparent via-primary-6 to-transparent opacity-25 absolute top-12 left-9 bottom-12 w2">&nbsp;</div>
+            <div className="hidden lg:block bg-gradient-to-r from-transparent via-primary-6 to-transparent opacity-25 absolute top-12 left-9 bottom-28 w2">&nbsp;</div>
             {truth.sections.solution.subsections.map(subsec => 
               <div key={subsec.heading}  className="flex flex-col lg:flex-row justify-start items-center mb-6 lg:mb-0">
                 <div className="rounded-md bg-center-fade-to-transparent shadow-lg w-full p-_1 md:w-auto" >
@@ -142,11 +197,18 @@ export default function Home() {
                 </div>
               </div>
             )}
+            <br />
+            <div className="flex justify-center items-center lg:justify-stretch">
+            <Link href={'/learn-more#a-groundbreaking-approach'} className="bg-slate-300 ml-2 py-3 px-6 rounded-md  text-primary-6 font-semibold text-lg" >Learn More</Link>
+            <Link href={'/learn-more'} className="bg-slate-300 ml-2 py-3 px-6 rounded-md  text-primary-6 font-semibold text-lg" >Read Lightpaper -&gt;</Link>
+            </div>
+            
           </div>
+ 
           <div className="flex-1 mb-12 flex items-center justify-center mt-[2rem]">
 
 
-       <picture  className="m-6 max-w-[400px] md:max-w-[600px]">
+       <picture  className="m-6 max-w-[400px] md:max-w-[600px] flex flex-col">
             <source srcSet='/images/solution_darkmode.png' media="(prefers-color-scheme: dark)" />
        
             <Image
@@ -156,9 +218,14 @@ export default function Home() {
               width={713}
               height={580}
             />
+     
           </picture>
           </div>
         </div>
+
+    
+        
+        
 
 
         </section>
@@ -187,15 +254,19 @@ export default function Home() {
             />
           </picture>
  
-          <div   className=" mb-2 leading-8 tracking-wide text-lg max-w-auto text-center lg:text-left lg:max-w-[500px] mx-6">
+          <div   className="mt-4 mb-2 leading-8 tracking-wide text-xl max-w-auto text-center lg:text-left lg:max-w-[500px] mx-6">
             {truth.sections.solution.content}
+            <div className="flex justify-center lg:justify-stretch items-center mt-8">
+            <Link href={'/learn-more#platform'} className="bg-slate-300 py-3 px-6 rounded-md  text-primary-6 font-semibold text-lg" >Learn More</Link>
+            <Link href={'/learn-more'} className="bg-slate-300 ml-2 py-3 px-6 rounded-md  text-primary-6 font-semibold text-lg" >Read Lightpaper -&gt;</Link>
+            </div>
           </div>
 
           <div className="flex-1 leading-8 tracking-wide m-6 mx-0 lg:mx-auto bg-white p-6 rounded-lg bg-center-fade-to-transparent p-_1">
 
           </div>
         </div>
-
+     
 
       </section>
 
@@ -215,7 +286,12 @@ export default function Home() {
             <div className="flex-1 leading-8 tracking-wide text-lg">
               {truth.sections.about.content}
             </div>
-              <a href={truth.hero.link.href} className="bg-fade py-3 px-6 rounded-md bg-fade  text-white font-semibold text-md mt-6 lg:mt-0 w-full text-center lg:w-auto lg:text-left">{truth.hero.link.text} -&gt;</a>
+            <div className="flex flex-col gap-2 w-full">
+
+              <Link href={'/learn-more'} className="border border-primary-6 py-3 px-6 rounded-md  text-primary-6 font-semibold text-lg text-center" >Learn More About our Platform</Link>
+              <Link href={'/learn-more'} className="border border-primary-6 py-3 px-6 rounded-md  text-primary-6 font-semibold text-lg text-center" >Read the Technical Lightpaper</Link>
+              <a href={truth.hero.link.href} className="bg-fade py-3 px-6 rounded-md bg-fade  text-white font-semibold text-md  w-full text-center">Get Started with Chainleaf Labs -&gt;</a>
+            </div>
           </div>
         </div>
 
