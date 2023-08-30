@@ -72,7 +72,7 @@ export default function Home() {
           <h3 className="text-4xl font-bold leading-26 mb-10">{truth.hero.heading} <span className="text-primary-6 font-bold text-4xl mb-12">{truth.hero.subheading}</span></h3>
          
           <Link href={'/learn-more'} className="bg-slate-200 py-3 px-6 rounded-md  text-primary-6 font-semibold text-lg" >Learn More</Link>
-          <Link href={'/learn-more'} className="bg-slate-200 ml-2 py-3 px-6 rounded-md  text-primary-6 font-semibold text-lg" >Read Lightpaper</Link>
+          {/* <Link href={'/learn-more'} className="bg-slate-200 ml-2 py-3 px-6 rounded-md  text-primary-6 font-semibold text-lg" >Read Lightpaper</Link> */}
           <a href={truth.hero.link.href} className="bg-fade py-3 px-6 ml-2 rounded-md bg-fade  text-white font-semibold text-lg" >{truth.hero.link.text} -&gt;</a>
         </div>
 
@@ -200,7 +200,7 @@ export default function Home() {
             <br />
             <div className="flex justify-center items-center lg:justify-stretch">
             <Link href={'/learn-more#a-groundbreaking-approach'} className="bg-slate-300 ml-2 py-3 px-6 rounded-md  text-primary-6 font-semibold text-lg" >Learn More</Link>
-            <Link href={'/learn-more'} className="bg-slate-300 ml-2 py-3 px-6 rounded-md  text-primary-6 font-semibold text-lg" >Read Lightpaper -&gt;</Link>
+            {/* <Link href={'/learn-more'} className="bg-slate-300 ml-2 py-3 px-6 rounded-md  text-primary-6 font-semibold text-lg" >Read Lightpaper -&gt;</Link> */}
             </div>
             
           </div>
@@ -258,7 +258,7 @@ export default function Home() {
             {truth.sections.solution.content}
             <div className="flex justify-center lg:justify-stretch items-center mt-8">
             <Link href={'/learn-more#platform'} className="bg-slate-300 py-3 px-6 rounded-md  text-primary-6 font-semibold text-lg" >Learn More</Link>
-            <Link href={'/learn-more'} className="bg-slate-300 ml-2 py-3 px-6 rounded-md  text-primary-6 font-semibold text-lg" >Read Lightpaper -&gt;</Link>
+            {/* <Link href={'/learn-more'} className="bg-slate-300 ml-2 py-3 px-6 rounded-md  text-primary-6 font-semibold text-lg" >Read Lightpaper -&gt;</Link> */}
             </div>
           </div>
 
@@ -289,7 +289,7 @@ export default function Home() {
             <div className="flex flex-col gap-2 w-full">
 
               <Link href={'/learn-more'} className="border border-primary-6 py-3 px-6 rounded-md  text-primary-6 font-semibold text-lg text-center" >Learn More About our Platform</Link>
-              <Link href={'/learn-more'} className="border border-primary-6 py-3 px-6 rounded-md  text-primary-6 font-semibold text-lg text-center" >Read the Technical Lightpaper</Link>
+              {/* <Link href={'/learn-more'} className="border border-primary-6 py-3 px-6 rounded-md  text-primary-6 font-semibold text-lg text-center" >Read the Technical Lightpaper</Link> */}
               <a href={truth.hero.link.href} className="bg-fade py-3 px-6 rounded-md bg-fade  text-white font-semibold text-md  w-full text-center">Get Started with Chainleaf Labs -&gt;</a>
             </div>
           </div>
