@@ -40,7 +40,7 @@ export default function Home() {
     }
   }
 
-  const [activeFilter, setActiveFilter] = useState('tech')
+  const [activeFilter, setActiveFilter] = useState('')
 
   return (
     <>
@@ -71,9 +71,9 @@ export default function Home() {
           <h2 className="text-dark font-semibold mb-2">{truth.hero.supheading}</h2>
           <h3 className="text-4xl font-bold leading-26 mb-10">{truth.hero.heading} <span className="text-primary-6 font-bold text-4xl mb-12">{truth.hero.subheading}</span></h3>
          
-          <Link href={'/learn-more'} className="bg-slate-200 py-3 px-6 rounded-md  text-primary-6 font-semibold text-lg" >Learn More</Link>
+          <Link href={'/learn-more'} className="bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 duration-300 py-3 px-6 rounded-md  text-primary-6 font-semibold text-lg" >Learn More</Link>
           {/* <Link href={'/learn-more'} className="bg-slate-200 ml-2 py-3 px-6 rounded-md  text-primary-6 font-semibold text-lg" >Read Lightpaper</Link> */}
-          <a href={truth.hero.link.href} className="bg-fade py-3 px-6 ml-2 rounded-md bg-fade  text-white font-semibold text-lg" >{truth.hero.link.text} -&gt;</a>
+          <a href={truth.hero.link.href} className="bg-fade py-3 px-6 ml-2 rounded-md bg-fade  text-white font-semibold text-lg hover:underline" >{truth.hero.link.text} -&gt;</a>
         </div>
 
           <div className="flex-1 flex items-center justify-center ml-6 lg:ml-0 max-w-[20rem] md:max-w-[30rem]">
@@ -109,12 +109,12 @@ export default function Home() {
         <div className="flex flex-col-reverse lg:flex-row items-center">
           <div className="flex-col flex-1 gap-4">
             {truth.sections.problem.subsections.map(subsec => 
-              <div key={subsec.heading}  className="relative rounded-md p-_1 bg-gradient-to-r from-primary-6 via-primary-1 to-transparent flex items-center mb-6 leading-6 tracking-wide">
+              <div key={subsec.heading}  className="group relative rounded-md p-_1 bg-gradient-to-r from-primary-6 via-primary-1 to-transparent flex items-center mb-6 leading-6 tracking-wide">
                 <div className="h-auto px-2 lg:px-4" >
-                  <subsec.icon className="h-8 w-8 md:h-16 md:w-16 text-primary-1"/>
+                  <subsec.icon className="h-8 w-8 md:h-16 md:w-16 text-primary-1 group-hover:rotate-6 duration-300"/>
                 </div>
-                <div className="p-4 md:p-6 bg-white dark:bg-gray-900 w-full rounded-md">
-                  <h4 className="text-primary-6 mb-2 text-lg text-semibold">{subsec.heading}</h4>
+                <div className="p-4 md:p-6 bg-white dark:bg-gray-900 w-full rounded-md group-hover:bg-slate-200 dark:group-hover:bg-slate-800 duration-300">
+                  <h4 className="text-primary-5 group-hover:text-primary-6 dark:group-hover:text-primary-6 duration-300 mb-2 text-lg text-semibold">{subsec.heading}</h4>
                   <p className="font-sm text-dark dark:text-gray-200">{subsec.content}</p>
                 </div>
               </div>
@@ -140,14 +140,14 @@ export default function Home() {
         <p className="text-dark text-center mt-6 mb-10 dark:text-gray-300">{truth.sections.vision.content}</p>
 
       <div className='flex justify-center gap-4 mb-5'>
-        <button className='bg-slate-200 hover:bg-slate-300 ml-2 py-3 px-6 rounded-md  text-primary-6 font-semibold text-lg' onClick={() => setActiveFilter('growers')}>For Growers</button>
-        <button className='bg-slate-200 hover:bg-slate-300 ml-2 py-3 px-6 rounded-md  text-primary-6 font-semibold text-lg' onClick={() => setActiveFilter('tech')}>For Techs</button>
-        <button className='bg-slate-200 hover:bg-slate-300 ml-2 py-3 px-6 rounded-md  text-primary-6 font-semibold text-lg' onClick={() => setActiveFilter('consumers')}>For Consumers</button>
+        <button className='bg-green-200 hover:bg-green-300 dark:bg-green-900 dark:hover:bg-green-800 ml-2 py-3 px-6 rounded-md  text-primary-6 font-semibold text-lg duration-300' onClick={() => setActiveFilter('growers')}>For Growers</button>
+        <button className='bg-purple-200 hover:bg-purple-300 dark:bg-purple-900 dark:hover:bg-purple-800 ml-2 py-3 px-6 rounded-md  text-primary-6 font-semibold text-lg duration-300' onClick={() => setActiveFilter('tech')}>For Techs</button>
+        <button className='bg-blue-200 hover:bg-blue-300 dark:bg-blue-800 dark:hover:bg-blue-700 ml-2 py-3 px-6 rounded-md  text-primary-6 font-semibold text-lg duration-300' onClick={() => setActiveFilter('consumers')}>For Consumers</button>
       </div>
 
         <div className="grid grid-cols-1 gap-6  lg:grid-cols-3">
           <AnimatePresence>
-            {truth.sections.vision.subsections.filter(x => x.tags.includes(activeFilter))?.map(subsec => 
+            {truth.sections.vision.subsections.filter(x => !activeFilter ? true : x.tags.includes(activeFilter))?.map(subsec => 
               <motion.div
                 key={subsec.heading} 
                 variants={animationVariants}
@@ -155,11 +155,18 @@ export default function Home() {
                 animate="visible"
               >
               <div className="rounded-md p-_1 bg-center-fade-to-transparent flex-1 h-full w-full leading-6 tracking-wide"  >
-                <div className="relative p-6 md:p-8 bg-white dark:bg-gray-900 w-full rounded-md overflow-hidden h-full flex-1 " style={{minHeight: '20rem'}}>
-                  <div className="absolute -bottom-4 -right-3 bg-indigo-100 dark:bg-indigo-900 p-4 rounded-full">
-                    <subsec.icon className="h-16 w-16 text-primary-6"/>
+                <div className="relative p-6 md:p-8 bg-white dark:bg-gray-900 hover:bg-slate-200 group dark:hover:bg-indigo-900 duration-300 w-full rounded-md overflow-hidden h-full flex-1  " style={{minHeight: '16rem', 
+                // background: activeFilter === 'growers' ? '#dfd' : activeFilter === 'tech' ? '#fdf' : '#ddf' 
+                }}>
+                  <div className="absolute -bottom-4 -right-3 bg-indigo-100 dark:bg-indigo-900 p-4 rounded-full   duration-300">
+                    <subsec.icon className="h-16 w-16 text-primary-6 group-hover:rotate-6 duration-300" style={{
+                      color: activeFilter === 'growers' 
+                        ? '#0f06' 
+                        : activeFilter === 'tech' 
+                          ? '#f0f6' 
+                          : '#66f6' }}/>
                   </div>
-                  <h4 className="mb-2 md:mb-4 text-primary-6 text-lg font-semibold">{subsec.heading}</h4>
+                  <h4 className="mb-2 md:mb-4 text-primary-6 group-hover:text-primary-5 duration-300 text-lg font-semibold">{subsec.heading}</h4>
                   <p className="font-sm text-dark">{subsec.content}</p>
                 </div>
               </div>
@@ -183,10 +190,10 @@ export default function Home() {
           <div className="relative flex-col flex-1 gap-4 lg:mx-0  justify-center">
             <div className="hidden lg:block bg-gradient-to-r from-transparent via-primary-6 to-transparent opacity-25 absolute top-12 left-9 bottom-28 w2">&nbsp;</div>
             {truth.sections.solution.subsections.map(subsec => 
-              <div key={subsec.heading}  className="flex flex-col lg:flex-row justify-start items-center mb-6 lg:mb-0">
+              <div key={subsec.heading}  className="flex flex-col lg:flex-row justify-start items-center mb-6 lg:mb-0 group duration-300">
                 <div className="rounded-md bg-center-fade-to-transparent shadow-lg w-full p-_1 md:w-auto" >
-                  <div className="relative bg-white dark:bg-gray-900 rounded-md p-4 w-full lg:w-auto flex items-center gap-6 whitespace-nowrap" >
-                  <subsec.icon className="h-12 w-12 text-primary-6 self-baseline"/>
+                  <div className="relative bg-white dark:bg-gray-900 group-hover:bg-primary-6 duration-300 rounded-md p-4 w-full lg:w-auto flex items-center gap-6 whitespace-nowrap" >
+                  <subsec.icon className="h-12 w-12 child text-primary-6 group-hover:text-white self-baseline duration-300"/>
                   <h4 className="block md:hidden mb-0 md:mb-2 text-primary-6 text-lg font-semibold">{subsec.heading}</h4>
 
                   </div>
@@ -199,7 +206,7 @@ export default function Home() {
             )}
             <br />
             <div className="flex justify-center items-center lg:justify-stretch">
-            <Link href={'/learn-more#a-groundbreaking-approach'} className="bg-slate-300 ml-2 py-3 px-6 rounded-md  text-primary-6 font-semibold text-lg" >Learn More</Link>
+            <Link href={'/learn-more#a-groundbreaking-approach'} className="bg-slate-300 hover:bg-slate-400 dark:bg-slate-800 dark:hover:bg-slate-700 duration-300 duration-300 ml-2 py-3 px-6 rounded-md  text-primary-6 font-semibold text-lg" >Learn More</Link>
             {/* <Link href={'/learn-more'} className="bg-slate-300 ml-2 py-3 px-6 rounded-md  text-primary-6 font-semibold text-lg" >Read Lightpaper -&gt;</Link> */}
             </div>
             
@@ -257,7 +264,7 @@ export default function Home() {
           <div   className="mt-4 mb-2 leading-8 tracking-wide text-xl max-w-auto text-center lg:text-left lg:max-w-[500px] mx-6">
             {truth.sections.solution.content}
             <div className="flex justify-center lg:justify-stretch items-center mt-8">
-            <Link href={'/learn-more#platform'} className="bg-slate-300 py-3 px-6 rounded-md  text-primary-6 font-semibold text-lg" >Learn More</Link>
+            <Link href={'/learn-more#platform'} className="bg-slate-300 hover:bg-slate-400  dark:bg-slate-800 dark:hover:bg-slate-700 duration-300 duration-300 py-3 px-6 rounded-md  text-primary-6 font-semibold text-lg" >Learn More</Link>
             {/* <Link href={'/learn-more'} className="bg-slate-300 ml-2 py-3 px-6 rounded-md  text-primary-6 font-semibold text-lg" >Read Lightpaper -&gt;</Link> */}
             </div>
           </div>
@@ -288,9 +295,9 @@ export default function Home() {
             </div>
             <div className="flex flex-col gap-2 w-full">
 
-              <Link href={'/learn-more'} className="border border-primary-6 py-3 px-6 rounded-md  text-primary-6 font-semibold text-lg text-center" >Learn More About our Platform</Link>
+              <Link href={'/learn-more'} className="border border-primary-6 hover:bg-primary-6 hover:text-white duration-300 py-3 px-6 rounded-md  text-primary-6 font-semibold text-lg text-center" >Learn More About our Platform</Link>
               {/* <Link href={'/learn-more'} className="border border-primary-6 py-3 px-6 rounded-md  text-primary-6 font-semibold text-lg text-center" >Read the Technical Lightpaper</Link> */}
-              <a href={truth.hero.link.href} className="bg-fade py-3 px-6 rounded-md bg-fade  text-white font-semibold text-md  w-full text-center">Get Started with Chainleaf Labs -&gt;</a>
+              <a href={truth.hero.link.href} className="bg-fade py-3 px-6 rounded-md hover:underline duration-300 text-white font-semibold text-md  w-full text-center">Get Started with Chainleaf Labs -&gt;</a>
             </div>
           </div>
         </div>
