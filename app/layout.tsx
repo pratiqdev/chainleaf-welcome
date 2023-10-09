@@ -20,6 +20,18 @@ export default function RootLayout({
         <link rel="icon" type="image/png" sizes="16x16" href="images/favicons/favicon-16x16.png" />
         <link rel="manifest" href="images/favicons/site.webmanifest" />
         <link rel="mask-icon" href="images/favicons/safari-pinned-tab.svg" color="#5bbad5" />
+
+        {/* <!-- Google tag (gtag.js) --> */}
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-XK7DCLVXT4"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          {/* @ts-ignore */}
+          function gtag(){dataLayer.push(arguments)}
+          gtag('js', new Date());
+
+          gtag('config', 'G-XK7DCLVXT4');
+        </script>
+
       </Head>
 
       <body className={inter.className + " relative max-w-50"}>{children}</body>
