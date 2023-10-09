@@ -6,44 +6,12 @@ import NavLinks from '@/components/NavLinks'
 import Link from 'next/link'
 import Button from '@/blocks/Button'
 import Gallery from '@/components/TeamGallery'
-import SmallLogo from '@/public/icons/logo_no_text_color.svg'
+import SmallLogo from '@/public/icons/logo_no_text_white.svg'
 import { motion, AnimatePresence } from 'framer-motion'
 
-export default function Home() {
-  const animationVariants = {
-    hidden: {
-      scaleX: 0,
-      opacity: 0,
-      transition: {
-        type: "tween",
-        duration: 1,
-        delay: 0,
-      }
-    },
-    exit: {
-      scaleX: 0,
-      opacity: 0,
-      transition: {
-        type: "tween",
-        duration: .5,
-        delay: 0,
-      }
-    },
-    visible: {
-      scaleX: 1,
-      opacity: 1,
-      transition: {
-        type: "tween",
-        duration: .5,
-        delay: 0,
-      }
-    }
-  }
 
-  const [activeFilter, setActiveFilter] = useState('')
-
+const Nav = () => {
   return (
-    <>
     <nav className="fixed w-screen flex items-center justify-between p-2 px-6 h-20 z-50">
       <span className="flex items-center text-md gap-4 font-bold">
 
@@ -56,7 +24,7 @@ export default function Home() {
               priority={true}
               loading="eager"
           />
-        <h1 className="text-gradient text-xl">Chainleaf Labs</h1>
+        <h1 className="text-gradient text-xl">Chainleaf</h1>
         </span>
         <NavLinks />
         <div className="flex gap-2">
@@ -64,22 +32,29 @@ export default function Home() {
           <a href={truth.nav.external.register} className="py-1 px-5 rounded-md bg-gradient-to-r from-primary-6 to-primary-1 text-sm text-white font-semibold">Sign Up</a>
         </div>
     </nav>
-    <main className="flex min-h-screen flex-col items-center justify-between pt-32 w-full" id="home">
+  )
 
-      <div className="flex flex-col-reverse lg:flex-row lg:py-20 items-center justify-evenly w-full max-w-1200 pl-0 lg:pl-12">
+}
+
+
+
+
+const Banner = () => {
+  return (
+    <div className="flex flex-col-reverse lg:flex-row lg:py-20 my-20 items-center justify-evenly w-full max-w-1200 pl-0 lg:pl-12">
         <div className="flex-col flex-1 text-center lg:text-left p-4">
           <h2 className="text-dark font-semibold mb-2">{truth.hero.supheading}</h2>
-          <h3 className="text-4xl font-bold leading-26 mb-10">{truth.hero.heading} <span className="text-primary-6 font-bold text-4xl mb-12">{truth.hero.subheading}</span></h3>
+          <h3 className="text-5xl font-bold leading-26 mb-10 flex-col"><span className="w-full">{truth.hero.heading}</span> <span className="text-primary-6 font-bold text-5xl mb-12">{truth.hero.subheading}</span></h3>
          
-          <Link href={'/learn-more'} className="bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 duration-300 py-3 px-6 rounded-md  text-primary-6 font-semibold text-lg" >Learn More</Link>
+          <a href={truth.hero.link.href} className="bg-fade py-3 px-6 mr-3 rounded-md bg-fade  text-white font-semibold text-lg hover:underline" >Join the Beta Program</a>
+          <Link href={'/learn-more'} className="bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 duration-300 py-3 px-6 rounded-md  text-primary-6 font-semibold text-lg" >Learn More -&gt;</Link>
           {/* <Link href={'/learn-more'} className="bg-slate-200 ml-2 py-3 px-6 rounded-md  text-primary-6 font-semibold text-lg" >Read Lightpaper</Link> */}
-          <a href={truth.hero.link.href} className="bg-fade py-3 px-6 ml-2 rounded-md bg-fade  text-white font-semibold text-lg hover:underline" >{truth.hero.link.text} -&gt;</a>
         </div>
 
           <div className="flex-1 flex items-center justify-center ml-6 lg:ml-0 max-w-[20rem] md:max-w-[30rem]">
             <Image
-              className="absolute flex-1 z-20  banner-logo mr-8 opacity-30 w-[200px] h-[200px]"
-              src="/icons/logo_no_text_white.svg"
+              className="absolute flex-1 z-20  banner-logo mr-8 w-[200px] h-[200px]"
+              src="/icons/logo_no_text_color.svg"
               alt="Chainleaf Labs Services"
               width={200}
               height={200}
@@ -87,7 +62,7 @@ export default function Home() {
               priority={true}
 
               />
-            <Image
+            {/* <Image
               className="relative flex-1 z-10 banner-logo  w-[300px] h-[300px]"
               src="/icons/banner-cube.svg"
               alt="Chainleaf Labs Services"
@@ -96,12 +71,17 @@ export default function Home() {
               loading="eager"
               priority={true}
 
-              />
+              /> */}
           </div>
       </div>
+  )
+}
 
 
-      <section className="w-full relative m-20 max-w-1200 p-6" id="problem">
+
+const Problem = () => {
+  return (
+    <section className="w-full relative m-20 max-w-1200 p-6" id="problem">
         <h2 className="relative text-transparent bg-clip-text bg-gradient-to-b from-indigo-500 to-indigo-200 inline-block text-6xl lg:text-8xl font-bold text-center uppercase w-full opacity-75 z-10">{truth.sections.problem.heading}</h2>
         <h3 className="relative text-center text-4xl -mt-6 z-10 font-semibold tracking-wide dark:text-primary-6">{truth.sections.problem.subheading}</h3>
         <p className="text-dark text-center mt-6 mb-10  dark:text-gray-300">{truth.sections.problem.content}</p>
@@ -133,8 +113,45 @@ export default function Home() {
 
 
       </section>
+  )
+}
 
-      <section className="w-full relative m-20 max-w-1200 p-6" id="vision">
+
+
+const Vision = () => {
+  const animationVariants = {
+    hidden: {
+      scaleX: 0,
+      opacity: 0,
+      transition: {
+        type: "tween",
+        duration: 1,
+        delay: 0,
+      }
+    },
+    exit: {
+      scaleX: 0,
+      opacity: 0,
+      transition: {
+        type: "tween",
+        duration: .5,
+        delay: 0,
+      }
+    },
+    visible: {
+      scaleX: 1,
+      opacity: 1,
+      transition: {
+        type: "tween",
+        duration: .5,
+        delay: 0,
+      }
+    }
+  }
+  const [activeFilter, setActiveFilter] = useState('')
+
+  return (
+    <section className="w-full relative m-20 max-w-1200 p-6" id="vision">
         <h2 className="relative text-transparent bg-clip-text bg-gradient-to-b from-indigo-500 to-indigo-200 inline-block text-6xl lg:text-8xl font-bold text-center uppercase w-full opacity-75 z-10">{truth.sections.vision.heading}</h2>
         <h3 className="relative text-center text-4xl -mt-6 z-10 font-semibold tracking-wide dark:text-primary-6">{truth.sections.vision.subheading}</h3>
         <p className="text-dark text-center mt-6 mb-10 dark:text-gray-300">{truth.sections.vision.content}</p>
@@ -178,6 +195,109 @@ export default function Home() {
 
 
       </section>
+  )
+}
+
+
+
+const Onboard = () => {
+  const [type, setType] = useState("Consumers")
+  const [step, setStep] = useState(0)
+
+  const data:any = {
+    "Consumers":{
+      link: 'https://chainleaflabs.com/app',
+      steps:[
+        {
+          title:"Step 1",
+          text: "Do this",
+          img: "the image"
+        },
+        {
+          title:"Step 1",
+          text: "Do this",
+          img: "the image"
+        },
+      ],
+    },
+    "Growers":{
+      link: 'https://chainleaflabs.com/grow',
+      steps:[
+        {
+          title:"Step 1",
+          text: "Do this",
+          img: "the image"
+        },
+        {
+          title:"Step 1",
+          text: "Do this",
+          img: "the image"
+        },
+      ],
+    },
+    "Laboratories":{
+      link: 'https://chainleaflabs.com/labs',
+      steps:[
+        {
+          title:"Step 1",
+          text: "Do this",
+          img: "the image"
+        },
+        {
+          title:"Step 1",
+          text: "Do this",
+          img: "the image"
+        },
+      ],
+    },
+    
+  }
+
+
+  const stepUp = () => step < Object.keys(data[type].steps).length && setStep(s => s++)
+  const stepDown = () => step > 0 && setStep(s => s--)
+
+  return (
+    <div className="border w-full max-w-[1200px] flex-col align-center">
+      <h3 className="text-5xl font-bold leading-26 mb-10 mb-12 text-center text-primary-6">How to Connect</h3>
+      <div className="flex gap-20 mx-auto w-min">
+        {Object.keys(data).map((x,i) => <button onClick={() => {setType(x); setStep(0)}} className={type === x ? "text-primary font-semibold text-xl hover:text-primary-6" : "font-semibold text-xl hover:text-primary-6"}>{x}</button>)}
+      </div>
+      {type === "Consumers" && <div>
+        consumer
+        {step}
+      </div>}
+      {type === "Growers" && <div>
+        grower
+        {step}
+      </div>}
+      {type === "Laboratories" && <div>
+        lab
+        {step}
+      </div>}
+      <button onClick={stepUp}></button>
+      <button onClick={stepDown}></button>
+    </div>
+  )
+}
+
+export default function Home() {
+ 
+
+  
+
+  return (
+    <>
+      <Nav />
+      <main className="flex min-h-screen flex-col items-center justify-between pt-32 w-full" id="home">
+        <Banner />
+        {/* <Problem /> */}
+        {/* <Vision /> */}
+        <Onboard />
+
+      
+
+      
 
 
       <section className="w-full relative m-20 max-w-1200 mb-0 p-6" id="solution">
