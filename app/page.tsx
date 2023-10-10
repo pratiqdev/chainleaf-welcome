@@ -1,5 +1,5 @@
 "use client"
-import { useState } from 'react'
+import { useState, useEffect, ReactNode, JSXElementConstructor } from 'react'
 import Image from 'next/image'
 import truth from '../lib/truth'
 import NavLinks from '@/components/NavLinks'
@@ -8,52 +8,153 @@ import Button from '@/blocks/Button'
 import Gallery from '@/components/TeamGallery'
 import SmallLogo from '@/public/icons/logo_no_text_white.svg'
 import { motion, AnimatePresence } from 'framer-motion'
+import clsx from 'clsx'
+import { Links } from '@/components/NavLinks'
 
+const data:any = {
+  "Consumers":{
+    cta: 'Trust your brand',
+    link: 'https://chainleaflabs.com/app',
+    steps:[
+      {
+        title:"Step 1",
+        text: <p>Visit <Link className="text-primary-6" href="/join" >chainleaflabs.com/join</Link> on your desktop or mobile device</p>,
+        img: "https://placekitten.com/400/300"
+      },
+      {
+        title:"Step 2",
+        text: <p>Create an account to get started with Chainleaf</p>,
+        img: "https://placekitten.com/300/600"
+      },
+      {
+        title:"Step 3",
+        text: <p>Browse products and certificates from authentic sources</p>,
+        img: "https://placekitten.com/500/234"
+      },
+      {
+        title:"Step 4",
+        text: <p>Find farms and brands you can <b>trust</b></p>,
+        img: "https://placekitten.com/500/275"
+      },
+      {
+        title:"Step 5",
+        text: <p>Compare and rank your favorites to <Link className="text-primary-6 hoverline" href="/beta#earn-credits" target='_BLANK'>earn credits</Link></p>,
+        img: "https://placekitten.com/500/276"
+      },
+    ],
+  },
+  "Growers":{
+    cta: 'Show off your Stats',
+    link: 'https://chainleaflabs.com/grow',
+    steps:[
+      {
+        title:"Step 1",
+        text: <p>Visit <Link className="text-primary-6" href="/grow">chainleaflabs.com/grow</Link> on your desktop or mobile device</p>,
+        img: "https://placekitten.com/802/600"
+      },
+      {
+        title:"Step 2",
+        text: <p>Create an account to get started with Chainleaf</p>,
+        img: "https://placekitten.com/301/640"
+      },
+      {
+        title:"Step 3",
+        text: <p>Connect with certified product testing labs in your area</p>,
+        img: "https://placekitten.com/204/830"
+      },
+      {
+        title:"Step 4",
+        text: <p>Save time and money on certifications and consumer outreach</p>,
+        img: "https://placekitten.com/404/530"
+      },
+      {
+        title:"Step 5",
+        text: <p>Show off your stats and share your rank with the community</p>,
+        img: "https://placekitten.com/404/530"
+      },
 
-const Nav = () => {
-  return (
-    <nav className="fixed w-screen flex items-center justify-between p-2 px-6 h-20 z-50">
-      <span className="flex items-center text-md gap-4 font-bold">
-
-        <Image
-          className="relative h-[40px] w-[40px]"
-          src={SmallLogo}
-          alt="Chainleaf Labs Logo"
-          width={40}
-          height={40}
-              priority={true}
-              loading="eager"
-          />
-        <h1 className="text-gradient text-xl">Chainleaf</h1>
-        </span>
-        <NavLinks />
-        <div className="flex gap-2">
-          <a href={truth.nav.external.login} className="hidden sm:block py-1 px-5 bg-fade-outline rounded-md text-sm text-white font-semibold">Log In</a>
-          <a href={truth.nav.external.register} className="py-1 px-5 rounded-md bg-gradient-to-r from-primary-6 to-primary-1 text-sm text-white font-semibold">Sign Up</a>
-        </div>
-    </nav>
-  )
-
+    ],
+  },
+  "Laboratories":{
+    cta: 'Connect with the Community',
+    link: 'https://chainleaflabs.com/labs',
+    steps:[
+      {
+        title:"Step 1",
+        text: <p>Visit <Link className="text-primary-6" href="/labs">chainleaflabs.com/labs</Link> on your desktop or mobile device</p>,
+        img: "https://placekitten.com/410/310"
+      },
+      {
+        title:"Step 2",
+        text: <p>Create an account to get started with Chainleaf</p>,
+        img: "https://placekitten.com/301/610"
+      },
+      {
+        title:"Step 3",
+        text: <p>Connect with local farms in need of certification</p>,
+        img: "https://placekitten.com/407/570"
+      },
+      {
+        title:"Step 4",
+        text: <p>Expand your customer base and simplify customer communication</p>,
+        img: "https://placekitten.com/508/480"
+      },
+      {
+        title:"Step 5",
+        text: <p>Work with the best in the business and solidify your reputation</p>,
+        img: "https://placekitten.com/708/410"
+      },
+    ],
+  },
+  
 }
 
-
+const animationVariants = {
+  hidden: {
+    scaleX: 0,
+    opacity: 0,
+    transition: {
+      type: "tween",
+      duration: 1,
+      delay: 0,
+    }
+  },
+  exit: {
+    scaleX: 0,
+    opacity: 0,
+    transition: {
+      type: "tween",
+      duration: .5,
+      delay: 0,
+    }
+  },
+  visible: {
+    scaleX: 1,
+    opacity: 1,
+    transition: {
+      type: "tween",
+      duration: .5,
+      delay: 0,
+    }
+  }
+}
 
 
 const Banner = () => {
   return (
-    <div className="flex flex-col-reverse lg:flex-row lg:py-20 my-20 items-center justify-evenly w-full max-w-1200 pl-0 lg:pl-12">
-        <div className="flex-col flex-1 text-center lg:text-left p-4">
+    <div id="home" className="flex flex-col-reverse lg:flex-row lg:py-20 my-20 items-center justify-evenly w-full max-w-1200 pl-0 lg:pl-12 min-h-[60vh]">
+        <div className="flex-col flex-1 text-center lg:text-left p-4 z-10">
           <h2 className="text-dark font-semibold mb-2">{truth.hero.supheading}</h2>
-          <h3 className="text-5xl font-bold leading-26 mb-10 flex-col"><span className="w-full">{truth.hero.heading}</span> <span className="text-primary-6 font-bold text-5xl mb-12">{truth.hero.subheading}</span></h3>
+          <h3 className="text-5xl font-bold leading-26 mb-10 flex-col max-w-[13em]"><span className="w-full">{truth.hero.heading}</span> <span className="text-primary-6 font-bold text-5xl mb-12">{truth.hero.subheading}</span></h3>
          
-          <a href={truth.hero.link.href} className="bg-fade py-3 px-6 mr-3 rounded-md bg-fade  text-white font-semibold text-lg hover:underline" >Join the Beta Program</a>
+          <a href='/join' className="bg-fade py-3 px-6 mr-3 rounded-md bg-fade  text-white font-semibold text-lg hover:underline" >Join the Beta Program</a>
           <Link href={'/learn-more'} className="bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 duration-300 py-3 px-6 rounded-md  text-primary-6 font-semibold text-lg" >Learn More -&gt;</Link>
           {/* <Link href={'/learn-more'} className="bg-slate-200 ml-2 py-3 px-6 rounded-md  text-primary-6 font-semibold text-lg" >Read Lightpaper</Link> */}
         </div>
 
           <div className="flex-1 flex items-center justify-center ml-6 lg:ml-0 max-w-[20rem] md:max-w-[30rem]">
             <Image
-              className="absolute flex-1 z-20  banner-logo mr-8 w-[200px] h-[200px]"
+              className="absolute flex-1 z-0 opacity-50 lg:opacity-100 banner-logo lg:mr-8 w-[80vw] h-[80vw] lg:w-[20vw] lg:h-[20vw] mt-[20vh] lg:mt-0"
               src="/icons/logo_no_text_color.svg"
               alt="Chainleaf Labs Services"
               width={200}
@@ -76,8 +177,6 @@ const Banner = () => {
       </div>
   )
 }
-
-
 
 const Problem = () => {
   return (
@@ -116,38 +215,7 @@ const Problem = () => {
   )
 }
 
-
-
 const Vision = () => {
-  const animationVariants = {
-    hidden: {
-      scaleX: 0,
-      opacity: 0,
-      transition: {
-        type: "tween",
-        duration: 1,
-        delay: 0,
-      }
-    },
-    exit: {
-      scaleX: 0,
-      opacity: 0,
-      transition: {
-        type: "tween",
-        duration: .5,
-        delay: 0,
-      }
-    },
-    visible: {
-      scaleX: 1,
-      opacity: 1,
-      transition: {
-        type: "tween",
-        duration: .5,
-        delay: 0,
-      }
-    }
-  }
   const [activeFilter, setActiveFilter] = useState('')
 
   return (
@@ -198,210 +266,205 @@ const Vision = () => {
   )
 }
 
-
-
 const Onboard = () => {
   const [type, setType] = useState("Consumers")
   const [step, setStep] = useState(0)
 
-  const data:any = {
-    "Consumers":{
-      link: 'https://chainleaflabs.com/app',
-      steps:[
-        {
-          title:"Step 1",
-          text: "Do this",
-          img: "the image"
-        },
-        {
-          title:"Step 1",
-          text: "Do this",
-          img: "the image"
-        },
-      ],
-    },
-    "Growers":{
-      link: 'https://chainleaflabs.com/grow',
-      steps:[
-        {
-          title:"Step 1",
-          text: "Do this",
-          img: "the image"
-        },
-        {
-          title:"Step 1",
-          text: "Do this",
-          img: "the image"
-        },
-      ],
-    },
-    "Laboratories":{
-      link: 'https://chainleaflabs.com/labs',
-      steps:[
-        {
-          title:"Step 1",
-          text: "Do this",
-          img: "the image"
-        },
-        {
-          title:"Step 1",
-          text: "Do this",
-          img: "the image"
-        },
-      ],
-    },
-    
-  }
+  const stepUp = () => setStep(s => s < data[type].steps.length - 1 ? ++s : s);
+  const stepDown = () => setStep(s => s > 0 ? --s : s);
 
 
-  const stepUp = () => step < Object.keys(data[type].steps).length && setStep(s => s++)
-  const stepDown = () => step > 0 && setStep(s => s--)
+
 
   return (
-    <div className="border w-full max-w-[1200px] flex-col align-center">
-      <h3 className="text-5xl font-bold leading-26 mb-10 mb-12 text-center text-primary-6">How to Connect</h3>
-      <div className="flex gap-20 mx-auto w-min">
-        {Object.keys(data).map((x,i) => <button onClick={() => {setType(x); setStep(0)}} className={type === x ? "text-primary font-semibold text-xl hover:text-primary-6" : "font-semibold text-xl hover:text-primary-6"}>{x}</button>)}
+    <div id="connect" className="w-full max-w-[1200px] flex-col align-center">
+      <h3 className="text-5xl font-bold leading-26 mb-10 text-center text-primary-6">How to Connect</h3>
+
+      <div className="flex flex-col justify-between min-h-[70vh]">
+
+        <div className="flex gap-20 mx-auto w-min">
+          {Object.keys(data).map((x,i) => <button onClick={() => {setType(x); setStep(0)}} className={clsx("font-semibold text-md md:text-2xl hover:text-primary-6", { "text-primary":type === x, })}>{x}</button>)}
+        </div>
+          {/* <AnimatePresence mode='wait'>
+            {Object.entries(data).filter(([key]) => key === type).map(([key, val]:any[]) => val.steps.filter((s:any, i:number) => i === step).map((s:any, idx:number) => 
+               <motion.div
+               key={s.img + idx + 'title'} 
+               initial={{ x:30, opacity: 0}}
+               animate={{ x:0, opacity: 1}}
+               exit={{ x:30, opacity: 0}}
+               transition={{ duration: .7, type: 'spring', }}
+             >
+               <h3 className="font-semibold text-[1rem] opacity-40  text-center pointer-events-none">{val.cta}</h3>
+             </motion.div>
+            ))}
+          </AnimatePresence> */}
+
+
+        <div className="flex flex-col md:flex-row my-6 md:my-20 justify-center items-center gap-10">
+          <AnimatePresence mode='wait'>
+            {Object.entries(data).filter(([key]) => key === type).map(([key, val]:any[]) => val.steps.filter((s:any, i:number) => i === step).map((s:any, idx:number) => 
+                <motion.img
+                  key={s.img + idx + 'img'} 
+                  src={s.img}
+                  initial={{ x:-30, opacity: 0}}
+                  animate={{ x:0, opacity: 1}}
+                  exit={{ x:-30, opacity: 0}}
+                  transition={{ duration: .7, type: 'spring' }}
+                  className="rounded-xl h-[20em] w-[20em] object-cover skel"
+                />
+            ))}
+          </AnimatePresence>
+
+
+          
+          <div className="flex flex-col justify-center items-center  md:items-start text-center md:text-left mt-4 md:mt-10 md:flex w-[22em]">
+            <AnimatePresence mode='wait'>
+              {Object.entries(data).filter(([key]) => key === type).map(([key, val]:any[]) => val.steps.filter((s:any, i:number) => i === step).map((s:any, idx:number) => 
+                <motion.div
+                  key={s.img + idx + 'title'} 
+                  initial={{ x:30, opacity: 0}}
+                  animate={{ x:0, opacity: 1}}
+                  exit={{ x:30, opacity: 0}}
+                  transition={{ duration: .7, type: 'spring', }}
+                >
+                  <h3 className="bg-primary-2 w-min whitespace-nowrap py-1 px-2 rounded mb-3 font-semibold text-xl">{s.title}</h3>
+                </motion.div>
+              ))}
+            </AnimatePresence>
+
+
+            <AnimatePresence mode='wait'>
+              {Object.entries(data).filter(([key]) => key === type).map(([key, val]:any[]) => val.steps.filter((s:any, i:number) => i === step).map((s:any, idx:number) => 
+                <motion.div
+                  key={s.img + idx + 'text'} 
+                  initial={{ x:50, opacity: 0}}
+                  animate={{ x:0, opacity: 1}}
+                  exit={{ x:50, opacity: 0}}
+                  transition={{ duration: 1, type: 'spring', }}
+                >
+                  <p className="text-xl leading-6 tracking-wide mt-4">{s.text}</p>
+                </motion.div>
+              ))}
+            </AnimatePresence>
+          </div>
+        </div>
+
+        <div className="flex justify-center items-center text-3xl bg-slate-800 p-1 w-min mx-auto rounded-3xl border-2 border-slate-700">
+          <button onClick={stepDown} className="rounded-[50%] h-10 w-10 hover:bg-slate-700 hover:text-primary-4">&lt;-</button>
+          {data[type].steps.map((x:any, i:number) => <div onClick={() => setStep(i)} className={`h-6 w-6 mx-2 rounded-[100%] hover:bg-slate-500 cursor-pointer ${step === i ? 'bg-primary-3' : 'bg-slate-600'}`} />)}
+          <button onClick={stepUp} className="rounded-[50%] h-10 w-10 hover:bg-slate-700 hover:text-primary-4">-&gt;</button>
+        </div>
+
       </div>
-      {type === "Consumers" && <div>
-        consumer
-        {step}
-      </div>}
-      {type === "Growers" && <div>
-        grower
-        {step}
-      </div>}
-      {type === "Laboratories" && <div>
-        lab
-        {step}
-      </div>}
-      <button onClick={stepUp}></button>
-      <button onClick={stepDown}></button>
+    
     </div>
   )
 }
 
-export default function Home() {
- 
-
-  
-
+const Solution = () => {
   return (
-    <>
-      <Nav />
-      <main className="flex min-h-screen flex-col items-center justify-between pt-32 w-full" id="home">
-        <Banner />
-        {/* <Problem /> */}
-        {/* <Vision /> */}
-        <Onboard />
-
-      
-
-      
+    <section className="w-full relative m-20 max-w-1200 mb-0 p-6" id="solution">
+    <h2 className="relative text-transparent bg-clip-text bg-gradient-to-b from-indigo-500 to-indigo-200 inline-block text-6xl lg:text-8xl font-bold text-center uppercase w-full opacity-75 z-10">{truth.sections.solution.heading}</h2>
+    <h3 className="relative text-center text-4xl -mt-6 -mb-12 z-10 font-semibold tracking-wide dark:text-primary-6">{truth.sections.solution.subheading}</h3>
+    {/* <p className="text-dark text-center mt-6 mb-10 dark:text-gray-300">{truth.sections.solution.content}</p> */}
 
 
-      <section className="w-full relative m-20 max-w-1200 mb-0 p-6" id="solution">
-        <h2 className="relative text-transparent bg-clip-text bg-gradient-to-b from-indigo-500 to-indigo-200 inline-block text-6xl lg:text-8xl font-bold text-center uppercase w-full opacity-75 z-10">{truth.sections.solution.heading}</h2>
-        <h3 className="relative text-center text-4xl -mt-6 -mb-12 z-10 font-semibold tracking-wide dark:text-primary-6">{truth.sections.solution.subheading}</h3>
-        {/* <p className="text-dark text-center mt-6 mb-10 dark:text-gray-300">{truth.sections.solution.content}</p> */}
-    
+    <div className="flex flex-col-reverse lg:flex-row-reverse items-center">
+      <div className="relative flex-col flex-1 gap-4 lg:mx-0  justify-center">
+        <div className="hidden lg:block bg-gradient-to-r from-transparent via-primary-6 to-transparent opacity-25 absolute top-12 left-9 bottom-28 w2">&nbsp;</div>
+        {truth.sections.solution.subsections.map(subsec => 
+          <div key={subsec.heading}  className="flex flex-col lg:flex-row justify-start items-center mb-6 lg:mb-0 group duration-300">
+            <div className="rounded-md bg-center-fade-to-transparent shadow-lg w-full p-_1 md:w-auto" >
+              <div className="relative bg-white dark:bg-gray-900 group-hover:bg-primary-6 duration-300 rounded-md p-4 w-full lg:w-auto flex items-center gap-6 whitespace-nowrap" >
+              <subsec.icon className="h-12 w-12 child text-primary-6 group-hover:text-white self-baseline duration-300"/>
+              <h4 className="block md:hidden mb-0 md:mb-2 text-primary-6 text-lg font-semibold">{subsec.heading}</h4>
 
-        <div className="flex flex-col-reverse lg:flex-row-reverse items-center">
-          <div className="relative flex-col flex-1 gap-4 lg:mx-0  justify-center">
-            <div className="hidden lg:block bg-gradient-to-r from-transparent via-primary-6 to-transparent opacity-25 absolute top-12 left-9 bottom-28 w2">&nbsp;</div>
-            {truth.sections.solution.subsections.map(subsec => 
-              <div key={subsec.heading}  className="flex flex-col lg:flex-row justify-start items-center mb-6 lg:mb-0 group duration-300">
-                <div className="rounded-md bg-center-fade-to-transparent shadow-lg w-full p-_1 md:w-auto" >
-                  <div className="relative bg-white dark:bg-gray-900 group-hover:bg-primary-6 duration-300 rounded-md p-4 w-full lg:w-auto flex items-center gap-6 whitespace-nowrap" >
-                  <subsec.icon className="h-12 w-12 child text-primary-6 group-hover:text-white self-baseline duration-300"/>
-                  <h4 className="block md:hidden mb-0 md:mb-2 text-primary-6 text-lg font-semibold">{subsec.heading}</h4>
-
-                  </div>
-                </div>
-                <div className="p-6 w-full leading-6 tracking-wide text-center lg:text-left">
-                  <h4 className="hidden md:block mb-2 text-primary-6 text-lg font-semibold">{subsec.heading}</h4>
-                  <p className="font-sm text-dark dark:text-gray-200">{subsec.content}</p>
-                </div>
               </div>
-            )}
-            <br />
-            <div className="flex justify-center items-center lg:justify-stretch">
-            <Link href={'/learn-more#a-groundbreaking-approach'} className="bg-slate-300 hover:bg-slate-400 dark:bg-slate-800 dark:hover:bg-slate-700 duration-300 duration-300 ml-2 py-3 px-6 rounded-md  text-primary-6 font-semibold text-lg" >Learn More</Link>
-            {/* <Link href={'/learn-more'} className="bg-slate-300 ml-2 py-3 px-6 rounded-md  text-primary-6 font-semibold text-lg" >Read Lightpaper -&gt;</Link> */}
             </div>
-            
+            <div className="p-6 w-full leading-6 tracking-wide text-center lg:text-left">
+              <h4 className="hidden md:block mb-2 text-primary-6 text-lg font-semibold">{subsec.heading}</h4>
+              <p className="font-sm text-dark dark:text-gray-200">{subsec.content}</p>
+            </div>
           </div>
- 
-          <div className="flex-1 mb-12 flex items-center justify-center mt-[2rem]">
-
-
-       <picture  className="m-6 max-w-[400px] md:max-w-[600px] flex flex-col">
-            <source srcSet='/images/solution_darkmode.png' media="(prefers-color-scheme: dark)" />
-       
-            <Image
-              className="w-full"
-              src="/images/solution_lightmode.png"
-              alt="Next.js Logo"
-              width={713}
-              height={580}
-            />
-     
-          </picture>
-          </div>
+        )}
+        <br />
+        <div className="flex justify-center items-center lg:justify-stretch">
+        <Link href={'/learn-more#a-groundbreaking-approach'} className="bg-slate-300 hover:bg-slate-400 dark:bg-slate-800 dark:hover:bg-slate-700 duration-300 duration-300 ml-2 py-3 px-6 rounded-md  text-primary-6 font-semibold text-lg" >Learn More</Link>
+        {/* <Link href={'/learn-more'} className="bg-slate-300 ml-2 py-3 px-6 rounded-md  text-primary-6 font-semibold text-lg" >Read Lightpaper -&gt;</Link> */}
         </div>
+        
+      </div>
+
+      <div className="flex-1 mb-12 flex items-center justify-center mt-[2rem]">
+
+
+   <picture  className="m-6 max-w-[400px] md:max-w-[600px] flex flex-col">
+        <source srcSet='/images/solution_darkmode.png' media="(prefers-color-scheme: dark)" />
+   
+        <Image
+          className="w-full"
+          src="/images/solution_lightmode.png"
+          alt="Next.js Logo"
+          width={713}
+          height={580}
+        />
+ 
+      </picture>
+      </div>
+    </div>
+
 
     
-        
-        
+    
 
 
-        </section>
-        
+  </section>
+  )
+}
+
+const Platform = () => {
+  return ( 
+    <section className="w-full relative m-20 max-w-1200 p-6" id="platform">
+
+    <h2 className="relative text-transparent bg-clip-text bg-gradient-to-b from-indigo-500 to-indigo-200 inline-block text-6xl lg:text-8xl font-bold text-center uppercase w-full opacity-75 z-10">PLATFORM</h2>
+    <h3 className="relative text-center text-4xl -mt-6 z-10 font-semibold tracking-wide dark:text-primary-6">Connecting the Pieces</h3>
 
 
 
+    <div className="flex flex-col lg:flex-row-reverse gap-6 mx-auto max-w-[1200px] mt-12 justify-center items-center">
+      <picture  className="m-0 md:m-2 max-w-[400px] md:max-w-[600px]">
+        <source srcSet='/images/diagram_large_darkmode.png' media="(prefers-color-scheme: dark)" />
+   
+        <Image
+          className="w-full"
+          src="/images/diagram_large.png"
+          alt="Next.js Logo"
+          width={1194}
+          height={937}
+        />
+      </picture>
 
-        <section className="w-full relative m-20 max-w-1200 p-6" id="platform">
-
-        <h2 className="relative text-transparent bg-clip-text bg-gradient-to-b from-indigo-500 to-indigo-200 inline-block text-6xl lg:text-8xl font-bold text-center uppercase w-full opacity-75 z-10">PLATFORM</h2>
-        <h3 className="relative text-center text-4xl -mt-6 z-10 font-semibold tracking-wide dark:text-primary-6">Connecting the Pieces</h3>
-
-
-
-        <div className="flex flex-col lg:flex-row-reverse gap-6 mx-auto max-w-[1200px] mt-12 justify-center items-center">
-          <picture  className="m-0 md:m-2 max-w-[400px] md:max-w-[600px]">
-            <source srcSet='/images/diagram_large_darkmode.png' media="(prefers-color-scheme: dark)" />
-       
-            <Image
-              className="w-full"
-              src="/images/diagram_large.png"
-              alt="Next.js Logo"
-              width={1194}
-              height={937}
-            />
-          </picture>
- 
-          <div   className="mt-4 mb-2 leading-8 tracking-wide text-xl max-w-auto text-center lg:text-left lg:max-w-[500px] mx-6">
-            {truth.sections.solution.content}
-            <div className="flex justify-center lg:justify-stretch items-center mt-8">
-            <Link href={'/learn-more#platform'} className="bg-slate-300 hover:bg-slate-400  dark:bg-slate-800 dark:hover:bg-slate-700 duration-300 duration-300 py-3 px-6 rounded-md  text-primary-6 font-semibold text-lg" >Learn More</Link>
-            {/* <Link href={'/learn-more'} className="bg-slate-300 ml-2 py-3 px-6 rounded-md  text-primary-6 font-semibold text-lg" >Read Lightpaper -&gt;</Link> */}
-            </div>
-          </div>
-
-          <div className="flex-1 leading-8 tracking-wide m-6 mx-0 lg:mx-auto bg-white p-6 rounded-lg bg-center-fade-to-transparent p-_1">
-
-          </div>
+      <div   className="mt-4 mb-2 leading-8 tracking-wide text-xl max-w-auto text-center lg:text-left lg:max-w-[500px] mx-6">
+        {truth.sections.solution.content}
+        <div className="flex justify-center lg:justify-stretch items-center mt-8">
+        <Link href={'/learn-more#platform'} className="bg-slate-300 hover:bg-slate-400  dark:bg-slate-800 dark:hover:bg-slate-700 duration-300 duration-300 py-3 px-6 rounded-md  text-primary-6 font-semibold text-lg" >Learn More</Link>
+        {/* <Link href={'/learn-more'} className="bg-slate-300 ml-2 py-3 px-6 rounded-md  text-primary-6 font-semibold text-lg" >Read Lightpaper -&gt;</Link> */}
         </div>
-     
+      </div>
 
-      </section>
+      <div className="flex-1 leading-8 tracking-wide m-6 mx-0 lg:mx-auto bg-white p-6 rounded-lg bg-center-fade-to-transparent p-_1">
 
+      </div>
+    </div>
+ 
 
+  </section>
+  )
+}
 
-
-
-      <section className="w-full relative my-20 max-w-1200 p-6" id="about">
+const About = () => {
+  return (
+    <section className="w-full relative my-20 max-w-1200 p-6" id="about">
         <h2 className="relative text-transparent bg-clip-text bg-gradient-to-b from-indigo-500 to-indigo-200 inline-block text-6xl lg:text-8xl font-bold text-center uppercase w-full opacity-75 z-10">{truth.sections.about.heading}</h2>
         <h3 className="relative text-center text-4xl -mt-6 z-10 font-semibold tracking-wide mb-10 dark:text-primary-6">{truth.sections.about.subheading}</h3>
 
@@ -424,12 +487,12 @@ export default function Home() {
 
 
       </section>
+  )
+}
 
-
-
-
-
-      <footer className="w-full flex flex-col bg-primary-6 dark:bg-gray-900 py-12 text-white">
+const Footer = () => {
+  return (
+    <footer className="w-full flex flex-col bg-primary-6 dark:bg-gray-900 py-12 text-white">
         <div className="w-full flex justify-center">
         <div className="max-w-1200 w-full flex items-center justify-between px-6 md:px-0">
          <Image
@@ -454,6 +517,51 @@ export default function Home() {
           </div>
         </div>
       </footer>
+  )
+}
+
+export default function Home() {
+ 
+
+  
+
+  return (
+    <>
+      {/* <Nav links={truth.nav.links}/> */}
+      <main className="flex min-h-screen flex-col items-center justify-between pt-32 w-full" id="home">
+        <Banner />
+        {/* <Problem /> */}
+        {/* <Vision /> */}
+        <Onboard />
+        <Solution />
+        <Platform />
+        <About />
+        <Footer />
+
+      
+
+      
+
+
+  
+        
+
+
+
+
+     
+
+
+
+
+
+      
+
+
+
+
+
+      
 
 
 

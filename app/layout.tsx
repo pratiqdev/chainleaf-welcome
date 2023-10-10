@@ -3,6 +3,7 @@ import truth from '@/lib/truth'
 import { Inter } from 'next/font/google'
 import Head from 'next/head'
 import Script from 'next/script'
+import Nav from '@/components/Nav'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -43,11 +44,14 @@ export default function RootLayout({
         <link rel="icon" type="image/png" sizes="16x16" href="images/favicons/favicon-16x16.png" />
         <link rel="manifest" href="images/favicons/site.webmanifest" />
         <link rel="mask-icon" href="images/favicons/safari-pinned-tab.svg" color="#5bbad5" />
-        <GoogleAnalyticsTag />
 
       </Head>
+      <GoogleAnalyticsTag />
 
-      <body className={inter.className + " relative max-w-50"}>{children}</body>
+      <body className={inter.className + " relative max-w-50"}>
+        <Nav links={truth.nav.links}/>
+        {children}
+        </body>
     </html>
   )
 }
