@@ -283,7 +283,7 @@ const Onboard = () => {
       <div className="flex flex-col justify-between min-h-[70vh]">
 
         <div className="flex gap-20 mx-auto w-min">
-          {Object.keys(data).map((x,i) => <button onClick={() => {setType(x); setStep(0)}} className={clsx("font-semibold text-md md:text-2xl hover:text-primary-6", { "text-primary":type === x, })}>{x}</button>)}
+          {Object.keys(data).map((x,i) => <button key={i} onClick={() => {setType(x); setStep(0)}} className={clsx("font-semibold text-md md:text-2xl hover:text-primary-6", { "text-primary":type === x, })}>{x}</button>)}
         </div>
           {/* <AnimatePresence mode='wait'>
             {Object.entries(data).filter(([key]) => key === type).map(([key, val]:any[]) => val.steps.filter((s:any, i:number) => i === step).map((s:any, idx:number) => 
@@ -351,7 +351,7 @@ const Onboard = () => {
 
         <div className="flex justify-center items-center text-3xl bg-slate-800 p-1 w-min mx-auto rounded-3xl border-2 border-slate-700">
           <button onClick={stepDown} className="rounded-[50%] h-10 w-10 hover:bg-slate-700 hover:text-primary-4">&lt;-</button>
-          {data[type].steps.map((x:any, i:number) => <div onClick={() => setStep(i)} className={`h-6 w-6 mx-2 rounded-[100%] hover:bg-slate-500 cursor-pointer ${step === i ? 'bg-primary-3' : 'bg-slate-600'}`} />)}
+          {data[type].steps.map((x:any, i:number) => <div key={i} onClick={() => setStep(i)} className={`h-6 w-6 mx-2 rounded-[100%] hover:bg-slate-500 cursor-pointer ${step === i ? 'bg-primary-3' : 'bg-slate-600'}`} />)}
           <button onClick={stepUp} className="rounded-[50%] h-10 w-10 hover:bg-slate-700 hover:text-primary-4">-&gt;</button>
         </div>
 
