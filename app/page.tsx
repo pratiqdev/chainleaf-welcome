@@ -148,7 +148,7 @@ type BlastProps = {
 
 const BlastForm = (props:BlastProps) => {
   const [email, setEmail] = useState('')
-  const url = 'http://nlb.chainleaflabs.com/chainleaflabs-usersubscriptions/usersubscriptions/chainleaflabs/subscribeforupdates'
+  const url = 'https://nlb.chainleaflabs.com/chainleaflabs-usersubscriptions/usersubscriptions/chainleaflabs/subscribeforupdates'
   const envData = useEnvironment()
   const userTime = useTime()
 
