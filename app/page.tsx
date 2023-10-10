@@ -10,6 +10,8 @@ import SmallLogo from '@/public/icons/logo_no_text_white.svg'
 import { motion, AnimatePresence } from 'framer-motion'
 import clsx from 'clsx'
 import { Links } from '@/components/NavLinks'
+import useEnvironment from '@/lib/useEnvironment'
+import useTime from '@/lib/useTime'
 
 const data:any = {
   "Consumers":{
@@ -139,16 +141,67 @@ const animationVariants = {
   }
 }
 
+type BlastProps = {
+  placeholder: string;
+  redirect?: string;
+}
+
+const BlastForm = (props:BlastProps) => {
+  const [email, setEmail] = useState('')
+  const url = 'http://nlb.chainleaflabs.com/chainleaflabs-usersubscriptions/usersubscriptions/chainleaflabs/subscribeforupdates'
+  const envData = useEnvironment()
+  const userTime = useTime()
+
+  const send = () => {
+    if(!email) {
+      console.log('no email provided...')
+      return
+    }
+    console.log('sending email to '+email)
+
+    fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        "user_subscription_details": {
+          email: email,
+          origin: 'chainleaf welcome banner email subscriber',
+          envData,
+          userTime,
+        }
+      }),
+    })
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch((error) => console.error('Error:', error));
+  }
+
+
+
+  return (
+    <div className="border mb-6 rounded h-12 overflow-hidden flex items-center max-w-[32rem] mx-auto">
+      <input placeholder={props.placeholder} type="text" className="h-12 p-4 flex-1 bg-transparent" onChange={(e) => setEmail(e.target.value)} />
+      <button onClick={send} className="p-4 text-primary-2  hover:bg-white duration-200">-&gt;</button>
+    </div>
+  )
+}
+
 
 const Banner = () => {
   return (
     <div id="home" className="flex flex-col-reverse lg:flex-row lg:py-20 my-20 items-center justify-evenly w-full max-w-1200 pl-0 lg:pl-12 min-h-[60vh]">
-        <div className="flex-col flex-1 text-center lg:text-left p-4 z-10">
+        <div className="flex-col flex-1 text-center lg:text-left p-4 z-10 max-w-[32em]">
           <h2 className="text-dark font-semibold mb-2">{truth.hero.supheading}</h2>
-          <h3 className="text-5xl font-bold leading-26 mb-10 flex-col max-w-[13em]"><span className="w-full">{truth.hero.heading}</span> <span className="text-primary-6 font-bold text-5xl mb-12">{truth.hero.subheading}</span></h3>
+          <h3 className="text-5xl font-bold leading-26 mb-6 flex-col max-w-[13em] lg:min-w-[13em]"><span className="w-full">{truth.hero.heading}</span> <span className="text-primary-6 font-bold text-5xl mb-12">{truth.hero.subheading}</span></h3>
          
-          <a href='/join' className="bg-fade py-3 px-6 mr-3 rounded-md bg-fade  text-white font-semibold text-lg hover:underline" >Join the Beta Program</a>
-          <Link href={'/learn-more'} className="bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 duration-300 py-3 px-6 rounded-md  text-primary-6 font-semibold text-lg" >Learn More -&gt;</Link>
+          <BlastForm placeholder='Subscribe for Updates' />
+          <div className="max-w-[32rem] flex justify-stretch">
+            <a href='/join' className="bg-fade py-3 px-6 mr-3 rounded-md bg-fade  text-white font-semibold text-lg hover:underline flex-1" >Join the Beta Program -&gt;</a>
+            <Link href={'/learn-more'} className="bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 duration-300 py-3 px-6 rounded-md  text-primary-6 font-semibold text-lg" >Learn More -&gt;</Link>
+          </div>
+          
           {/* <Link href={'/learn-more'} className="bg-slate-200 ml-2 py-3 px-6 rounded-md  text-primary-6 font-semibold text-lg" >Read Lightpaper</Link> */}
         </div>
 
@@ -342,7 +395,7 @@ const Onboard = () => {
                   exit={{ x:50, opacity: 0}}
                   transition={{ duration: 1, type: 'spring', }}
                 >
-                  <p className="text-xl leading-6 tracking-wide mt-4">{s.text}</p>
+                  <div className="text-xl leading-6 tracking-wide mt-4">{s.text}</div>
                 </motion.div>
               ))}
             </AnimatePresence>
