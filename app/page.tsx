@@ -181,7 +181,7 @@ const BlastForm = (props:BlastProps) => {
 
 
   return (
-    <div className="border mb-6 rounded h-12 overflow-hidden flex items-center max-w-[32rem] mx-auto">
+    <div className="border mb-3 rounded h-12 overflow-hidden flex items-center max-w-[32rem] mx-auto">
       <input placeholder={props.placeholder} type="text" className="h-12 p-4 flex-1 bg-transparent" onChange={(e) => setEmail(e.target.value)} />
       <button onClick={send} className="p-4 text-primary-2  hover:bg-white duration-200">-&gt;</button>
     </div>
