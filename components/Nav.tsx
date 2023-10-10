@@ -11,7 +11,7 @@ const Nav = (props:NavProps) => {
 
     return (
       <nav className="fixed w-screen flex items-center justify-between p-2 px-6 h-20 z-50">
-        <a href="#home" className="flex items-center text-md gap-4 font-bold">
+        <a href="./#home" className="flex items-center text-md gap-4 font-bold">
   
           <Image
             className="relative h-[40px] w-[40px]"
