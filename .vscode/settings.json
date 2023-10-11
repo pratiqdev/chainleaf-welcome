@@ -16,5 +16,8 @@
         "**/log/**": true,
         "**/.fdk/**": true,
 
-    }
+    },
+    "cSpell.words": [
+        "chainleaf"
+    ]
 }

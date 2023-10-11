@@ -1,12 +1,13 @@
 
 
 ------------------------------------------------------------------------------------------------------
-# refactor learn-more page into approachable sections and searchable list
+# refactor learn-more page into approachable sections
 
 ## QUESTIONS
 
 ## TASKS
-- create some beginner friendly sections that explain:
+- create a simplified '/more' page, with '/learn-more' being tech heavy
+- create some beginner friendly sections in '/more' that explain:
     - what does chainleaf do (validation service)
     - how does it benefit the community (reference all three user_types)
     - how does chainleaf do it (blockchain tech)
