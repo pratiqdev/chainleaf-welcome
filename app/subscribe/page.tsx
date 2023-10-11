@@ -1,6 +1,4 @@
-
-
-const Join = () => {
+const Page = () => {
     return (
         <div className="bg-slate-500 min-h-screen">
             <div className="h-20" />
@@ -13,4 +11,4 @@ const Join = () => {
     )
 }
 
-export default Join
+export default Page
