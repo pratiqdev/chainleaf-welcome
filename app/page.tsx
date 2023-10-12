@@ -12,15 +12,16 @@ import clsx from 'clsx'
 import { Links } from '@/components/NavLinks'
 import useEnvironment from '@/lib/useEnvironment'
 import useTime from '@/lib/useTime'
+import BlastForm from '@/components/Blast'
 
 const data:any = {
   "Consumers":{
     cta: 'Trust your brand',
-    link: 'https://chainleaflabs.com/app',
+    link: 'https://dev.chainleaflabs.com/auth/register#user',
     steps:[
       {
         title:"Step 1",
-        text: <p>Visit <Link className="text-primary-6" href="/join" >chainleaflabs.com/join</Link> on your desktop or mobile device</p>,
+        text: <p>Visit <Link className="text-primary-6" href="https://dev.chainleaflabs.com/auth/register#user" >chainleaflabs.com/join</Link> on your desktop or mobile device</p>,
         img: "https://placekitten.com/400/300"
       },
       {
@@ -51,7 +52,7 @@ const data:any = {
     steps:[
       {
         title:"Step 1",
-        text: <p>Visit <Link className="text-primary-6" href="/grow">chainleaflabs.com/grow</Link> on your desktop or mobile device</p>,
+        text: <p>Visit <Link className="text-primary-6" href="https://dev.chainleaflabs.com/auth/register#grow">chainleaflabs.com/grow</Link> on your desktop or mobile device</p>,
         img: "https://placekitten.com/802/600"
       },
       {
@@ -83,7 +84,7 @@ const data:any = {
     steps:[
       {
         title:"Step 1",
-        text: <p>Visit <Link className="text-primary-6" href="/labs">chainleaflabs.com/labs</Link> on your desktop or mobile device</p>,
+        text: <p>Visit <Link className="text-primary-6" href="/https://dev.chainleaflabs.com/auth/register#labs">chainleaflabs.com/labs</Link> on your desktop or mobile device</p>,
         img: "https://placekitten.com/410/310"
       },
       {
@@ -139,53 +140,6 @@ const animationVariants = {
       delay: 0,
     }
   }
-}
-
-type BlastProps = {
-  placeholder: string;
-  redirect?: string;
-}
-
-const BlastForm = (props:BlastProps) => {
-  const [email, setEmail] = useState('')
-  const url = 'https://nlb.chainleaflabs.com/chainleaflabs-usersubscriptions/usersubscriptions/chainleaflabs/subscribeforupdates'
-  const envData = useEnvironment()
-  const userTime = useTime()
-
-  const send = () => {
-    if(!email) {
-      console.log('no email provided...')
-      return
-    }
-    console.log('sending email to '+email)
-
-    fetch(url, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        "user_subscription_details": {
-          email: email,
-          origin: 'chainleaf welcome banner email subscriber',
-          envData,
-          userTime,
-        }
-      }),
-    })
-    .then(response => response.json())
-    .then(data => console.log(data))
-    .catch((error) => console.error('Error:', error));
-  }
-
-
-
-  return (
-    <div className="border mb-3 rounded h-12 overflow-hidden flex items-center max-w-[32rem] mx-auto">
-      <input placeholder={props.placeholder} type="text" className="h-12 p-4 flex-1 bg-transparent" onChange={(e) => setEmail(e.target.value)} />
-      <button onClick={send} className="p-4 text-primary-2  hover:bg-white duration-200">-&gt;</button>
-    </div>
-  )
 }
 
 
@@ -416,9 +370,9 @@ const Onboard = () => {
 
 const Solution = () => {
   return (
-    <section className="w-full relative m-20 max-w-1200 mb-0 p-6" id="solution">
-    <h2 className="relative text-transparent bg-clip-text bg-gradient-to-b from-indigo-500 to-indigo-200 inline-block text-6xl lg:text-8xl font-bold text-center uppercase w-full opacity-75 z-10">{truth.sections.solution.heading}</h2>
-    <h3 className="relative text-center text-4xl -mt-6 -mb-12 z-10 font-semibold tracking-wide dark:text-primary-6">{truth.sections.solution.subheading}</h3>
+    <section className="w-full relative my-24 min-h-[80vh] max-w-1200 mb-0 p-6 flex flex-col justify-center" id="solution">
+    {/* <h2 className="relative text-transparent bg-clip-text bg-gradient-to-b from-indigo-500 to-indigo-200 inline-block text-6xl lg:text-8xl font-bold text-center uppercase w-full opacity-75 z-10 mb-4">{truth.sections.solution.heading}</h2> */}
+    <h3 className="relative text-center text-5xl  mb-8 z-10 font-bold tracking-wide dark:text-primary-6">{truth.sections.solution.subheading}</h3>
     {/* <p className="text-dark text-center mt-6 mb-10 dark:text-gray-300">{truth.sections.solution.content}</p> */}
 
 
@@ -587,8 +541,8 @@ export default function Home() {
         {/* <Vision /> */}
         <Onboard />
         <Solution />
-        <Platform />
-        <About />
+        {/* <Platform /> */}
+        {/* <About /> */}
         <Footer />
 
       
