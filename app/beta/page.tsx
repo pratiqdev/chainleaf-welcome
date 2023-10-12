@@ -13,4 +13,4 @@ const Page = () => {
     )
 }
 
-export default Join
+export default Page
