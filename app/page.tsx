@@ -22,27 +22,27 @@ const data:any = {
       {
         title:"Step 1",
         text: <p>Visit <Link className="text-primary-6" href="https://dev.chainleaflabs.com/auth/register#user" >chainleaflabs.com/join</Link> on your desktop or mobile device</p>,
-        img: "https://placekitten.com/400/300"
+        img: "/images/chainleaf/app-mobile.png"
       },
       {
         title:"Step 2",
         text: <p>Create an account to get started with Chainleaf</p>,
-        img: "https://placekitten.com/300/600"
+        img: "/images/chainleaf/login-mobile.png"
       },
       {
         title:"Step 3",
         text: <p>Browse products and certificates from authentic sources</p>,
-        img: "https://placekitten.com/500/234"
+        img: "/images/chainleaf/browse-mobile.png"
       },
       {
         title:"Step 4",
         text: <p>Find farms and brands you can <b>trust</b></p>,
-        img: "https://placekitten.com/500/275"
+        img: "/images/chainleaf/trust-mobile.png"
       },
       {
         title:"Step 5",
         text: <p>Compare and rank your favorites to <Link className="text-primary-6 hoverline" href="/beta#earn-credits" target='_BLANK'>earn credits</Link></p>,
-        img: "https://placekitten.com/500/276"
+        img: "/images/chainleaf/compare-mobile.png"
       },
     ],
   },
@@ -53,27 +53,27 @@ const data:any = {
       {
         title:"Step 1",
         text: <p>Visit <Link className="text-primary-6" href="https://dev.chainleaflabs.com/auth/register#grow">chainleaflabs.com/grow</Link> on your desktop or mobile device</p>,
-        img: "https://placekitten.com/802/600"
+        img: "/images/chainleaf/app-desktop.png"
       },
       {
         title:"Step 2",
         text: <p>Create an account to get started with Chainleaf</p>,
-        img: "https://placekitten.com/301/640"
+        img: "/images/chainleaf/login-desktop.png"
       },
       {
         title:"Step 3",
         text: <p>Connect with certified product testing labs in your area</p>,
-        img: "https://placekitten.com/204/830"
+        img: "/images/chainleaf/connect-desktop.png"
       },
       {
         title:"Step 4",
         text: <p>Save time and money on certifications and consumer outreach</p>,
-        img: "https://placekitten.com/404/530"
+        img: "/images/chainleaf/save-desktop.png"
       },
       {
         title:"Step 5",
         text: <p>Show off your stats and share your rank with the community</p>,
-        img: "https://placekitten.com/404/530"
+        img: "/images/chainleaf/compare-desktop.png"
       },
 
     ],
@@ -85,27 +85,27 @@ const data:any = {
       {
         title:"Step 1",
         text: <p>Visit <Link className="text-primary-6" href="/https://dev.chainleaflabs.com/auth/register#labs">chainleaflabs.com/labs</Link> on your desktop or mobile device</p>,
-        img: "https://placekitten.com/410/310"
+        img: "/images/chainleaf/app-desktop.png"
       },
       {
         title:"Step 2",
         text: <p>Create an account to get started with Chainleaf</p>,
-        img: "https://placekitten.com/301/610"
+        img: "/images/chainleaf/login-desktop.png"
       },
       {
         title:"Step 3",
         text: <p>Connect with local farms in need of certification</p>,
-        img: "https://placekitten.com/407/570"
+        img: "/images/chainleaf/connect-desktop.png"
       },
       {
         title:"Step 4",
         text: <p>Expand your customer base and simplify customer communication</p>,
-        img: "https://placekitten.com/508/480"
+        img: "/images/chainleaf/compare-desktop.png"
       },
       {
         title:"Step 5",
         text: <p>Work with the best in the business and solidify your reputation</p>,
-        img: "https://placekitten.com/708/410"
+        img: "/images/chainleaf/trust-desktop.png"
       },
     ],
   },
