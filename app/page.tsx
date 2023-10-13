@@ -10,15 +10,18 @@ import SmallLogo from '@/public/icons/logo_no_text_white.svg'
 import { motion, AnimatePresence } from 'framer-motion'
 import clsx from 'clsx'
 import { Links } from '@/components/NavLinks'
+import useEnvironment from '@/lib/useEnvironment'
+import useTime from '@/lib/useTime'
+import BlastForm from '@/components/Blast'
 
 const data:any = {
   "Consumers":{
     cta: 'Trust your brand',
-    link: 'https://chainleaflabs.com/app',
+    link: 'https://dev.chainleaflabs.com/auth/register#user',
     steps:[
       {
         title:"Step 1",
-        text: <p>Visit <Link className="text-primary-6" href="/join" >chainleaflabs.com/join</Link> on your desktop or mobile device</p>,
+        text: <p>Visit <Link className="text-primary-6" href="https://dev.chainleaflabs.com/auth/register#user" >chainleaflabs.com/join</Link> on your desktop or mobile device</p>,
         img: "https://placekitten.com/400/300"
       },
       {
@@ -49,7 +52,7 @@ const data:any = {
     steps:[
       {
         title:"Step 1",
-        text: <p>Visit <Link className="text-primary-6" href="/grow">chainleaflabs.com/grow</Link> on your desktop or mobile device</p>,
+        text: <p>Visit <Link className="text-primary-6" href="https://dev.chainleaflabs.com/auth/register#grow">chainleaflabs.com/grow</Link> on your desktop or mobile device</p>,
         img: "https://placekitten.com/802/600"
       },
       {
@@ -81,7 +84,7 @@ const data:any = {
     steps:[
       {
         title:"Step 1",
-        text: <p>Visit <Link className="text-primary-6" href="/labs">chainleaflabs.com/labs</Link> on your desktop or mobile device</p>,
+        text: <p>Visit <Link className="text-primary-6" href="/https://dev.chainleaflabs.com/auth/register#labs">chainleaflabs.com/labs</Link> on your desktop or mobile device</p>,
         img: "https://placekitten.com/410/310"
       },
       {
@@ -143,12 +146,16 @@ const animationVariants = {
 const Banner = () => {
   return (
     <div id="home" className="flex flex-col-reverse lg:flex-row lg:py-20 my-20 items-center justify-evenly w-full max-w-1200 pl-0 lg:pl-12 min-h-[60vh]">
-        <div className="flex-col flex-1 text-center lg:text-left p-4 z-10">
+        <div className="flex-col flex-1 text-center lg:text-left p-4 z-10 max-w-[32em]">
           <h2 className="text-dark font-semibold mb-2">{truth.hero.supheading}</h2>
-          <h3 className="text-5xl font-bold leading-26 mb-10 flex-col max-w-[13em]"><span className="w-full">{truth.hero.heading}</span> <span className="text-primary-6 font-bold text-5xl mb-12">{truth.hero.subheading}</span></h3>
+          <h3 className="text-5xl font-bold leading-26 mb-6 flex-col max-w-[13em] lg:min-w-[13em]"><span className="w-full">{truth.hero.heading}</span> <span className="text-primary-6 font-bold text-5xl mb-12">{truth.hero.subheading}</span></h3>
          
-          <a href='/join' className="bg-fade py-3 px-6 mr-3 rounded-md bg-fade  text-white font-semibold text-lg hover:underline" >Join the Beta Program</a>
-          <Link href={'/learn-more'} className="bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 duration-300 py-3 px-6 rounded-md  text-primary-6 font-semibold text-lg" >Learn More -&gt;</Link>
+          <BlastForm placeholder='Subscribe for Updates' />
+          <div className="max-w-[32rem] flex justify-stretch">
+            <a href='/join' className="bg-fade py-3 px-6 mr-3 rounded-md bg-fade  text-white font-semibold text-lg hover:underline flex-1" >Join the Beta Program -&gt;</a>
+            <Link href={'/learn-more'} className="bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 duration-300 py-3 px-6 rounded-md  text-primary-6 font-semibold text-lg" >Learn More -&gt;</Link>
+          </div>
+          
           {/* <Link href={'/learn-more'} className="bg-slate-200 ml-2 py-3 px-6 rounded-md  text-primary-6 font-semibold text-lg" >Read Lightpaper</Link> */}
         </div>
 
@@ -283,7 +290,7 @@ const Onboard = () => {
       <div className="flex flex-col justify-between min-h-[70vh]">
 
         <div className="flex gap-20 mx-auto w-min">
-          {Object.keys(data).map((x,i) => <button onClick={() => {setType(x); setStep(0)}} className={clsx("font-semibold text-md md:text-2xl hover:text-primary-6", { "text-primary":type === x, })}>{x}</button>)}
+          {Object.keys(data).map((x,i) => <button key={i} onClick={() => {setType(x); setStep(0)}} className={clsx("font-semibold text-md md:text-2xl hover:text-primary-6", { "text-primary":type === x, })}>{x}</button>)}
         </div>
           {/* <AnimatePresence mode='wait'>
             {Object.entries(data).filter(([key]) => key === type).map(([key, val]:any[]) => val.steps.filter((s:any, i:number) => i === step).map((s:any, idx:number) => 
@@ -342,7 +349,7 @@ const Onboard = () => {
                   exit={{ x:50, opacity: 0}}
                   transition={{ duration: 1, type: 'spring', }}
                 >
-                  <p className="text-xl leading-6 tracking-wide mt-4">{s.text}</p>
+                  <div className="text-xl leading-6 tracking-wide mt-4">{s.text}</div>
                 </motion.div>
               ))}
             </AnimatePresence>
@@ -351,7 +358,7 @@ const Onboard = () => {
 
         <div className="flex justify-center items-center text-3xl bg-slate-800 p-1 w-min mx-auto rounded-3xl border-2 border-slate-700">
           <button onClick={stepDown} className="rounded-[50%] h-10 w-10 hover:bg-slate-700 hover:text-primary-4">&lt;-</button>
-          {data[type].steps.map((x:any, i:number) => <div onClick={() => setStep(i)} className={`h-6 w-6 mx-2 rounded-[100%] hover:bg-slate-500 cursor-pointer ${step === i ? 'bg-primary-3' : 'bg-slate-600'}`} />)}
+          {data[type].steps.map((x:any, i:number) => <div key={i} onClick={() => setStep(i)} className={`h-6 w-6 mx-2 rounded-[100%] hover:bg-slate-500 cursor-pointer ${step === i ? 'bg-primary-3' : 'bg-slate-600'}`} />)}
           <button onClick={stepUp} className="rounded-[50%] h-10 w-10 hover:bg-slate-700 hover:text-primary-4">-&gt;</button>
         </div>
 
@@ -363,9 +370,9 @@ const Onboard = () => {
 
 const Solution = () => {
   return (
-    <section className="w-full relative m-20 max-w-1200 mb-0 p-6" id="solution">
-    <h2 className="relative text-transparent bg-clip-text bg-gradient-to-b from-indigo-500 to-indigo-200 inline-block text-6xl lg:text-8xl font-bold text-center uppercase w-full opacity-75 z-10">{truth.sections.solution.heading}</h2>
-    <h3 className="relative text-center text-4xl -mt-6 -mb-12 z-10 font-semibold tracking-wide dark:text-primary-6">{truth.sections.solution.subheading}</h3>
+    <section className="w-full relative my-24 min-h-[80vh] max-w-1200 mb-0 p-6 flex flex-col justify-center" id="solution">
+    {/* <h2 className="relative text-transparent bg-clip-text bg-gradient-to-b from-indigo-500 to-indigo-200 inline-block text-6xl lg:text-8xl font-bold text-center uppercase w-full opacity-75 z-10 mb-4">{truth.sections.solution.heading}</h2> */}
+    <h3 className="relative text-center text-5xl  mb-8 z-10 font-bold tracking-wide dark:text-primary-6">{truth.sections.solution.subheading}</h3>
     {/* <p className="text-dark text-center mt-6 mb-10 dark:text-gray-300">{truth.sections.solution.content}</p> */}
 
 
@@ -534,8 +541,8 @@ export default function Home() {
         {/* <Vision /> */}
         <Onboard />
         <Solution />
-        <Platform />
-        <About />
+        {/* <Platform /> */}
+        {/* <About /> */}
         <Footer />
 
       
