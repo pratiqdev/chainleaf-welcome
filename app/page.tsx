@@ -317,7 +317,7 @@ const Onboard = () => {
                   animate={{ x:0, opacity: 1}}
                   exit={{ x:-30, opacity: 0}}
                   transition={{ duration: .7, type: 'spring' }}
-                  className="rounded-xl h-[20em] w-[20em] object-cover skel"
+                  className="rounded-xl h-[25em] w-[25em] p-10 object-cover skel"
                 />
             ))}
           </AnimatePresence>

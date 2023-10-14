@@ -244,6 +244,7 @@ nav {
 
 .skel {
   /* background-image: linear-gradient(35deg, #222,  #555, #333); */
+  background-image: radial-gradient(#99c6, #99c5, #99c5, #99c4, #99c4, #99c2, #99c0, #99c0, #99c0, #99c0, #99c0);
 }
 
 
