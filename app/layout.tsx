@@ -5,6 +5,7 @@ import Head from 'next/head'
 import Script from 'next/script'
 import Nav from '@/components/Nav'
 
+
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = truth.metadata
@@ -36,6 +37,8 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+
+
   return (
     <html lang="en">
       <Head>
@@ -49,7 +52,7 @@ export default function RootLayout({
       <GoogleAnalyticsTag />
 
       <body className={inter.className + " relative max-w-50"}>
-        <Nav links={truth.nav.links}/>
+        <Nav />
         {children}
         </body>
     </html>

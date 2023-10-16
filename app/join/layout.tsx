@@ -1,29 +1,28 @@
+import { AuthProvider } from "@/components/AuthProvider"
 import Blast from "@/components/Blast"
 import Link from "next/link"
 
 // https://dev.chainleaflabs.com/auth/register
 
-const Join = () => {
+const JoinLayout = ({
+    children,
+  }: {
+    children: React.ReactNode
+  }) => {
 
 
     return  (
-        <div className="bg-slate-800 p-8 min-w-[20rem] rounded-lg text-primary mx-auto mt-4 w-min shadow-lg flex flex-col items-center">
-            <h2 className="text-2xl text-primary-2 font-bold mb-6 text-center">Join Chainleaf Today</h2>
-            <p className="text-white text-md leading-6 my-4 text-center">Select a User Type to continue to the Chainleaf Demo Application</p>
-            <div className="flex flex-col gap-4 w-full">
-                <Link href="/join/user" className="p-2 text-center bg-primary-2 text-white w-full text-xl rounded hover:bg-primary-3">Users</Link>
-                <Link href="/join/grow" className="p-2 text-center bg-primary-2 text-white w-full text-xl rounded hover:bg-primary-3">Growers</Link>
-                <Link href="/join/labs" className="p-2 text-center bg-primary-2 text-white w-full text-xl rounded hover:bg-primary-3">Laboratories</Link>
+        <AuthProvider>
+            <div className="min-h-screen flex justify-center items-center">
+                <div className="h-20" />
+                {children}
             </div>
-            <p className="text-white text-md leading-6 my-4 text-center mt-12">Or Join our Email list to get updated when we go live!</p>
-            <Blast placeholder="Subscribe for Updates" />
-            
-        </div>
+        </AuthProvider>
     )
        
 }
 
-export default Join 
+export default JoinLayout 
 
 
 {/* <div className="min-h-screen flex justify-center items-center">

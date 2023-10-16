@@ -21,7 +21,7 @@ const data:any = {
     steps:[
       {
         title:"Step 1",
-        text: <p>Visit <Link className="text-primary-6" href="https://dev.chainleaflabs.com/auth/register#user" >chainleaflabs.com/join</Link> on your desktop or mobile device</p>,
+        text: <p>Visit <Link className="text-primary-6" href="/join/user" >chainleaflabs.com/join</Link> on your desktop or mobile device</p>,
         img: "/images/chainleaf/app-mobile.png"
       },
       {
@@ -52,7 +52,7 @@ const data:any = {
     steps:[
       {
         title:"Step 1",
-        text: <p>Visit <Link className="text-primary-6" href="https://dev.chainleaflabs.com/auth/register#grow">chainleaflabs.com/grow</Link> on your desktop or mobile device</p>,
+        text: <p>Visit <Link className="text-primary-6" href="join/grow">chainleaflabs.com/grow</Link> on your desktop or mobile device</p>,
         img: "/images/chainleaf/app-desktop.png"
       },
       {
@@ -84,7 +84,7 @@ const data:any = {
     steps:[
       {
         title:"Step 1",
-        text: <p>Visit <Link className="text-primary-6" href="https://dev.chainleaflabs.com/auth/register#labs">chainleaflabs.com/labs</Link> on your desktop or mobile device</p>,
+        text: <p>Visit <Link className="text-primary-6" href="/join/labs">chainleaflabs.com/labs</Link> on your desktop or mobile device</p>,
         img: "/images/chainleaf/app-desktop.png"
       },
       {
