@@ -4,6 +4,7 @@ import useEnvironment from '@/lib/useEnvironment'
 import useTime from '@/lib/useTime'
 import { useRouter } from 'next/navigation'
 import { useAuth } from './AuthProvider'
+import axiosInstance from '@/lib/axios'
 
 type BlastProps = {
     placeholder: string;
@@ -20,7 +21,7 @@ const BlastForm = (props: BlastProps) => {
     const router = useRouter()
     const ctx = useAuth()
 
-    const send = () => {
+    const send = async () => {
         if (!email || !emailRegexp.test(email)) {
             console.log('Invalid email:', email)
             setError('Invalid email!')
@@ -28,28 +29,36 @@ const BlastForm = (props: BlastProps) => {
         }
         console.log('sending email to ' + email)
         setError('Sending email...')
+         const { data } = await axiosInstance.post('/chainleaflabs-usersubscriptions/usersubscriptions/chainleaflabs/subscribeforupdates', JSON.stringify({
+            "user_subscription_details": {
+                email: email,
+                origin: 'chainleaf welcome banner email subscriber',
+                envData,
+                userTime,
+            }
+        }))
 
-        fetch(url, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                "user_subscription_details": {
-                    email: email,
-                    origin: 'chainleaf welcome banner email subscriber',
-                    envData,
-                    userTime,
-                }
-            }),
-        })
-            .then(response => response.json())
-            .then(data => {
-                if('UserSubscription' in data){
-                    router.push(`/join/subscribed?email=${email}`)
-                }
-            })
-            .catch((error) => console.error('Error:', error));
+        // fetch(url, {
+        //     method: 'POST',
+        //     headers: {
+        //         'Content-Type': 'application/json',
+        //     },
+        //     body: JSON.stringify({
+        //         "user_subscription_details": {
+        //             email: email,
+        //             origin: 'chainleaf welcome banner email subscriber',
+        //             envData,
+        //             userTime,
+        //         }
+        //     }),
+        // })
+        //     .then(response => response.json())
+        //     .then(data => {
+        //         if('UserSubscription' in data){
+        //             router.push(`/join/subscribed?email=${email}`)
+        //         }
+        //     })
+        //     .catch((error) => console.error('Error:', error));
     }
 
 
