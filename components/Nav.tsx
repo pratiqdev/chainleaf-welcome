@@ -10,11 +10,11 @@ import { usePathname } from "next/navigation"
 const Nav = () => {
   const pathname = usePathname()
 
-  const pathsWithNoNav = [
+  const noNav = [
     '/join'
   ]
 
-  const showNav = pathsWithNoNav.includes(pathname)
+  const showNav = noNav.some((x:string) => x.includes(pathname))
 
     return (
       <nav className="fixed w-screen flex items-center justify-between p-2 px-6 h-20 z-50">

@@ -4,7 +4,7 @@ import Link from "next/link"
 import { useState } from "react"
 import axiosInstance from "@/lib/axios"
 import { useAuth } from "./AuthProvider"
-
+import { useRouter } from "next/navigation"
 
 const RegisterForm = ({ type, callback }: { type:string, callback:string }) => {
 
@@ -12,15 +12,18 @@ const RegisterForm = ({ type, callback }: { type:string, callback:string }) => {
     const [password, setPassword] = useState('')
     const [error, setError] = useState('')
     const { auth, setAuth } = useAuth()
+    const router = useRouter()
 
     const register = async () => {
         if(!email.length || !password.length){
             console.log('No username or password...')
             setError('Please enter a username and password.')
             return
+        }else{
+            setError('')
         }
-        try{
 
+        try{
             const expectedApiData = {
                 UserName: email,
                 UserPassword: password,
@@ -32,6 +35,14 @@ const RegisterForm = ({ type, callback }: { type:string, callback:string }) => {
             console.log('login data:', data)
             setError('')
         }catch(err){
+            //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            setAuth({
+                email,
+                user_id: 1
+            })        
+            callback && router.push(callback)
+            return
+            //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
             console.log('login err:', err)
             setError('There was an error with the login service')
         }

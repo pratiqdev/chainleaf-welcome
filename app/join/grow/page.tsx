@@ -12,7 +12,7 @@ const Join = () => {
             <h2 className="text-2xl text-primary-6 dark:text-primary-3 font-bold m-6 text-center">Grow with Chainleaf!</h2>
             <p className="text-md leading-6 m-4 text-center">Create a <b>Growers</b> account to connect with the chainleaf community, or <Link className="underline text-primary-6 dark:text-primary-3 font-semibold whitespace-nowrap" href="https://dev.chainleaflabs.com/auth/signin">sign-in</Link> if you already have an account.</p>
 
-            <RegisterForm type="Grower" />
+            <RegisterForm type="Grower" callback="/join/grow/getting-started"/>
         </div>
     )
 }
