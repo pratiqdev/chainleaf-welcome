@@ -37,7 +37,8 @@ const BlastForm = (props: BlastProps) => {
                     origin: 'chainleaf welcome banner email subscriber',
                     envData,
                     userTime,
-                }
+                },
+                "user_email": email
             }))
 
             if('UserSubscription' in data){
