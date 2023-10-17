@@ -16,7 +16,7 @@ export default function Subscribed() {
             <h2 className="text-2xl text-primary-5 font-bold text-center">Thanks for Joining!</h2>
             <Balancer className="text-md leading-6 my-2 text-center">Hey <b>{params?.get('email') ?? '?'}</b>, thank you for joining our waitlist for Chainleaf Labs!</Balancer>
             
-            <p className="text-xs leading-6 my-2 text-center">We truly appreciate your interest and support as it keeps us going, and we can't wait to show you what we&apos;ve been working on.</p>
+            <p className="text-xs leading-6 my-2 text-center">We truly appreciate your interest and support as it keeps us going, and we can&apos;t wait to show you what we&apos;ve been working on.</p>
             <p className="text-xs leading-6 my-2 text-center">If you have any questions, please reach out to our team at <Link href="mailto:support@chainleaflabs-group.com" className="text-center text-primary-5 hoverline duration-200">support@chainleaflabs-group.com</Link></p>
 
             <h2 className="text-2xl text-primary-5 font-bold text-center mt-6">Follow Us</h2>
