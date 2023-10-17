@@ -145,23 +145,22 @@ const animationVariants = {
 
 const Banner = () => {
   return (
-    <div id="home" className="flex flex-col-reverse lg:flex-row lg:py-20 my-20 items-center justify-evenly w-full max-w-1200 pl-0 lg:pl-12 min-h-[60vh]">
-        <div className="flex-col flex-1 text-center lg:text-left p-4 z-10 max-w-[32em]">
-          <h2 className="text-dark font-semibold mb-2">{truth.hero.supheading}</h2>
-          <h3 className="text-5xl font-bold leading-26 mb-6 flex-col max-w-[13em] lg:min-w-[13em]"><span className="w-full">{truth.hero.heading}</span> <span className="text-primary-6 font-bold text-5xl mb-12">{truth.hero.subheading}</span></h3>
+    <div id="home" className="flex flex-col-reverse lg:flex-row lg:py-20 my-10 md:my-20 items-center justify-evenly w-full max-w-1200 pl-0 lg:pl-12 min-h-[60vh]">
+        <div className="flex-col flex-1 text-center lg:text-left p-4 z-10 max-w-[32em] items-center w-full">
+          <h2 className="text-dark font-semibold mb-2 text-xs md:text-md w-full">{truth.hero.supheading}</h2>
+          <h3 className="text-2xl md:text-3xl lg:text-5xl font-bold leading-26 mb-6 flex-col md:max-w-[13em] lg:min-w-[13em] text-center md:text-left flex"><span className="w-full">{truth.hero.heading}</span> <span className="text-primary-6 mb-12">{truth.hero.subheading}</span></h3>
          
           <BlastForm placeholder='Subscribe for Updates' />
-          <div className="max-w-[32rem] flex justify-stretch">
-            <a href='/join' className="bg-fade py-3 px-6 mr-3 rounded-md bg-fade  text-white font-semibold text-lg hover:underline flex-1" >Join the Beta Program -&gt;</a>
-            <Link href={'/learn-more'} className="bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 duration-300 py-3 px-6 rounded-md  text-primary-6 font-semibold text-lg" >Learn More -&gt;</Link>
+          <div className="max-w-[32rem] mx-6 md:mx-0 flex justify-stretch text-md md:text-lg">
+            <a href='/join' className="bg-fade py-1 md:py-3 px-4 md:px-6 mr-3 rounded-md bg-fade  text-white font-semibold hover:underline flex-1" >Join Beta Program</a>
+            <Link href={'/learn-more'} className="bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 duration-300 py-1 md:py-3 px-4 md:px-6 rounded-md  text-primary-6 font-semibold" >Learn More -&gt;</Link>
           </div>
           
-          {/* <Link href={'/learn-more'} className="bg-slate-200 ml-2 py-3 px-6 rounded-md  text-primary-6 font-semibold text-lg" >Read Lightpaper</Link> */}
         </div>
 
           <div className="flex-1 flex items-center justify-center ml-6 lg:ml-0 max-w-[20rem] md:max-w-[30rem]">
             <Image
-              className="absolute flex-1 z-0 opacity-50 lg:opacity-100 banner-logo lg:mr-8 w-[80vw] h-[80vw] lg:w-[20vw] lg:h-[20vw] mt-[20vh] lg:mt-0"
+              className="absolute flex-1 z-0 opacity-30 lg:opacity-100 banner-logo lg:mr-8 w-[80vw] h-[80vw] lg:w-[20vw] lg:h-[20vw] mt-[20vh] lg:mt-0"
               src="/icons/logo_no_text_color.svg"
               alt="Chainleaf Labs Services"
               width={200}

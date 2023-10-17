@@ -17,11 +17,12 @@ const Nav = () => {
   const showNav = noNav.some((x:string) => x.includes(pathname))
 
     return (
-      <nav className="fixed w-screen flex items-center justify-between p-2 px-6 h-20 z-50">
+      <>
+      <nav className="fixed w-screen flex items-center justify-between p-2 px-6 h-16 md:h-20 z-50">
         <a href="../#home" className="flex items-center text-md gap-4 font-bold">
   
           <Image
-            className="relative h-[40px] w-[40px]"
+            className="relative h-[40px] w-[40px] invert dark:invert-0 hidden md:block"
             src={SmallLogo}
             alt="Chainleaf Labs Logo"
             width={40}
@@ -29,14 +30,20 @@ const Nav = () => {
                 priority={true}
                 loading="eager"
             />
-          <h1 className="text-gradient text-xl">Chainleaf Labs</h1>
+          <h1 className="text-gradient text-md md:text-xl">Chainleaf Labs</h1>
           </a>
-          <NavLinks links={showNav ? truth.nav.links : []} />
+          <div className="hidden lg:block">
+            <NavLinks links={showNav ? truth.nav.links : []} />
+          </div>
           <div className="flex gap-2">
             {/* <a href={truth.nav.external.login} className="hidden sm:block py-1 px-5 bg-fade-outline rounded-md text-sm text-white font-semibold">Log In</a> */}
-            <a href={truth.nav.internal.registerUser} className="py-1 px-5 rounded-md bg-gradient-to-r from-primary-6 to-primary-1 text-sm text-white font-semibold">Sign Up</a>
+            <a href={truth.nav.internal.registerUser} className="py-1 px-4 rounded-md bg-gradient-to-r from-primary-6 to-primary-1 text-sm text-white font-semibold">Sign Up</a>
           </div>
       </nav>
+        <div className="block lg:hidden absolute top-[5rem] text-sm whitespace-nowrap px-6 w-full">
+          <NavLinks links={showNav ? truth.nav.links : []} />
+        </div>
+      </>
     )
   
   }

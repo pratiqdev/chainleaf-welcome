@@ -16,10 +16,10 @@ export type NavLinksProps = {
 export default function NavLinks(props:NavLinksProps) {
     const hash = useHash();
     return (
-        <div className="hidden lg:flex text-sm gap-10">
+        <div className="flex justify-between w-full md:min-w-[32rem]">
             {props.links.map(link => 
                     <a 
-                        className={(hash.includes(link.href) ? "px-4 text-primary font-semibold hover:text-primary-6" : "px-4 font-semibold hover:text-primary-6")}
+                    className={(hash.includes(link.href) ? "p-1 px-2 text-primary font-semibold hover:text-primary-6" : "p-1 px-2 font-semibold hover:text-primary-6 bg-slate-200 rounded hover:bg-primary-2 hover:text-white")}
                         key={link.href} 
                         href={link.href}
                     >
