@@ -70,7 +70,7 @@ const BlastForm = (props: BlastProps) => {
             setError('Email service error...')
         }
     }
-
+ 
 
 
     return (
