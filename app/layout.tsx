@@ -51,7 +51,7 @@ export default function RootLayout({
       </Head>
       <GoogleAnalyticsTag />
 
-      <body className={inter.className + " relative max-w-50"}>
+      <body className={inter.className}>
         <Nav />
         {children}
         </body>

@@ -148,12 +148,12 @@ const Banner = () => {
     <div id="home" className="flex flex-col-reverse lg:flex-row lg:py-20 my-10 md:my-20 items-center justify-evenly w-full max-w-1200 pl-0 lg:pl-12 min-h-[60vh]">
         <div className="flex-col flex-1 text-center lg:text-left p-4 z-10 max-w-[32em] items-center w-full">
           <h2 className="text-dark font-semibold mb-2 text-xs md:text-md w-full">{truth.hero.supheading}</h2>
-          <h3 className="text-2xl md:text-3xl lg:text-5xl font-bold leading-26 mb-6 flex-col md:max-w-[13em] lg:min-w-[13em] text-center md:text-left flex"><span className="w-full">{truth.hero.heading}</span> <span className="text-primary-6 mb-12">{truth.hero.subheading}</span></h3>
+          <h3 className="text-2xl md:text-3xl lg:text-5xl font-bold leading-26 mb-6 flex-col md:max-w-[13em] lg:min-w-[13em] text-center md:text-left flex"><span className="w-full">{truth.hero.heading}</span> <span className="text-primary-5 mb-12">{truth.hero.subheading}</span></h3>
          
           <BlastForm placeholder='Subscribe for Updates' />
-          <div className="max-w-[32rem] mx-6 md:mx-0 flex justify-stretch text-md md:text-lg">
-            <a href='/join' className="bg-fade py-1 md:py-3 px-4 md:px-6 mr-3 rounded-md bg-fade  text-white font-semibold hover:underline flex-1" >Join Beta Program</a>
-            <Link href={'/learn-more'} className="bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 duration-300 py-1 md:py-3 px-4 md:px-6 rounded-md  text-primary-6 font-semibold" >Learn More -&gt;</Link>
+          <div className="max-w-[32rem] mx-6 md:mx-0 flex justify-stretch text-sm md:text-lg">
+            <a href='/join' className="bg-fade py-2 md:py-3 px-4 md:px-6 mr-3 rounded-md bg-fade text-white font-semibold hover:underline flex-1" >Join Beta Program</a>
+            <Link href={'/learn-more'} className="bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 duration-300 py-2 md:py-3 px-4 md:px-6 rounded-md  text-primary-5 font-semibold" >Learn More -&gt;</Link>
           </div>
           
         </div>
@@ -284,12 +284,18 @@ const Onboard = () => {
 
   return (
     <div id="connect" className="w-full max-w-[1200px] flex-col align-center">
-      <h3 className="text-5xl font-bold leading-26 mb-10 text-center text-primary-6">How to Connect</h3>
+      <h3 className="text-3xl md:text-3xl lg:text-5xl font-bold leading-26 mb-4 md:mb-10 text-center text-primary-5">How to Connect</h3>
 
       <div className="flex flex-col justify-between min-h-[70vh]">
 
-        <div className="flex gap-20 mx-auto w-min">
-          {Object.keys(data).map((x,i) => <button key={i} onClick={() => {setType(x); setStep(0)}} className={clsx("font-semibold text-md md:text-2xl hover:text-primary-6", { "text-primary":type === x, })}>{x}</button>)}
+        <div className="flex w-full justify-between px-6 max-w-[50rem] mx-auto">
+          {Object.keys(data).map((x,i) => <button key={i} onClick={() => {setType(x); setStep(0)}} 
+          className={clsx(
+            "font-semibold text-sm md:text-2xl py-1 px-2 rounded bg-slate-50 shadow dark:bg-slate-800 hover:bg-indigo-300 duration-200", 
+            type === x && " bg-indigo-200 ",
+            )
+          }
+            >{x}</button>)}
         </div>
           {/* <AnimatePresence mode='wait'>
             {Object.entries(data).filter(([key]) => key === type).map(([key, val]:any[]) => val.steps.filter((s:any, i:number) => i === step).map((s:any, idx:number) => 
@@ -306,7 +312,7 @@ const Onboard = () => {
           </AnimatePresence> */}
 
 
-        <div className="flex flex-col md:flex-row my-6 md:my-20 justify-center items-center gap-10">
+        <div className="flex flex-col md:flex-row my-0 md:my-20 justify-between md:justify-center md:gap-10 items-center">
           <AnimatePresence mode='wait'>
             {Object.entries(data).filter(([key]) => key === type).map(([key, val]:any[]) => val.steps.filter((s:any, i:number) => i === step).map((s:any, idx:number) => 
                 <motion.img
@@ -316,7 +322,8 @@ const Onboard = () => {
                   animate={{ x:0, opacity: 1}}
                   exit={{ x:-30, opacity: 0}}
                   transition={{ duration: .7, type: 'spring' }}
-                  className="rounded-xl h-[25em] w-[25em] p-10 object-cover skel"
+                  className="rounded-xl h-[15em] w-[15em] md:h-[25em] md:w-[25em] p-3 md:p-10 object-cover skel"
+                  loading='eager'
                 />
             ))}
           </AnimatePresence>
@@ -333,7 +340,7 @@ const Onboard = () => {
                   exit={{ x:30, opacity: 0}}
                   transition={{ duration: .7, type: 'spring', }}
                 >
-                  <h3 className="bg-primary-2 w-min whitespace-nowrap py-1 px-2 rounded mb-3 font-semibold text-xl">{s.title}</h3>
+                  <h3 className="bg-primary-2 w-min whitespace-nowrap py-1 px-2 rounded mb-3 font-semibold text-xl shadow-lg">{s.title}</h3>
                 </motion.div>
               ))}
             </AnimatePresence>
@@ -355,10 +362,10 @@ const Onboard = () => {
           </div>
         </div>
 
-        <div className="flex justify-center items-center text-3xl bg-slate-800 p-1 w-min mx-auto rounded-3xl border-2 border-slate-700">
-          <button onClick={stepDown} className="rounded-[50%] h-10 w-10 hover:bg-slate-700 hover:text-primary-4">&lt;-</button>
-          {data[type].steps.map((x:any, i:number) => <div key={i} onClick={() => setStep(i)} className={`h-6 w-6 mx-2 rounded-[100%] hover:bg-slate-500 cursor-pointer ${step === i ? 'bg-primary-3' : 'bg-slate-600'}`} />)}
-          <button onClick={stepUp} className="rounded-[50%] h-10 w-10 hover:bg-slate-700 hover:text-primary-4">-&gt;</button>
+        <div className="flex justify-center items-center text-3xl bg-slate-100 dark:bg-slate-900 p-1 w-min mx-auto rounded-3xl shadow-lg text-primary-6 mt-2">
+          <button onClick={stepDown} className="rounded-[50%] h-10 w-10 hover:bg-slate-200 dark:hover:bg-slate-700 hover:text-primary-4">&lt;-</button>
+          {data[type].steps.map((x:any, i:number) => <div key={i} onClick={() => setStep(i)} className={`h-6 w-6 mx-2 rounded-[100%] hover:bg-slate-500 opacity-50 dark:bg-slate-800 cursor-pointer ${step === i ? ' bg-primary-3 dark:bg-slate-200' : ' dark:bg-slate-800 bg-slate-200 '}`} />)}
+          <button onClick={stepUp} className="rounded-[50%] h-10 w-10 hover:bg-slate-200 dark:hover:bg-slate-700 hover:text-primary-4">-&gt;</button>
         </div>
 
       </div>
@@ -369,9 +376,9 @@ const Onboard = () => {
 
 const Solution = () => {
   return (
-    <section className="w-full relative my-24 min-h-[80vh] max-w-1200 mb-0 p-6 flex flex-col justify-center" id="solution">
+    <section className="w-full relative my-24 min-h-[90vh] max-w-1200 mb-0 p-6 flex flex-col justify-center" id="solution">
     {/* <h2 className="relative text-transparent bg-clip-text bg-gradient-to-b from-indigo-500 to-indigo-200 inline-block text-6xl lg:text-8xl font-bold text-center uppercase w-full opacity-75 z-10 mb-4">{truth.sections.solution.heading}</h2> */}
-    <h3 className="relative text-center text-5xl  mb-8 z-10 font-bold tracking-wide dark:text-primary-6">{truth.sections.solution.subheading}</h3>
+    <h3 className="relative text-center text-3xl md:text-5xl  md:mb-8 z-10 font-bold tracking-wide text-primary-5">{truth.sections.solution.subheading}</h3>
     {/* <p className="text-dark text-center mt-6 mb-10 dark:text-gray-300">{truth.sections.solution.content}</p> */}
 
 

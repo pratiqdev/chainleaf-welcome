@@ -35,6 +35,7 @@ const RegisterForm = ({ type, callback }: { type:string, callback:string }) => {
             console.log('login data:', data)
             setError('')
         }catch(err){
+            console.log('login err:', err)
             //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
             setAuth({
                 email,
@@ -43,7 +44,6 @@ const RegisterForm = ({ type, callback }: { type:string, callback:string }) => {
             callback && router.push(callback)
             return
             //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-            console.log('login err:', err)
             setError('There was an error with the login service')
         }
     }
@@ -61,7 +61,7 @@ const RegisterForm = ({ type, callback }: { type:string, callback:string }) => {
                 Password
                 <Tails.input onChange={(e:any) => setPassword(e?.target?.value ?? '')} placeholder="Password" type="password" />
             </Tails.label>
-            <div className="flex flex-col justify-center text-center gap-2">
+            <div className="flex flex-col justify-center text-center gap-4 text-sm">
                 <Tails.button onClick={register} className="mt-4 w-full">Register</Tails.button>
                 <Link href="https://dev.chainleaflabs.com/auth/signin" className="text-primary-6 dark:text-primary-3 font-semibold hoverline">Already have an account?</Link>
                 <Link href="/join" className="text-primary-6 dark:text-primary-3 font-semibold hoverline">Switch account types</Link>

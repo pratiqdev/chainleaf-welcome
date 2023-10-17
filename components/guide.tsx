@@ -1,6 +1,7 @@
 "use client"
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from 'react'
+import Balancer from "react-wrap-balancer";
 
 
 
@@ -12,6 +13,7 @@ export type Benefit = {
 export type Step = {
     title: string; //'Complete your Profile',
     text: string; // "Add important details to your Grower account profile",
+    img: string;
     benefits: Benefit[];
 }
 
@@ -23,11 +25,11 @@ const Guide = ({ steps }:{ steps: Step[] }) => {
     const stepDown = () => setStep(s => s > 0 ? --s : s);
 
     return(
-    <div className="flex flex-col justify-between min-h-[70vh]">
+    <div className="flex flex-col justify-start min-h-[70vh]">
 
 
 
-        <div className="flex flex-col md:flex-row my-6 md:my-20 justify-center items-center gap-10">
+        <div className="flex flex-col md:flex-row my-6 md:my-20 justify-center items-center gap-10 border pb-4 min-h-[50vh]">
             <AnimatePresence mode='wait'>
                 {steps.filter((s: any, i: number) => i === step).map((s: any, idx: number) =>
                     <motion.img
@@ -37,7 +39,7 @@ const Guide = ({ steps }:{ steps: Step[] }) => {
                         animate={{ x: 0, opacity: 1 }}
                         exit={{ x: -30, opacity: 0 }}
                         transition={{ duration: .7, type: 'spring' }}
-                        className="rounded-xl h-[25em] w-[25em] p-10 object-cover skel"
+                        className="rounded-xl h-[15em] w-[15em] md:h-[25em] md:w-[25em] p-4 md:p-10 object-cover skel"
                     />
                 )}
             </AnimatePresence>
@@ -48,13 +50,13 @@ const Guide = ({ steps }:{ steps: Step[] }) => {
                 <AnimatePresence mode='wait'>
                         {steps.filter((s: any, i: number) => i === step).map((s: any, idx: number) =>
                         <motion.div
-                            key={s.img + idx + 'title'}
+                            key={s.img + idx + 'step'}
                             initial={{ x: 30, opacity: 0 }}
                             animate={{ x: 0, opacity: 1 }}
                             exit={{ x: 30, opacity: 0 }}
                             transition={{ duration: .7, type: 'spring', }}
                         >
-                            <h3 className="bg-primary-2 w-min whitespace-nowrap py-1 px-2 rounded mb-3 font-semibold text-xl">STEP {idx + 1}</h3>
+                            <h3 className="bg-primary-5  text-white dark:text-black w-min whitespace-nowrap py-1 px-2 rounded mb-3 font-semibold text-sm md:text-xl">STEP {step + 1}</h3>
                         </motion.div>
                     )}
                 </AnimatePresence>
@@ -68,7 +70,7 @@ const Guide = ({ steps }:{ steps: Step[] }) => {
                             exit={{ x: 30, opacity: 0 }}
                             transition={{ duration: .7, type: 'spring', }}
                         >
-                            <h3 className="w-min whitespace-nowrap mb-3 font-semibold text-2xl">{s.title}</h3>
+                            <h3 className="w-min whitespace-nowrap mb-3 font-bold text-2xl text-primary-5">{s.title}</h3>
                         </motion.div>
                     )}
                 </AnimatePresence>
@@ -83,22 +85,22 @@ const Guide = ({ steps }:{ steps: Step[] }) => {
                             exit={{ x: 50, opacity: 0 }}
                             transition={{ duration: 1, type: 'spring', }}
                         >
-                            <div className="text-lg leading-6 tracking-wide mt-4">{s.text}</div>
+                            <div className="md:text-lg leading-6 tracking-wide mt-4">{s.text}</div>
                         </motion.div>
                     )}
                 </AnimatePresence>
                     <AnimatePresence mode='wait'>
                         {steps.filter((s: any, i: number) => i === step).map((s: any, idx: number) =>
                             <motion.div
-                                key={s.img + idx + 'text'}
+                                key={s.img + idx + 'benefits'}
                                 initial={{ x: 50, opacity: 0 }}
                                 animate={{ x: 0, opacity: 1 }}
                                 exit={{ x: 50, opacity: 0 }}
-                                transition={{ duration: 1, type: 'spring', }}
+                                transition={{ duration: 1.3, type: 'spring', }}
                             >
-                                <ul className="leading-6 tracking-wide mt-4 text-gray-200 dark:text-gray-500 ">
-                                    {s.benefits.map((b:Benefit) => <li className="list-disc ml-4" key={b.text}>{b.text}</li>)}
-                                </ul>
+                                <div className="text-xs md:text-normal leading-6 tracking-wide mt-4 text-gray-200 dark:text-gray-500">
+                                    {s.benefits.map((b:Benefit) => <Balancer className="mt-3" key={b.text}>{b.text}</Balancer>)}
+                                </div>
                             </motion.div>
                         )}
                     </AnimatePresence>
