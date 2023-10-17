@@ -40,9 +40,9 @@ const Nav = () => {
             <a href={truth.nav.internal.registerUser} className="py-1 px-4 rounded-md bg-gradient-to-r from-primary-6 to-primary-1 text-sm text-white font-semibold hover:shadow-ld duration-200">Sign Up</a>
           </div>
       </nav>
-        <div className="block lg:hidden absolute top-[5rem] text-sm whitespace-nowrap px-6 w-full">
+        {showNav && <div className="block lg:hidden absolute top-[5rem] text-sm whitespace-nowrap px-6 w-full">
           <NavLinks links={showNav ? truth.nav.links : []} />
-        </div>
+        </div>}
       </>
     )
   
