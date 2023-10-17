@@ -9,7 +9,8 @@ const axiosInstance = axios.create({
         // 'Access-Control-Allow-Headers': 'access-control-allow-origin, access-control-allow-headers'
         
     },
-    // mode: 'cors',
+    //@ts-ignore
+    mode: 'cors',
     httpsAgent: new https.Agent({  
         rejectUnauthorized: false
     })
