@@ -6,6 +6,7 @@ const axiosInstance = axios.create({
     headers: {
         'Content-Type': 'application/json',
         'Access-Control-Allow-Origin': '*',
+        'HOST':'nlb.chainleaflabs.com'
         // 'Access-Control-Allow-Headers': 'access-control-allow-origin, access-control-allow-headers'
         
     },
