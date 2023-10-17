@@ -34,24 +34,22 @@ const RegisterForm = ({ type, callback }: { type:string, callback:string }) => {
             
             console.log('login data:', data)
             setError('')
-        }catch(err){
-            console.log('login err:', err)
-            //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
             setAuth({
                 email,
                 user_id: 1
             })        
             callback && router.push(callback)
+
+        }catch(err){
+            console.log('login err:', err)
+            setError('There was an error with the login service, please try again or contact support@chainleaflabs-group.com')
             return
-            //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-            setError('There was an error with the login service')
         }
     }
 
     return (
         <div className="p-6 w-full">
-            {error && <p className="bg-red-300 text-red-800 p-2 rounded w-full font-semibold text-sm">{error}</p>}
-            <pre>{JSON.stringify(auth)}</pre>
+            {error && <p className="bg-red-300 text-red-800 p-2 rounded w-full font-semibold text-xs">{error}</p>}
             <Tails.label>
                 Email
                 <Tails.input onChange={(e:any) => setEmail(e?.target?.value ?? '')} placeholder="Email" />

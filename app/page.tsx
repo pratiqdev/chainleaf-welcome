@@ -402,7 +402,7 @@ const Solution = () => {
         )}
         <br />
         <div className="flex justify-center items-center lg:justify-stretch">
-        <Link href={'/learn-more#a-groundbreaking-approach'} className="bg-slate-300 hover:bg-slate-400 dark:bg-slate-800 dark:hover:bg-slate-700 duration-300 duration-300 ml-2 py-3 px-6 rounded-md  text-primary-6 font-semibold text-lg" >Learn More</Link>
+        <Link href={'/learn-more#a-groundbreaking-approach'} className="bg-slate-300 hover:bg-slate-400 dark:bg-slate-800 dark:hover:bg-slate-700 duration-300 duration-300 ml-2 px-2 py-1 md:py-3 md:px-6 rounded-md  text-primary-6 font-semibold text-md md:text-lg" >Learn More</Link>
         {/* <Link href={'/learn-more'} className="bg-slate-300 ml-2 py-3 px-6 rounded-md  text-primary-6 font-semibold text-lg" >Read Lightpaper -&gt;</Link> */}
         </div>
         
@@ -509,7 +509,7 @@ const Footer = () => {
         <div className="w-full flex justify-center">
         <div className="max-w-1200 w-full flex items-center justify-between px-6 md:px-0">
          <Image
-          className="relative h-24 w-24 md:h-48 md:w-48"
+          className="relative hidden md:block h-24 w-24 md:h-48 md:w-48"
           src="/icons/white logo.svg"
           alt="Chainleaf Labs Logo"
           width={200}
