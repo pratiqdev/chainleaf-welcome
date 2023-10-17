@@ -31,7 +31,7 @@ const BlastForm = (props: BlastProps) => {
             }
             console.log('sending email to ' + email)
             setError('Sending email...')
-            const { data } = await axiosInstance.post('/chainleaflabs-usersubscriptions/usersubscriptions/chainleaflabs/subscribeforupdates', JSON.stringify({
+            const { data } = await axiosInstance.post('/chainleaflabs-usersubscriptions/usersubscriptions/chainleaflabs/subscribeforupdates', {
                 "user_subscription_details": {
                     email: email,
                     origin: 'chainleaf welcome banner email subscriber',
@@ -39,7 +39,7 @@ const BlastForm = (props: BlastProps) => {
                     userTime,
                 },
                 "user_email": email
-            }))
+            })
 
             if('UserSubscription' in data){
                 router.push(`/join/subscribed?email=${email}`)
