@@ -4,46 +4,6 @@ import Guide, { Step } from "@/components/guide";
 import Balancer from "react-wrap-balancer";
 import Tails from "@/components/Tails";
 
-const GrowerSteps:Step[] = [
-    {
-        title: "Complete your profile",
-        text: "Add important details to your account like business location, entity type and more.",
-        img: "/images/chainleaf/app-mobile.png",
-        benefits: [
-            {
-                text: "Find local certified labs that meet your business requirements.",
-                icon: "",
-            },
-            {
-                text: "Allow users to find your products by name, location or certification.",
-                icon: "",
-            }, 
-            {
-                text: "Get notifications and updates about local regulation changes.",
-                icon: "",
-            },
-        ]
-    },
-    {
-        title: "Find Local Labs",
-        text: "Find local certified labs that meet your business requirements and start testing.",
-        img: "/images/chainleaf/login-mobile.png",
-        benefits: [
-            {
-                text: "Simplified certification and testing with data directly from laboratories.",
-                icon: "",
-            },
-            {
-                text: "Share your certification data with the community for complete transparency.",
-                icon: "",
-            }, 
-            {
-                text: "Get notifications and updates about local regulation changes.",
-                icon: "",
-            },
-        ]
-    }
-]
 
 const GrowerGettingStarted = () => {
 
@@ -55,12 +15,15 @@ const GrowerGettingStarted = () => {
                 <h2 className="text-xl md:text-2xl font-semibold text-primary-5">Take a Tour of Chainleaf</h2>
                 <Link className="px-2 py-1 md:px-4 py-2 text-lg bg-primary-5 text-white dark:bg-primary-2 hover:bg-primary-4 dark:hover:bg-primary-3 rounded-lg whitespace-nowrap font-semibold duration-200 w-full md:w-auto text-center" href="/join/grow/getting-started/steps">Let's Go -&gt;</Link>
             </div>
+            <div className="w-full px-6 mt-4 hidden md:block">
+                <div className="h-[1px] w-full bg-primary-5" />
+            </div>
 
             <h2 className="text-xl md:text-2xl font-semibold text-primary-5 mt-8 ">Tell me More</h2>
-            <Balancer className="text-lg text-center"><Link href="/more/platform" className="underline text-primary-5 font-semibold hoverline hover:text-primary-4">Learn More</Link>&nbsp;about the chainleaf platform, how it works and the benefits of the <Link href="/more/beta" className="underline text-primary-5 font-semibold hover:text-primary-4">beta program</Link></Balancer>
+            <Balancer className="text-md md:text-lg text-center"><Link href="/more/platform" className="underline text-primary-5 font-semibold hoverline hover:text-primary-4">Learn More</Link>&nbsp;about the chainleaf platform, how it works and the benefits of the <Link href="/more/beta" className="underline text-primary-5 font-semibold hover:text-primary-4">beta program</Link></Balancer>
 
             <h2 className="text-xl md:text-2xl font-semibold text-primary-5 mt-8">Talk to Us</h2>
-            <Balancer className="text-lg text-center">on social media or contact us directly with feedback, reviews or suggestions!</Balancer>
+            <Balancer className="text-md md:text-lg text-center">on social media or contact us directly with feedback, reviews or suggestions!</Balancer>
 
             <div className="flex justify-center gap-6 items-center w-full px-6 mt-2 text-md font-semibold underline text-primary-5 hover:text-primary-4">
                 <Link href="https://www.linkedin.com/company/chainleaflabs/" className="text-center hoverline duration-200 hover:text-primary-4">LinkedIn</Link>
@@ -68,7 +31,7 @@ const GrowerGettingStarted = () => {
                 <Link href="mainto:support@chainleaflabs-group.com" className="text-center hoverline duration-200 hover:text-primary-4">Support</Link>
             </div>
 
-            <div className="flex justify-between items-center w-full px-6 mb-2 mt-8">
+            <div className="flex justify-between items-center w-full px-6 mb-2 mt-10">
                 <Link passHref className="underline text-primary-5 font-semibold hover:text-primary-4" href="https://dev.chainleaflabs.com">
                     <Tails.button>
                     Go Back
