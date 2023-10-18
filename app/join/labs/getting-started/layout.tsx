@@ -17,8 +17,8 @@ const RequiresAuth = () => (
         <p className="text-md leading-6 m-4 text-center">You must be signed in to your Chainleaf account. Please sign in or create an account to continue.</p>
 
         <div className="flex flex-col gap-4 w-full p-6">
-            <Link href="dev.chainleaflabs.com/auth/signin" className="p-2 text-center bg-primary-2 text-white w-full text-md rounded hover:bg-primary-3 font-semibold">Sign In</Link>
-            <Link href="/join" className="p-2 text-center bg-primary-2 text-white w-full text-md rounded hover:bg-primary-3 font-semibold">Register an Account</Link>
+            <Link href="dev.chainleaflabs.com/auth/signin" className="p-2 text-center bg-primary-5 text-white w-full text-md rounded hover:bg-primary-4 font-semibold duration-200">Sign In</Link>
+            <Link href="/join" className="p-2 text-center bg-primary-5 text-white w-full text-md rounded hover:bg-primary-4 font-semibold duration-200">Register an Account</Link>
         </div>
     </div>
 )

@@ -5,6 +5,19 @@ module.exports = {
     './components/**/*.{js,ts,jsx,tsx,mdx}',
     './app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
+  // purge: {
+  //   // content: ['./pages/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}'],
+  //   options: {
+  //     safelist: [
+  //       'bg-indigo-200', 
+  //       'bg-indigo-800', 
+  //       'bg-slate-300', 
+  //       'bg-slate-800', 
+  //       'dark:bg-red-500', 
+  //       'bg-slate-50'
+  //     ], // Whitelist specific classes
+  //   },
+  // },
   theme: {
     extend: {
       backgroundImage: {

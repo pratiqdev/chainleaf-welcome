@@ -6,6 +6,9 @@ import axiosInstance from "@/lib/axios"
 import { useAuth } from "./AuthProvider"
 import { useRouter } from "next/navigation"
 
+//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+const IS_DEV = true
+
 const RegisterForm = ({ type, callback }: { type:string, callback:string }) => {
 
     const [email, setEmail] = useState('')
@@ -28,6 +31,17 @@ const RegisterForm = ({ type, callback }: { type:string, callback:string }) => {
                 UserName: email,
                 UserPassword: password,
                 Role: type,
+            }
+
+            if(IS_DEV){
+                console.log('DEV LOGIN')
+                setError('')
+                setAuth({
+                    email,
+                    user_id: 1
+                })        
+                callback && router.push(callback)
+                return
             }
             
             const { data } = await axiosInstance.post('/chainleaflabs-login-api-service/login/chainleaflabs/login', expectedApiData)

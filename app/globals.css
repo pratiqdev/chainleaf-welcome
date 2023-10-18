@@ -92,6 +92,10 @@ nav {
     )
     rgb(var(--fade-end));
 }
+.bg-fade:hover{
+  filter: hue-rotate(30deg)
+}
+
 .bg-fade-to-transparent {
   background: linear-gradient(
       to left,
