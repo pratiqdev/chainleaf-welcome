@@ -43,7 +43,6 @@ const GrowerGettingStarted = () => {
                     </Tails.button>
                 </Link>
             </div>
-
         </div>
     )
 }
