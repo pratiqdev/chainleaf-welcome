@@ -1,37 +1,46 @@
 "use client"
 import { AnimatePresence, motion } from "framer-motion";
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 import Balancer from "react-wrap-balancer";
 import clsx from 'clsx'
 
 
-export type Benefit = {
-    text: string,
-    icon: string,
-}
+
 
 export type Step = {
     title: string; //'Complete your Profile',
-    text: string; // "Add important details to your Grower account profile",
+    text?: string; // "Add important details to your Grower account profile",
     img: string;
-    benefits: Benefit[];
+    substeps: React.JSXElementConstructor<any>[];
 }
 
 const Guide = ({ steps }:{ steps: Step[] }) => {
 
     const [step, setStep] = useState(0)
+    const [substep, setSubstep] = useState(0)
 
     const stepUp = () => setStep(s => s < steps.length - 1 ? ++s : s);
     const stepDown = () => setStep(s => s > 0 ? --s : s);
+    const substepUp = () => console.log('Ayoooooooooo')
+    // const substepUp = () => setSubstep(s => s < steps[step].substeps.length - 1 ? ++s : s);
+    const substepDown = () => setSubstep(s => s > 0 ? --s : s);
+
+    const CurrentSubstep = useMemo(() => steps[step].substeps[substep], [step, steps, substep])
+
+    const controller = {
+        stepUp, stepDown,
+        substepUp, substepDown,
+    }
 
     return(
     <div>
 
 
-
+            <p>STEP {step}</p>
+            <p>SUBSTEP {substep}</p>
         <div className="flex flex-col md:flex-row my-6 mt-[-6rem] md:my-20 justify-center items-center gap-10 pb-4 min-h-[50vh]">
            
-            <AnimatePresence mode='wait'>
+                <AnimatePresence mode='wait' initial={false}>
                 {steps.filter((s: any, i: number) => i === step).map((s: any, idx: number) =>
                     <motion.img
                         key={s.img + idx + 'img'}
@@ -45,8 +54,8 @@ const Guide = ({ steps }:{ steps: Step[] }) => {
                 )}
             </AnimatePresence>
 
-            <div className="flex flex-col justify-center items-center  md:items-start text-center md:text-left mt-4 md:mt-10 md:flex w-[22em]">
-                <AnimatePresence mode='wait'>
+            <div className="flex flex-col justify-start items-center  md:items-start text-center md:text-left mt-4 md:mt-10 md:flex w-[22em] min-h-[40vh]">
+                    <AnimatePresence mode='wait' initial={false}>
                         {steps.filter((s: any, i: number) => i === step).map((s: any, idx: number) =>
                         <motion.div
                             key={s.img + idx + 'step'}
@@ -60,7 +69,7 @@ const Guide = ({ steps }:{ steps: Step[] }) => {
                     )}
                 </AnimatePresence>
 
-                <AnimatePresence mode='wait'>
+                    <AnimatePresence mode='wait' initial={false}>
                     {steps.filter((s: any, i: number) => i === step).map((s: any, idx: number) =>
                         <motion.div
                             key={s.img + idx + 'title'}
@@ -74,7 +83,7 @@ const Guide = ({ steps }:{ steps: Step[] }) => {
                     )}
                 </AnimatePresence>
 
-                <AnimatePresence mode='wait'>
+                {/* <AnimatePresence mode='wait' initial={false}>
                         {steps.filter((s: any, i: number) => i === step).map((s: any, idx: number) =>
                         <motion.div
                             key={s.img + idx + 'text'}
@@ -86,19 +95,20 @@ const Guide = ({ steps }:{ steps: Step[] }) => {
                             <Balancer className="md:text-lg leading-6 tracking-wide">{s.text}</Balancer>
                         </motion.div>
                     )}
-                </AnimatePresence>
+                </AnimatePresence> */}
 
-                <AnimatePresence mode='wait'>
+                    <AnimatePresence mode='wait' initial={false}>
                     {steps.filter((s: any, i: number) => i === step).map((s: any, idx: number) =>
                         <motion.div
-                            key={s.img + idx + 'benefits'}
+                            key={s.img + idx + 'benefits' + substep}
                             initial={{ x: 50, opacity: 0 }}
                             animate={{ x: 0, opacity: 1 }}
                             exit={{ x: 50, opacity: 0 }}
                             transition={{ duration: 1.3, type: 'spring', }}
                         >
                             <div className="text-xs md:text-normal leading-4 tracking-wide mt-4 text-gray-800 dark:text-gray-300 flex flex-col items-center md:items-start justify-between">
-                                {s.benefits.map((b:Benefit) => <Balancer className="" key={b.text}>{b.text}<div className="bg-primary-5 w-[7rem] h-[2px] mx-auto md:ml-0 my-2"/></Balancer>)}
+                                {/* {s.benefits.map((b:Benefit) => <Balancer className="" key={b.text}>{b.text}<div className="bg-primary-5 w-[7rem] h-[2px] mx-auto md:ml-0 my-2"/></Balancer>)} */}
+                                <CurrentSubstep controller={controller}/>
                             </div>
                         </motion.div>
                     )}
@@ -108,14 +118,14 @@ const Guide = ({ steps }:{ steps: Step[] }) => {
         {/* `h-6 w-6 mx-2 rounded-[100%] hover:bg-slate-500 opacity-50 dark:bg-slate-800 cursor-pointer ${step === i ? ' bg-primary-3 dark:bg-slate-200' : ' dark:bg-slate-800 bg-slate-200 '}` */}
 
         <div className="flex justify-center items-center text-3xl bg-slate-100 dark:bg-slate-900 p-1 w-min mx-auto rounded-3xl shadow-lg text-primary-6 mt-2">
-          <button onClick={stepDown} className="rounded-[50%] h-10 w-10 hover:bg-slate-200 dark:hover:bg-slate-700 hover:text-primary-4">&lt;-</button>
+          <button onClick={() => { stepDown(); setSubstep(0); }} className="rounded-[50%] h-10 w-10 hover:bg-slate-200 dark:hover:bg-slate-700 hover:text-primary-4">&lt;-</button>
             {steps.map((x:any, i:number) => 
                 <div key={i} onClick={() => setStep(i)} className={clsx("h-6 w-6 mx-2 rounded-[100%] cursor-pointer duration-200", {
                     "bg-primary-5 dark:bg-primary-5 hover:bg-primary-4": step === i,
                     "bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700": step !== i,
                 })} />
             )}
-          <button onClick={stepUp} className="rounded-[50%] h-10 w-10 hover:bg-slate-200 dark:hover:bg-slate-700 hover:text-primary-4">-&gt;</button>
+          <button onClick={() => { stepUp(); setSubstep(0); }} className="rounded-[50%] h-10 w-10 hover:bg-slate-200 dark:hover:bg-slate-700 hover:text-primary-4">-&gt;</button>
         </div>
 
     </div>

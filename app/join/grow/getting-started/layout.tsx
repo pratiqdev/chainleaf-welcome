@@ -2,6 +2,7 @@
 import { useAuth } from "@/components/AuthProvider"
 import Blast from "@/components/Blast"
 import Link from "next/link"
+import FLAGS from '@/FLAGS'
 
 // https://dev.chainleaflabs.com/auth/register
 
@@ -23,6 +24,8 @@ const RequiresAuth = () => (
     </div>
 )
 
+
+
 const GettingStartedLayout = ({
     children,
   }: {
@@ -31,7 +34,7 @@ const GettingStartedLayout = ({
 
     const { auth } = useAuth()
 
-    return  auth?.email ? children : <RequiresAuth />
+    return  FLAGS.dev || auth?.email ? children : <RequiresAuth />
        
 }
 

@@ -150,7 +150,7 @@ const Banner = () => {
           <h2 className="text-dark font-semibold mb-2 text-xs md:text-md w-full">{truth.hero.supheading}</h2>
           <h3 className="text-2xl md:text-3xl lg:text-5xl font-bold leading-26 mb-6 flex-col md:max-w-[13em] lg:min-w-[13em] text-center md:text-left flex"><span className="w-full">{truth.hero.heading}</span> <span className="text-primary-5 mb-12">{truth.hero.subheading}</span></h3>
          
-          <BlastForm placeholder='join@chainleaf - Subscribe for Updates' />
+          <BlastForm placeholder='Enter your email to join the wait list!' />
           <div className="max-w-[32rem] mx-6 md:mx-0 flex justify-stretch text-sm md:text-lg">
             <a href='/join' className="bg-fade py-2 md:py-3 px-4 md:px-6 mr-3 rounded-md bg-fade text-white font-semibold hover:underline flex-1" >Join Beta Program</a>
             <Link href={'/learn'} className="bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 duration-300 py-2 md:py-3 px-4 md:px-6 rounded-md  text-primary-5 font-semibold" >Learn More -&gt;</Link>
