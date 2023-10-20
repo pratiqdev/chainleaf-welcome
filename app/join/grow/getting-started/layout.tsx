@@ -3,6 +3,7 @@ import { useAuth } from "@/components/AuthProvider"
 import Blast from "@/components/Blast"
 import Link from "next/link"
 import FLAGS from '@/FLAGS'
+import { useEffect } from "react"
 
 // https://dev.chainleaflabs.com/auth/register
 
@@ -34,7 +35,9 @@ const GettingStartedLayout = ({
 
     const { auth } = useAuth()
 
-    return  FLAGS.dev || auth?.email ? children : <RequiresAuth />
+
+
+    return  auth?.email ? children : <RequiresAuth />
        
 }
 

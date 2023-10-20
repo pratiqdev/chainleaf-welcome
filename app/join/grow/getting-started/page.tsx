@@ -13,7 +13,7 @@ const GrowerGettingStarted = () => {
             {/* <Guide steps={GrowerSteps} /> */}
             <div className="flex flex-col gap-4 md:gap-0 md:flex-row justify-between items-center w-full px-6">
                 <h2 className="text-xl md:text-2xl font-semibold text-primary-5">Take a Tour of Chainleaf</h2>
-                <Link className="px-2 py-1 md:px-4 py-2 text-lg bg-primary-5 text-white dark:bg-primary-2 hover:bg-primary-4 dark:hover:bg-primary-3 rounded-lg whitespace-nowrap font-semibold duration-200 w-full md:w-auto text-center" href="/join/grow/getting-started/steps">Let's Go -&gt;</Link>
+                <Link className="px-2 py-1 md:px-4 py-2 text-lg bg-primary-5 text-white dark:bg-primary-2 hover:bg-primary-4 dark:hover:bg-primary-3 rounded-lg whitespace-nowrap font-semibold duration-200 w-full md:w-auto text-center" href="/join/grow/getting-started/steps">Let&apos;s Go -&gt;</Link>
             </div>
             <div className="w-full px-6 mt-4 hidden md:block">
                 <div className="h-[1px] w-full bg-primary-5" />

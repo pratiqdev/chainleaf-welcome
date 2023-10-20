@@ -45,7 +45,7 @@ const useInterval = (callback: any = () => {}, delay: number = 1000, options: I_
     useEffect(() => {
         options?.autoStart && set()
         return clear
-    }, [delay, set, clear])
+    }, [delay, set, clear, options?.autoStart])
 
     const reset = useCallback(() => {
         clear()

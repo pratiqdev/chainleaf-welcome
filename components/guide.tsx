@@ -1,44 +1,67 @@
 "use client"
 import { AnimatePresence, motion } from "framer-motion";
-import { useState, useMemo } from 'react'
+import { useState, useMemo, SetStateAction, useEffect } from 'react'
 import Balancer from "react-wrap-balancer";
 import clsx from 'clsx'
-
+import { useSearchParams, useRouter, usePathname } from "next/navigation";
 
 
 
 export type Step = {
     title: string; //'Complete your Profile',
-    text?: string; // "Add important details to your Grower account profile",
     img: string;
-    substeps: React.JSXElementConstructor<any>[];
+    substeps: (({ controller }: { controller: SubstepController; }) => JSX.Element)[];
+}
+
+export type SubstepController = {
+    stepUp: (value?: SetStateAction<number>) => void;
+    stepDown: (value?: SetStateAction<number>) => void;
+    substepUp: (value?: SetStateAction<number>) => void;
+    substepDown: (value?: SetStateAction<number>) => void;
 }
 
 const Guide = ({ steps }:{ steps: Step[] }) => {
+    const params = useSearchParams()
+    const router = useRouter();
+    const pathname = usePathname();
 
-    const [step, setStep] = useState(0)
-    const [substep, setSubstep] = useState(0)
 
-    const stepUp = () => setStep(s => s < steps.length - 1 ? ++s : s);
-    const stepDown = () => setStep(s => s > 0 ? --s : s);
-    const substepUp = () => console.log('Ayoooooooooo')
-    // const substepUp = () => setSubstep(s => s < steps[step].substeps.length - 1 ? ++s : s);
+
+    const [step, setStep] = useState<number>(() => parseInt(params.get('step') ?? '') ?? 0)
+    const [substep, setSubstep] = useState(() => parseInt(params.get('substep') ?? '') ?? 0)
+    // const [step, setStep] = useState<number>(0)
+    // const [substep, setSubstep] = useState(0)
+
+    const stepUp = () => setStep(s => {
+        setSubstep(0)
+        return s < steps.length - 1 ? ++s : s
+    });
+    const stepDown = () => setStep(s => {
+        setSubstep(0)
+        return s > 0 ? --s : s
+    });
+    const substepUp = () => setSubstep(s => s < steps[step].substeps.length - 1 ? ++s : s);
     const substepDown = () => setSubstep(s => s > 0 ? --s : s);
 
-    const CurrentSubstep = useMemo(() => steps[step].substeps[substep], [step, steps, substep])
+    useEffect(() => {
+        const searchParams = new URLSearchParams(window.location.search);
+        searchParams.set('step', `${step ?? 0}`);
+        searchParams.set('substep', `${substep ?? 0}`);
+        router.push(`${pathname}?${searchParams.toString()}`);
+    }, [step, substep])
 
-    const controller = {
+    
+    const controller:SubstepController = {
         stepUp, stepDown,
         substepUp, substepDown,
     }
 
+    const CurrentSubstep = useMemo(() => steps[step].substeps[substep], [step, steps, substep])
+
     return(
     <div>
-
-
-            <p>STEP {step}</p>
-            <p>SUBSTEP {substep}</p>
-        <div className="flex flex-col md:flex-row my-6 mt-[-6rem] md:my-20 justify-center items-center gap-10 pb-4 min-h-[50vh]">
+        
+        <div className="flex flex-col md:flex-row mt-[-3rem] md:my-20 justify-center items-center gap-2 md:gap-10 pb-4 min-h-[50vh]">
            
                 <AnimatePresence mode='wait' initial={false}>
                 {steps.filter((s: any, i: number) => i === step).map((s: any, idx: number) =>
@@ -49,12 +72,12 @@ const Guide = ({ steps }:{ steps: Step[] }) => {
                         animate={{ x: 0, opacity: 1 }}
                         exit={{ x: -30, opacity: 0 }}
                         transition={{ duration: .7, type: 'spring' }}
-                        className="rounded-xl h-[10em] w-[10em] md:h-[25em] md:w-[25em] p-0 object-cover skel"
+                        className="rounded-xl h-[10em] w-[10em] md:h-[25em] md:w-[25em] p-0 object-cover skel border"
                     />
                 )}
             </AnimatePresence>
 
-            <div className="flex flex-col justify-start items-center  md:items-start text-center md:text-left mt-4 md:mt-10 md:flex w-[22em] min-h-[40vh]">
+            <div className="flex flex-col justify-start items-center  md:items-start text-center md:text-left mt-2 md:mt-10 md:flex w-[22em] min-h-[40vh] border">
                     <AnimatePresence mode='wait' initial={false}>
                         {steps.filter((s: any, i: number) => i === step).map((s: any, idx: number) =>
                         <motion.div
@@ -106,7 +129,7 @@ const Guide = ({ steps }:{ steps: Step[] }) => {
                             exit={{ x: 50, opacity: 0 }}
                             transition={{ duration: 1.3, type: 'spring', }}
                         >
-                            <div className="text-xs md:text-normal leading-4 tracking-wide mt-4 text-gray-800 dark:text-gray-300 flex flex-col items-center md:items-start justify-between">
+                            <div className="text-sm md:text-normal leading-5 tracking-wide mt-4 text-black dark:text-white flex flex-col items-center md:items-start justify-between min-h-[30vh] max-w-[24rem]">
                                 {/* {s.benefits.map((b:Benefit) => <Balancer className="" key={b.text}>{b.text}<div className="bg-primary-5 w-[7rem] h-[2px] mx-auto md:ml-0 my-2"/></Balancer>)} */}
                                 <CurrentSubstep controller={controller}/>
                             </div>

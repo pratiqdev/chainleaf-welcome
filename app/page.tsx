@@ -150,9 +150,15 @@ const Banner = () => {
           <h2 className="text-dark font-semibold mb-2 text-xs md:text-md w-full">{truth.hero.supheading}</h2>
           <h3 className="text-2xl md:text-3xl lg:text-5xl font-bold leading-26 mb-6 flex-col md:max-w-[13em] lg:min-w-[13em] text-center md:text-left flex"><span className="w-full">{truth.hero.heading}</span> <span className="text-primary-5 mb-12">{truth.hero.subheading}</span></h3>
          
-          <BlastForm placeholder='Enter your email to join the wait list!' />
+          {/* <BlastForm placeholder='Enter your email to join the wait list!' /> */}
+          <Link passHref href="/join/subscribe">
+            <div className={clsx("border border-primary-5 text-primary-5 mb-3 rounded h-min overflow-hidden flex items-center max-w-[32rem] mx-6 md:mx-0 hover:shadow-lg hover:border-primary-4 cursor-pointer group")}>
+                <p className="p-4 w-full dark:group-hover:bg-gray-800 dark:group-hover:text-white duration-200">Join the Waitlist</p>
+                <button className="p-2 md:p-4 hover:bg-primary-5 hover:text-white dark:bg-transparent dark:text-primary-5 dark:hover:text-primary-1 dark:hover:bg-primary-4 duration-200 font-bold text-xl whitespace-nowrap group-hover:bg-primary-5 group-hover:text-white dark:group-hover:text-primary-1">-&gt;</button>
+            </div>
+          </Link>
           <div className="max-w-[32rem] mx-6 md:mx-0 flex justify-stretch text-sm md:text-lg">
-            <a href='/join' className="bg-fade py-2 md:py-3 px-4 md:px-6 mr-3 rounded-md bg-fade text-white font-semibold hover:underline flex-1" >Join Beta Program</a>
+            <a href='/join/subscribe' className="bg-fade py-2 md:py-3 px-4 md:px-6 mr-3 rounded-md bg-fade text-white font-semibold hover:underline flex-1" >Join Beta Program</a>
             <Link href={'/learn'} className="bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 duration-300 py-2 md:py-3 px-4 md:px-6 rounded-md  text-primary-5 font-semibold" >Learn More -&gt;</Link>
           </div>
           
@@ -169,16 +175,7 @@ const Banner = () => {
               priority={true}
 
               />
-            {/* <Image
-              className="relative flex-1 z-10 banner-logo  w-[300px] h-[300px]"
-              src="/icons/banner-cube.svg"
-              alt="Chainleaf Labs Services"
-              width={300}
-              height={300}
-              loading="eager"
-              priority={true}
 
-              /> */}
           </div>
       </div>
   )

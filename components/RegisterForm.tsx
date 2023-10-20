@@ -9,6 +9,11 @@ import { useRouter } from "next/navigation"
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 const IS_DEV = true
 
+const type = {
+    1: 'Grower',
+    2: '',
+}
+
 const RegisterForm = ({ type, callback }: { type:string, callback:string }) => {
 
     const [email, setEmail] = useState('')
@@ -18,7 +23,7 @@ const RegisterForm = ({ type, callback }: { type:string, callback:string }) => {
     const router = useRouter()
 
     const register = async () => {
-        if(!email.length || !password.length){
+        if(!IS_DEV && !email.length || !password.length){
             console.log('No username or password...')
             setError('Please enter a username and password.')
             return
@@ -37,14 +42,14 @@ const RegisterForm = ({ type, callback }: { type:string, callback:string }) => {
                 console.log('DEV LOGIN')
                 setError('')
                 setAuth({
-                    email,
+                    email: email || 'DevUser95',
                     user_id: 1
                 })        
                 callback && router.push(callback)
                 return
             }
-            
-            const { data } = await axiosInstance.post('/chainleaflabs-login-api-service/login/chainleaflabs/login', expectedApiData)
+            // http://nlb.chainleaflabs.com/chainleaflabs-usersubscriptions/userregistration/chainleaflabs/registeruser
+            const { data } = await axiosInstance.post('/chainleaflabs-usersubscriptions/userregistration/chainleaflabs/registeruser', expectedApiData)
             
             console.log('login data:', data)
             setError('')
