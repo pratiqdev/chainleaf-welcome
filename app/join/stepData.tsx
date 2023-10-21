@@ -454,7 +454,7 @@ export const GrowerSteps: Step[] = [
                             <h4 className="text-center md:text-left text-lg">Search for Local Labs</h4>
                             {/* <Tails.input onChange={(e:any) => setSearch(cleanZip(e.target.value))} value={search} placeholder="Business Location (Zip)" /> */}
                             {/* TODO - refactor all inputs to be uncontrolled and use stateless ref values */}
-                            <input className="bg-white text-black placeholder:text-gray-500 border-[1px] border-gray-300 p-2 py-1 rounded text-lg" onChange={handleZip} ref={zipRef} placeholder="Business Location (Zip)" />
+                            <input className="bg-white text-black placeholder:text-gray-500 border-[1px] border-gray-300 p-2 py-1 rounded text-lg" onChange={handleZip} ref={zipRef} value={search} placeholder="Business Location (Zip)" />
 
                             <div className="flex justify-center items-center">
                                 {!done && loading && <p className="text-2xl text-gray-500 mt-8">Loading...</p>}
