@@ -27,8 +27,8 @@ const Guide = ({ steps }:{ steps: Step[] }) => {
 
 
 
-    const [step, setStep] = useState<number>(() => parseInt(params.get('step') ?? '') ?? 0)
-    const [substep, setSubstep] = useState(() => parseInt(params.get('substep') ?? '') ?? 0)
+    const [step, setStep] = useState<number>(() => parseInt(params.get('step') ?? '0') ?? 0)
+    const [substep, setSubstep] = useState(() => parseInt(params.get('substep') ?? '0') ?? 0)
     // const [step, setStep] = useState<number>(0)
     // const [substep, setSubstep] = useState(0)
 
@@ -40,8 +40,14 @@ const Guide = ({ steps }:{ steps: Step[] }) => {
         setSubstep(0)
         return s > 0 ? --s : s
     });
-    const substepUp = () => setSubstep(s => s < steps[step].substeps.length - 1 ? ++s : s);
-    const substepDown = () => setSubstep(s => s > 0 ? --s : s);
+    const substepUp = () => setSubstep(s => {
+        if (s == steps[step].substeps.length - 1){ stepUp() }
+        return s < steps[step].substeps.length - 1 ? ++s : s
+    });
+    const substepDown = () => setSubstep(s => {
+        if (s == 0){ stepDown() }
+        return s > 0 ? --s : s
+    });
 
     useEffect(() => {
         const searchParams = new URLSearchParams(window.location.search);
@@ -72,12 +78,12 @@ const Guide = ({ steps }:{ steps: Step[] }) => {
                         animate={{ x: 0, opacity: 1 }}
                         exit={{ x: -30, opacity: 0 }}
                         transition={{ duration: .7, type: 'spring' }}
-                        className="rounded-xl h-[10em] w-[10em] md:h-[25em] md:w-[25em] p-0 object-cover skel border"
+                        className="rounded-xl h-[10em] w-[10em] md:h-[25em] md:w-[25em] p-0 object-cover skel"
                     />
                 )}
             </AnimatePresence>
 
-            <div className="flex flex-col justify-start items-center  md:items-start text-center md:text-left mt-2 md:mt-10 md:flex w-[22em] min-h-[40vh] border">
+            <div className="flex flex-col justify-start items-center  md:items-start text-center md:text-left mt-2 md:mt-10 md:flex w-[22em] min-h-[40vh]">
                     <AnimatePresence mode='wait' initial={false}>
                         {steps.filter((s: any, i: number) => i === step).map((s: any, idx: number) =>
                         <motion.div
@@ -143,7 +149,7 @@ const Guide = ({ steps }:{ steps: Step[] }) => {
         <div className="flex justify-center items-center text-3xl bg-slate-100 dark:bg-slate-900 p-1 w-min mx-auto rounded-3xl shadow-lg text-primary-6 mt-2">
           <button onClick={() => { stepDown(); setSubstep(0); }} className="rounded-[50%] h-10 w-10 hover:bg-slate-200 dark:hover:bg-slate-700 hover:text-primary-4">&lt;-</button>
             {steps.map((x:any, i:number) => 
-                <div key={i} onClick={() => setStep(i)} className={clsx("h-6 w-6 mx-2 rounded-[100%] cursor-pointer duration-200", {
+                <div key={i} onClick={() => { setStep(i); setSubstep(0); }} className={clsx("h-6 w-6 mx-2 rounded-[100%] cursor-pointer duration-200", {
                     "bg-primary-5 dark:bg-primary-5 hover:bg-primary-4": step === i,
                     "bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700": step !== i,
                 })} />

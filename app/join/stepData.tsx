@@ -1,11 +1,14 @@
 "use client"
 import { useAuth } from "@/components/AuthProvider";
-import Select from "@/components/Select";
+import Select, { Option } from "@/components/Select";
 import Tails from "@/components/Tails";
 import { Step } from "@/components/guide";
 import { SubstepController } from "@/components/guide";
 import clsx from "clsx";
 import { useCallback, useRef, useState, useEffect } from "react";
+import SelectSingle from "react-select";
+import Balancer from "react-wrap-balancer";
+import Link from "next/link";
 
 const baseButton = "px-2 py-2 bg-primary-5 hover:bg-primary-4  text-white dark:text-black rounded text-sm md:text-md"
 const dimButton = "text-gray-700 dark:text-gray-400 bg-transparent hover:bg-gray-200 dark:hover:bg-gray-800"
@@ -29,7 +32,7 @@ export const GrowerSteps: Step[] = [
         img: "/images/chainleaf/app-mobile.png",
         substeps: [
 
-
+            //! grower profile explanation
             ({ controller }: { controller: SubstepController }) => {
                 const {auth} = useAuth()
                 return (
@@ -50,7 +53,7 @@ export const GrowerSteps: Step[] = [
             },
 
 
-
+            //! Grower company name
             ({ controller }: { controller: SubstepController }) => {
                 const {auth, setAuth} = useAuth()
                 const [entity, setEntity] = useState(() => auth?.profile?.entityName)
@@ -61,6 +64,7 @@ export const GrowerSteps: Step[] = [
                     setAuth((x:any) => ({
                         ...x,
                         profile: {
+                            ...x.profile,
                             entityName: entity,
                             displayName: display
                         }
@@ -71,10 +75,16 @@ export const GrowerSteps: Step[] = [
                     <div className="flex flex-col flex-1 justify-between">
                         <div>
                             <h4 className="text-left text-lg">What is your Company Name?</h4>
-                            <Tails.input onChange={(e:any) => setEntity(e.target.value)} defaultValue={entity} placeholder="Entity Name" />
+                            <Tails.label>
+                                Entity Name
+                                <Tails.input onChange={(e:any) => setEntity(e.target.value)} defaultValue={entity} placeholder="Entity Name" />
+                            </Tails.label>
 
                             <h4 className="text-left text-lg mt-4">What should we call you?</h4>
-                            <Tails.input  onChange={(e:any) => setDisplay(e.target.value)} defaultValue={display} placeholder="Display Name" />
+                            <Tails.label>
+                                Display Name
+                                <Tails.input  onChange={(e:any) => setDisplay(e.target.value)} defaultValue={display} placeholder="Display Name" />
+                            </Tails.label>
                             {/* <button onClick={submit} >SUBMIT</button>
                             <pre>{JSON.stringify(auth)}</pre> */}
                         </div>
@@ -83,18 +93,95 @@ export const GrowerSteps: Step[] = [
                 )
             },
 
-
+            //! Grower location
             ({ controller }: { controller: SubstepController }) => {
                 const {auth, setAuth} = useAuth()
-                const [address, setAddress] = useState(() => auth?.location?.address)
-                const [state, setState] = useState(() => auth?.location?.state)
-                const [zip, setZip] = useState(() => auth?.location?.zip)
+                const [address, setAddress] = useState(auth?.location?.address)
+                const [state, setState] = useState(auth?.location?.state)
+                const [zip, setZip] = useState(auth?.location?.zip)
+
+                const zipRef = useRef(auth?.location?.zip)
+                const addressRef = useRef(auth?.location?.address)
+
+                const stateAbbreviations = [
+                    'AL', // Alabama
+                    'AK', // Alaska
+                    'AZ', // Arizona
+                    'AR', // Arkansas
+                    'CA', // California
+                    'CO', // Colorado
+                    'CT', // Connecticut
+                    'DE', // Delaware
+                    'FL', // Florida
+                    'GA', // Georgia
+                    'HI', // Hawaii
+                    'ID', // Idaho
+                    'IL', // Illinois
+                    'IN', // Indiana
+                    'IA', // Iowa
+                    'KS', // Kansas
+                    'KY', // Kentucky
+                    'LA', // Louisiana
+                    'ME', // Maine
+                    'MD', // Maryland
+                    'MA', // Massachusetts
+                    'MI', // Michigan
+                    'MN', // Minnesota
+                    'MS', // Mississippi
+                    'MO', // Missouri
+                    'MT', // Montana
+                    'NE', // Nebraska
+                    'NV', // Nevada
+                    'NH', // New Hampshire
+                    'NJ', // New Jersey
+                    'NM', // New Mexico
+                    'NY', // New York
+                    'NC', // North Carolina
+                    'ND', // North Dakota
+                    'OH', // Ohio
+                    'OK', // Oklahoma
+                    'OR', // Oregon
+                    'PA', // Pennsylvania
+                    'RI', // Rhode Island
+                    'SC', // South Carolina
+                    'SD', // South Dakota
+                    'TN', // Tennessee
+                    'TX', // Texas
+                    'UT', // Utah
+                    'VT', // Vermont
+                    'VA', // Virginia
+                    'WA', // Washington
+                    'WV', // West Virginia
+                    'WI', // Wisconsin
+                    'WY'  // Wyoming
+                  ];
+
+   
+                const handleZip = () => {
+                    if(!zipRef.current) return
+                    const parsedVal = zipRef.current.value.replace(/[^0-9]/g, '').substring(0,5)
+                    console.log('parsed zip:', parsedVal)
+                    zipRef.current.value = parsedVal
+                    setZip(parsedVal)
+                }
+
+
+                const handleAddress = () => {
+                    if(!addressRef.current) return
+                    const parsedVal = addressRef.current.value.replace(/[^0-9a-z]/g, '').substring(0,50)
+                    console.log('parsed address:', parsedVal)
+                    addressRef.current.value = parsedVal
+                    setAddress(parsedVal)
+                }
+
+                  
     
 
                 const submit = useCallback(() => {
                     setAuth((x:any) => ({
                         ...x,
                         location: {
+                            ...x.location,
                             address,
                             state,
                             zip
@@ -108,17 +195,25 @@ export const GrowerSteps: Step[] = [
                             <h4 className="text-left text-lg">Where does your company operate?</h4>
                             <Tails.label>
                                 Address
-                                <Tails.input onChange={(e:any) => setAddress(e.target.value)} defaultValue={address} placeholder="Address" />
+                                <input className="bg-white text-black placeholder:text-gray-500 border-[1px] border-gray-300 p-2 py-1 rounded text-lg" onChange={handleAddress} ref={addressRef} value={address} placeholder="Address" />
                             </Tails.label>
 
                             <Tails.label>
                                 State
-                                <Tails.input onChange={(e:any) => setState(e.target.value)} defaultValue={state} placeholder="State" />
+                                {/* <Tails.input onChange={(e:any) => setState(e.target.value)} defaultValue={state} placeholder="State" /> */}
+                                <SelectSingle 
+                                    placeholder="State"
+                                    defaultInputValue={state}
+                                    className="border-gray-400 text-lg text-gray-800"
+                                    options={stateAbbreviations.map((st:string) => ({ value:st, label:st }))} 
+                                    onChange={(v:any) => setState(v.value)} 
+                                    defaultValue={state} 
+                                />
                             </Tails.label>
 
                             <Tails.label>
                                 Zip
-                                <Tails.input onChange={(e:any) => setZip(e.target.value)} defaultValue={zip} placeholder="Zip Code" />
+                                <input className="bg-white text-black placeholder:text-gray-500 border-[1px] border-gray-300 p-2 py-1 rounded text-lg" onChange={handleZip} ref={zipRef} value={zip} placeholder="Zip Code" />
                             </Tails.label>
 
                         </div>
@@ -162,7 +257,10 @@ export const GrowerSteps: Step[] = [
                 const submit = () => {
                     setAuth((x:any) => ({
                         ...x,
-                        cert_types
+                        find_labs: {
+                            ...x.find_labs,
+                            cert_types
+                        }
                     }))
                 }
    
@@ -175,6 +273,7 @@ export const GrowerSteps: Step[] = [
                                 placeholder="Select multiple or type"
                                 className="mt-4 text-left" 
                                 onChange={(v:any) => setCertTypes(v)}
+                                defaultValue={cert_types}
                                 options={[
                                     'Fresh Produce',
                                     'Livestock/Animal Products',
@@ -204,7 +303,10 @@ export const GrowerSteps: Step[] = [
                 const submit = () => {
                     setAuth((x:any) => ({
                         ...x,
-                        licenses
+                        find_labs: {
+                            ...x.find_labs,
+                            licenses
+                        }
                     }))
                 }
 
@@ -266,6 +368,7 @@ export const GrowerSteps: Step[] = [
                                 placeholder="Select multiple or type"
                                 className="mt-4 text-left" 
                                 onChange={(v:any) => setLicenses(v)}
+                                defaultValue={licenses}
                                 options={[
                                     'Winery/Brewery/Distillery License',
                                     'Pesticide/Herbicide License',
@@ -298,10 +401,11 @@ export const GrowerSteps: Step[] = [
             //! search for labs
             ({ controller }: { controller: SubstepController }) => {
                 const {auth, setAuth} = useAuth()
-                const [search, setSearch] = useState(() => auth?.location?.zip ?? auth?.location?.state ?? auth?.location?.address)
+                const [search, setSearch] = useState(() => auth?.location?.zip)
                 const [loading, setLoading] = useState(false)
                 const [done, setDone] = useState(false)
                 const toRef = useRef<any>(null)
+                const zipRef = useRef<any>(null)
     
 
                 // const submit = useCallback(() => {
@@ -315,23 +419,52 @@ export const GrowerSteps: Step[] = [
                 // }, [auth, entity, display])
 
                 useEffect(() => {
-                    setLoading(search ? true : false)
-                    setDone(search ? false : false)
+                    if(search?.length < 5){
+                        setLoading(false)
+                        setDone(false)
+                        return
+                    }
+                    setLoading(search?.length === 5 ? true : false)
+                    setDone(false)
+
                    toRef.current = setTimeout(() => {
                         setLoading(false)
                         setDone(search ? true : false)
-                   }, Math.random() * 2000)
+                   }, Math.random() * 2000 + 500)
+
                 }, [auth, search])
+
+                // const cleanZip = (zip:string) => {
+                //     return zip.replace(/[^09]/g, '').substring(0,4)
+                // }
+
+                const handleZip = () => {
+                    if(!zipRef.current) return
+                    const parsedVal = zipRef.current.value.replace(/[^0-9]/g, '').substring(0,5)
+                    console.log('parsed zip:', parsedVal)
+                    zipRef.current.value = parsedVal
+                    setSearch(parsedVal)
+                }
+
+    
 
                 return (
                     <div className="flex flex-col flex-1 justify-between">
                         <div>
-                            <h4 className="text-left text-lg">Search for Local Labs</h4>
-                            <Tails.input onChange={(e:any) => setSearch(e.target.value)} defaultValue={search} placeholder="Entity Name" />
+                            <h4 className="text-center md:text-left text-lg">Search for Local Labs</h4>
+                            {/* <Tails.input onChange={(e:any) => setSearch(cleanZip(e.target.value))} value={search} placeholder="Business Location (Zip)" /> */}
+                            {/* TODO - refactor all inputs to be uncontrolled and use stateless ref values */}
+                            <input className="bg-white text-black placeholder:text-gray-500 border-[1px] border-gray-300 p-2 py-1 rounded text-lg" onChange={handleZip} ref={zipRef} placeholder="Business Location (Zip)" />
 
                             <div className="flex justify-center items-center">
-                                {!done && loading && <p className="text-2xl text-gray-500">Loading...</p>}
-                                {done && !loading && <p>Done!</p>}
+                                {!done && loading && <p className="text-2xl text-gray-500 mt-8">Loading...</p>}
+                                {done && !loading && 
+                                <div className="mt-8 bg-slate-300 p-4 rounded-lg">
+                                    <h5 className="text-lg">No Labs Found at this Location</h5>
+                                    <Balancer>You can <Link href="" className="text-primary-5 underline">Refer a Lab</Link> or contact your labs tech staff about validating with Chainleaf.</Balancer>
+                                    <Balancer>Read more about integrations <Link href="" className="text-primary-5 underline">here</Link></Balancer>
+                                </div>
+                                }
                             </div>
                       
 

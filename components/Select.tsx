@@ -23,13 +23,15 @@ const Select = ({
     className, 
     onChange, 
     placeholder,
-    maxOptions = 10
+    maxOptions = 10,
+    defaultValue,
  }:{ 
     options:string[], 
     className?:string, 
     onChange:Function,
     placeholder:string,
-    maxOptions?:number
+    maxOptions?:number,
+    defaultValue?:string[]
 }) => {
     const [error, setError] = React.useState('');
     const [inputValue, setInputValue] = React.useState('');
@@ -87,13 +89,18 @@ const Select = ({
             inputValue={inputValue}
             isClearable
             isMulti
+            // defaultValue={{
+            //     label: defaultValue,
+            //     value: defaultValue
+            // }}
+            defaultInputValue=''
             // menuIsOpen={false}
             options={options.map(createOption)}
             onChange={(newValue) => setNewValues(newValue)}
             onInputChange={handleNewInputValue}
             onKeyDown={handleKeyDown}
             placeholder="Select all that apply"
-            value={value}
+            value={!value.length && defaultValue ?  defaultValue.map((x:any) => ({ value:x, label:x })) : value }
             maxMenuHeight={300}
             />
             <small className="text-left">{error}</small>

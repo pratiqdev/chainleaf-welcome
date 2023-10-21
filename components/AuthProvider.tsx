@@ -1,12 +1,28 @@
 "use client"
 import {  useSessionStorage } from "@/lib/useStorage";
-import { createContext, useState, useContext, ReactNode, useEffect } from "react";
+import { createContext, useState, useContext, ReactNode, useEffect, useCallback } from "react";
 import FLAGS from "@/FLAGS";
+import _ from 'lodash'
 
 const AuthContext = createContext<any>({ auth:{}, setAuth: null });
 
 export const AuthProvider = ({ children }:{ children: ReactNode}) => {
   const [auth, setAuth] = useState({ email:'' });
+
+  // debounced and callback wrapped function to update the users subscriptiuon details in the db
+  const updateSubscriptionData = useCallback(
+    _.debounce(() => {
+      if(!auth?.email){
+        console.log('No email found. Skipping user data update...')
+        return;
+      }
+      console.log('Updating user data:', auth)
+
+    }, 1000),
+    [auth]
+  )
+
+
 
   useEffect(() => {
     if(!auth?.email && FLAGS.dev){
@@ -16,6 +32,8 @@ export const AuthProvider = ({ children }:{ children: ReactNode}) => {
         user_id: 1,
       }))
     }
+
+    updateSubscriptionData()
   }, [auth])
 
 

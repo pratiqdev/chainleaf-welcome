@@ -153,7 +153,7 @@ const Banner = () => {
           {/* <BlastForm placeholder='Enter your email to join the wait list!' /> */}
           <Link passHref href="/join/subscribe">
             <div className={clsx("border border-primary-5 text-primary-5 mb-3 rounded h-min overflow-hidden flex items-center max-w-[32rem] mx-6 md:mx-0 hover:shadow-lg hover:border-primary-4 cursor-pointer group")}>
-                <p className="p-4 w-full dark:group-hover:bg-gray-800 dark:group-hover:text-white duration-200">Join the Waitlist</p>
+                <p className="p-2 px-4 md:p-4 w-full dark:group-hover:bg-gray-800 dark:group-hover:text-white duration-200 text-left">Join the Waitlist</p>
                 <button className="p-2 md:p-4 hover:bg-primary-5 hover:text-white dark:bg-transparent dark:text-primary-5 dark:hover:text-primary-1 dark:hover:bg-primary-4 duration-200 font-bold text-xl whitespace-nowrap group-hover:bg-primary-5 group-hover:text-white dark:group-hover:text-primary-1">-&gt;</button>
             </div>
           </Link>
