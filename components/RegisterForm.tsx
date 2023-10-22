@@ -9,6 +9,13 @@ import FLAGS from "@/FLAGS"
 
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
+export type RegisterApiData = {
+    user_email: string;
+    password: string;
+    role_id: number;
+    subscribed: boolean;
+}
+
 /**
  * @example
  * type UserRoles = {
@@ -55,10 +62,11 @@ const RegisterForm = ({ type, callback }: { type:keyof UserRoles, callback:strin
         }
 
         try{
-            const expectedApiData = {
+            const expectedApiData:RegisterApiData = {
                 user_email: email,
                 password: password,
                 role_id: userRoles[type],
+                subscribed: subbed,
             }
 
             if(FLAGS.dev){

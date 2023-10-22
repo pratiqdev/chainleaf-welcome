@@ -46,28 +46,19 @@ export const AuthProvider = ({ children }:{ children: ReactNode}) => {
   // debounced and callback wrapped function to update the users subscriptiuon details in the db
   const updateSubscriptionData = useCallback(
     _.debounce(() => {
-      if(!auth?.loginData?.user_email || !auth.subData?.email){
-        console.log('No emails found. Skipping user data update...')
+      if(!auth.loginData?.user_email || !auth.subData?.email){
+        console.log('No emails found. Skipping user data update...', auth)
         return;
       }
       console.log('Updating user data:', auth)
 
     }, 1000),
-    [auth.loginData?.user_email, auth.subData?.email]
+    [auth]
   )
 
 
 
   useEffect(() => {
-    // if(!auth?.loginData && FLAGS.dev){
-    //   setAuth((x:AuthData) => ({
-    //     ...x,
-    //     loginData
-    //     email: 'DevUser95',
-    //     user_id: 1,
-    //   }))
-    // }
-
     updateSubscriptionData()
   }, [auth])
 
