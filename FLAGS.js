@@ -1,5 +1,5 @@
 const FLAGS = {
-    dev:true,
+    dev:  false,
 }
 
 export default FLAGS
