@@ -4,34 +4,69 @@ import { createContext, useState, useContext, ReactNode, useEffect, useCallback 
 import FLAGS from "@/FLAGS";
 import _ from 'lodash'
 
-const AuthContext = createContext<any>({ auth:{}, setAuth: null });
+export type LoginData = {
+  user_email: string;
+  password: string;
+  role_id: number;
+  subscribed:boolean;
+}
+
+export type OnboardingResponses = {
+  profile?: {
+    entityName?: string;
+    displayName?: string;
+  },
+  location?: {
+    address?: string;
+    state?: string;
+    zip?: string;
+  },
+  labRequirements?: {
+    certTypes?: string[];
+    licenses?: string[];
+  },
+}
+
+export type SubData = {
+  email?: string;
+  subscribed: boolean;
+}
+
+export type AuthData = {
+  subData?: SubData;
+  onboardData?: OnboardingResponses;
+  loginData?: LoginData;
+}
+
+const AuthContext = createContext<{ auth: AuthData, setAuth:any }>({ auth:{}, setAuth: null });
 
 export const AuthProvider = ({ children }:{ children: ReactNode}) => {
-  const [auth, setAuth] = useState({ email:'' });
+  const [auth, setAuth] = useState<AuthData>({ });
 
   // debounced and callback wrapped function to update the users subscriptiuon details in the db
   const updateSubscriptionData = useCallback(
     _.debounce(() => {
-      if(!auth?.email){
-        console.log('No email found. Skipping user data update...')
+      if(!auth?.loginData?.user_email || !auth.subData?.email){
+        console.log('No emails found. Skipping user data update...')
         return;
       }
       console.log('Updating user data:', auth)
 
     }, 1000),
-    [auth]
+    [auth.loginData?.user_email, auth.subData?.email]
   )
 
 
 
   useEffect(() => {
-    if(!auth?.email && FLAGS.dev){
-      setAuth(x => ({
-        ...x,
-        email: 'DevUser95',
-        user_id: 1,
-      }))
-    }
+    // if(!auth?.loginData && FLAGS.dev){
+    //   setAuth((x:AuthData) => ({
+    //     ...x,
+    //     loginData
+    //     email: 'DevUser95',
+    //     user_id: 1,
+    //   }))
+    // }
 
     updateSubscriptionData()
   }, [auth])

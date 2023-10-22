@@ -3,27 +3,50 @@ import Tails from "./Tails"
 import Link from "next/link"
 import { useState } from "react"
 import axiosInstance from "@/lib/axios"
-import { useAuth } from "./AuthProvider"
+import { AuthData, useAuth } from "./AuthProvider"
 import { useRouter } from "next/navigation"
+import FLAGS from "@/FLAGS"
 
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-const IS_DEV = true
 
-const type = {
-    1: 'Grower',
-    2: '',
+/**
+ * @example
+ * type UserRoles = {
+ *   1: 'Lab',
+ *   2: 'Grower',
+ *   6: 'Consumer'
+ * }
+ * <RegisterForm type={ 1 } />
+ */
+export type UserRoles = {
+    /** Lab */
+    'Lab': 1,
+    /** Grower */
+    'Grower': 2,
+    /** Consumer */
+    'Consumer': 6
 }
 
-const RegisterForm = ({ type, callback }: { type:string, callback:string }) => {
+const userRoles = {
+    /** Lab */
+    'Lab': 1,
+    /** Grower */
+    'Grower': 2,
+    /** Consumer */
+    'Consumer': 6
+}
+
+const RegisterForm = ({ type, callback }: { type:keyof UserRoles, callback:string }) => {
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [subbed, setSubbed] = useState(true)
     const [error, setError] = useState('')
     const { auth, setAuth } = useAuth()
     const router = useRouter()
 
     const register = async () => {
-        if(!IS_DEV && !email.length || !password.length){
+        if(!FLAGS.dev && (!email.length || !password.length)){
             console.log('No username or password...')
             setError('Please enter a username and password.')
             return
@@ -33,31 +56,51 @@ const RegisterForm = ({ type, callback }: { type:string, callback:string }) => {
 
         try{
             const expectedApiData = {
-                UserName: email,
-                UserPassword: password,
-                Role: type,
+                user_email: email,
+                password: password,
+                role_id: userRoles[type],
             }
 
-            if(IS_DEV){
+            if(FLAGS.dev){
                 console.log('DEV LOGIN')
                 setError('')
-                setAuth({
-                    email: email || 'DevUser95',
-                    user_id: 1
-                })        
+                setAuth((x:AuthData) => ({
+                    ...x,
+                    loginData: {
+                        user_email: email || 'DevUser95@email.com',
+                        password: password || '<no-password>',
+                        role_id: userRoles[type],
+                        subscribed: subbed,
+                    }
+                }))        
                 callback && router.push(callback)
                 return
             }
             // http://nlb.chainleaflabs.com/chainleaflabs-usersubscriptions/userregistration/chainleaflabs/registeruser
-            const { data } = await axiosInstance.post('/chainleaflabs-usersubscriptions/userregistration/chainleaflabs/registeruser', expectedApiData)
+            const { data, status } = await axiosInstance.post('/chainleaflabs-usersubscriptions/userregistration/chainleaflabs/registeruser', expectedApiData)
             
-            console.log('login data:', data)
-            setError('')
-            setAuth({
-                email,
-                user_id: 1
-            })        
-            callback && router.push(callback)
+            if(status === 200){
+                console.log('login data:', data)
+                setError('')
+                // setAuth({
+                //     email,
+                //     user_id: 1,
+                //     role_id: userRoles[type]
+                // })
+                setAuth((x:AuthData) => ({
+                    ...x,
+                    loginData: {
+                        user_email: email,
+                        password: password,
+                        role_id: userRoles[type],
+                        subscribed: subbed,
+                    }
+                }))    
+                callback && router.push(callback)
+            }else{
+                console.log('login failed?', {data, status})
+                setError('There was an error with the request. Please try again.')
+            }
 
         }catch(err){
             console.log('login err:', err)
@@ -78,6 +121,12 @@ const RegisterForm = ({ type, callback }: { type:string, callback:string }) => {
                 Password
                 <Tails.input onChange={(e:any) => setPassword(e?.target?.value ?? '')} placeholder="Password" type="password" />
             </Tails.label>
+
+            <div className="flex items-center gap-4">
+                <Tails.checkbox checked={subbed} onChange={(e:any) => setSubbed(e?.target?.checked ? true : false)} />
+                <p className="text-gray-700 dark:text-gray-300 text-sm">Subscribe to our Mailing List</p>
+            </div>
+            
             <div className="flex flex-col justify-center text-center gap-4 text-sm">
                 <Tails.button onClick={register} className="mt-4 w-full">Register</Tails.button>
                 <Link href="https://dev.chainleaflabs.com/auth/signin" className="text-primary-6 dark:text-primary-3 font-semibold hoverline">Already have an account?</Link>

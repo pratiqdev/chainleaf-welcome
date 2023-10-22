@@ -4,6 +4,7 @@ import Blast from '@/components/Blast'
 import Balancer from 'react-wrap-balancer'
 import { useSearchParams } from 'next/navigation'
 import Tails from '@/components/Tails'
+import links from '@/app/links'
 
 export default function Subscribed() {
   const params = useSearchParams()
@@ -36,7 +37,7 @@ export default function Subscribed() {
               </div>
 
               <div className="flex items-center gap-2">
-                <Link href="https://dev.chainleaflabs.com" passHref><Tails.button className="text-sm md:text-md lg:text-md md:py-1 md:px-2 whitespace-nowrap min-w-[10em]">View a Demo</Tails.button></Link>
+                <Link href={links?.demo?.disclaimer ?? '/join/disclaimer/demo'} passHref><Tails.button className="text-sm md:text-md lg:text-md md:py-1 md:px-2 whitespace-nowrap min-w-[10em]">View a Demo</Tails.button></Link>
                 <p className="text-sm ">to see our latest features</p>
               </div>
 

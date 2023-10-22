@@ -37,7 +37,7 @@ const GettingStartedLayout = ({
 
 
 
-    return  auth?.email ? children : <RequiresAuth />
+    return  auth?.loginData?.user_email ? children : <RequiresAuth />
        
 }
 

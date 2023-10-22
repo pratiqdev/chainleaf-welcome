@@ -15,7 +15,7 @@ const Join = () => {
                 <Link className="underline text-primary-6 dark:text-primary-3 font-semibold whitespace-nowrap" href="https://dev.chainleaflabs.com/auth/signin">sign-in</Link> 
                 &nbsp;if you already have an account.
             </Balancer>
-            <RegisterForm type="Grower" callback="/join/grow/getting-started"/>
+            <RegisterForm type='Grower' callback="/join/grow/getting-started"/>
         </div>
     )
 }

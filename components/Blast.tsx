@@ -3,7 +3,7 @@ import { useState} from 'react'
 import useEnvironment from '@/lib/useEnvironment'
 import useTime from '@/lib/useTime'
 import { useRouter } from 'next/navigation'
-import { useAuth } from './AuthProvider'
+import { AuthData, useAuth } from './AuthProvider'
 import axiosInstance from '@/lib/axios'
 import clsx from 'clsx'
 
@@ -33,18 +33,22 @@ const BlastForm = (props: BlastProps) => {
             }
             console.log('sending email to ' + email)
             setError('Sending email...')
-            const { data } = await axiosInstance.post('/chainleaflabs-usersubscriptions/usersubscriptions/chainleaflabs/subscribeforupdates', {
+            const { data, status } = await axiosInstance.post('/chainleaflabs-usersubscriptions/usersubscriptions/chainleaflabs/subscribeforupdates', {
                 "user_subscription_details": {
                     email: email,
                     origin: 'chainleaf welcome banner email subscriber',
                     envData,
                     userTime,
                 },
-                "user_email": email
+                "user_email": email,
+                "subscribe": true
             })
 
-            if('UserSubscription' in data){
+            if(status === 200 && 'UserSubscription' in data){
                 router.push(`/join/subscribed?email=${email}`)
+                ctx.setAuth((x:AuthData) => ({
+
+                }))
             }
 
         // fetch(url, {

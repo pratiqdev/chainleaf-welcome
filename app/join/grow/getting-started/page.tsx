@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import Guide, { Step } from "@/components/guide";
 import Balancer from "react-wrap-balancer";
 import Tails from "@/components/Tails";
+import links from "@/app/links";
 
 
 const GrowerGettingStarted = () => {
@@ -32,12 +33,12 @@ const GrowerGettingStarted = () => {
             </div>
 
             <div className="flex justify-between items-center w-full px-6 mb-2 mt-10">
-                <Link passHref className="underline text-primary-5 font-semibold hover:text-primary-4" href="https://dev.chainleaflabs.com">
+                <Link passHref className="underline text-primary-5 font-semibold hover:text-primary-4" href={'/'}>
                     <Tails.button>
                     Go Back
                     </Tails.button>
                 </Link>
-                <Link passHref className="underline text-primary-5 font-semibold hover:text-primary-4" href="https://dev.chainleaflabs.com">
+                <Link passHref className="underline text-primary-5 font-semibold hover:text-primary-4" href={links.demo.disclaimer}>
                     <Tails.button className="bg-transparent dark:bg-transparent">
                     View the Demo
                     </Tails.button>

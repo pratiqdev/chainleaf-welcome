@@ -1,5 +1,5 @@
 "use client"
-import { useAuth } from "@/components/AuthProvider";
+import { AuthData, useAuth } from "@/components/AuthProvider";
 import Select, { Option } from "@/components/Select";
 import Tails from "@/components/Tails";
 import { Step } from "@/components/guide";
@@ -38,7 +38,7 @@ export const GrowerSteps: Step[] = [
                 return (
                     <div className="flex flex-col flex-1 justify-between">
                         <div>
-                            <h4 className="mb-6">Profile for <b>{auth?.email ?? 'this account'}</b> is incomplete. Add important details to your account like business location, entity type and more.</h4>
+                            <h4 className="mb-6">Profile for <b>{auth?.loginData?.user_email ?? 'this account'}</b> is incomplete. Add important details to your account like business location, entity type and more.</h4>
                             <div className="text-gray-700 dark:text-gray-400 leading-4 text-xs">
                                 <p>Find local certified labs that meet your business requirements.</p>
                                 <div className="w-full px-10 md:pl-0 my-2" ><div className="w-full h-[1px] bg-primary-5" /></div>
@@ -56,17 +56,20 @@ export const GrowerSteps: Step[] = [
             //! Grower company name
             ({ controller }: { controller: SubstepController }) => {
                 const {auth, setAuth} = useAuth()
-                const [entity, setEntity] = useState(() => auth?.profile?.entityName)
-                const [display, setDisplay] = useState(() => auth?.profile?.displayName)
+                const [entity, setEntity] = useState(() => auth?.onboardData?.profile?.entityName)
+                const [display, setDisplay] = useState(() => auth?.onboardData?.profile?.displayName)
     
 
                 const submit = useCallback(() => {
-                    setAuth((x:any) => ({
+                    setAuth((x:AuthData) => ({
                         ...x,
-                        profile: {
-                            ...x.profile,
-                            entityName: entity,
-                            displayName: display
+                        onboardData: {
+                            ...x.onboardData,
+                            profile: {
+                                ...x.onboardData?.profile,
+                                entityName: entity,
+                                displayName: display
+                            }
                         }
                     }))
                 }, [entity, display, setAuth])
@@ -96,12 +99,12 @@ export const GrowerSteps: Step[] = [
             //! Grower location
             ({ controller }: { controller: SubstepController }) => {
                 const {auth, setAuth} = useAuth()
-                const [address, setAddress] = useState(auth?.location?.address)
-                const [state, setState] = useState(auth?.location?.state)
-                const [zip, setZip] = useState(auth?.location?.zip)
+                const [address, setAddress] = useState(auth?.onboardData?.location?.address)
+                const [state, setState] = useState(auth?.onboardData?.location?.state)
+                const [zip, setZip] = useState(auth?.onboardData?.location?.zip)
 
-                const zipRef = useRef(auth?.location?.zip)
-                const addressRef = useRef(auth?.location?.address)
+                const zipRef = useRef<HTMLInputElement | null>(null)
+                const addressRef = useRef<HTMLInputElement | null>(null)
 
                 const stateAbbreviations = [
                     'AL', // Alabama
@@ -178,13 +181,16 @@ export const GrowerSteps: Step[] = [
     
 
                 const submit = useCallback(() => {
-                    setAuth((x:any) => ({
+                    setAuth((x:AuthData) => ({
                         ...x,
-                        location: {
-                            ...x.location,
-                            address,
-                            state,
-                            zip
+                        onboardData: {
+                            ...x.onboardData,
+                            location: {
+                                ...x.onboardData?.location,
+                                address,
+                                state,
+                                zip
+                            }
                         }
                     }))
                 }, [address, state, zip, setAuth])
@@ -252,14 +258,17 @@ export const GrowerSteps: Step[] = [
             //! select product types
             ({ controller }: { controller: SubstepController }) => {
                 const {auth, setAuth} = useAuth()
-                const [cert_types, setCertTypes] = useState(() => auth?.find_labs?.cert_types)
+                const [cert_types, setCertTypes] = useState(() => auth?.onboardData?.labRequirements?.certTypes)
 
                 const submit = () => {
-                    setAuth((x:any) => ({
+                    setAuth((x:AuthData) => ({
                         ...x,
-                        find_labs: {
-                            ...x.find_labs,
-                            cert_types
+                        onboardData: {
+                            ...x.onboardData,
+                            labRequirements: {
+                                ...x.onboardData?.labRequirements,
+                                certTypes: cert_types,
+                            }
                         }
                     }))
                 }
@@ -298,15 +307,18 @@ export const GrowerSteps: Step[] = [
             //! select licenses
             ({ controller }: { controller: SubstepController }) => {
                 const {auth, setAuth} = useAuth()
-                const [licenses, setLicenses] = useState(() => auth?.find_labs?.licenses)
+                const [licenses, setLicenses] = useState(() => auth?.onboardData?.labRequirements?.licenses)
 
                 const submit = () => {
-                    setAuth((x:any) => ({
+                    setAuth((x:AuthData) => ({
                         ...x,
-                        find_labs: {
-                            ...x.find_labs,
-                            licenses
-                        }
+                        onboardData: {
+                            ...x.onboardData,
+                            labRequirements: {
+                                ...x.onboardData?.labRequirements,
+                                licenses
+                            }
+                        },
                     }))
                 }
 
@@ -401,7 +413,7 @@ export const GrowerSteps: Step[] = [
             //! search for labs
             ({ controller }: { controller: SubstepController }) => {
                 const {auth, setAuth} = useAuth()
-                const [search, setSearch] = useState(() => auth?.location?.zip)
+                const [search, setSearch] = useState(() => auth?.onboardData?.location?.zip ?? '')
                 const [loading, setLoading] = useState(false)
                 const [done, setDone] = useState(false)
                 const toRef = useRef<any>(null)
