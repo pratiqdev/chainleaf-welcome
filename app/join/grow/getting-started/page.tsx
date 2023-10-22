@@ -3,7 +3,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import Guide, { Step } from "@/components/guide";
 import Balancer from "react-wrap-balancer";
 import Tails from "@/components/Tails";
-import links from "@/app/links";
+import links from "@/links";
 
 
 const GrowerGettingStarted = () => {

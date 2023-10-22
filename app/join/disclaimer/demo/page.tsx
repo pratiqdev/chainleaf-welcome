@@ -1,4 +1,4 @@
-import links from "@/app/links"
+import links from "@/links"
 import Link from "next/link"
 import Tails from "@/components/Tails"
 

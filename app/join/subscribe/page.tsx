@@ -4,7 +4,7 @@ import Blast from '@/components/Blast'
 import Balancer from 'react-wrap-balancer'
 import { useSearchParams } from 'next/navigation'
 import Tails from '@/components/Tails'
-import links from '@/app/links'
+import links from '@/links'
 
 export default function Subscribed() {
   const params = useSearchParams()

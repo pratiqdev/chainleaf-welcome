@@ -13,7 +13,7 @@ import { Links } from '@/components/NavLinks'
 import useEnvironment from '@/lib/useEnvironment'
 import useTime from '@/lib/useTime'
 import BlastForm from '@/components/Blast'
-import links from './links'
+import links from '../links'
 
 const data:any = {
   "Consumers":{

@@ -1,12 +1,14 @@
 const links = {
     support: "support@chainleaflabs-group.com",
+    disclaimer: '/join/disclaimer/security',
     action: {
         whySubscribe: "/join/subscribe",
         thanksForSubscribing: "/join/subscribed", 
     },
     demo:{
         home:"https://dev.chainleaflabs.com",
-        login:"https://dev.chainleaflabs.com/auth/signin"
+        login:"https://dev.chainleaflabs.com/auth/signin",
+        disclaimer: '/join/disclaimer/demo'
     },
     docs: {
         home: "https://docs.chainleaflabs.com",
