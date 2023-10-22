@@ -74,9 +74,9 @@ export const AuthProvider = ({ children }:{ children: ReactNode}) => {
 
   return (
     <AuthContext.Provider value={{ auth, setAuth }}>
-      <div className="fixed bottom-0 left-0 max-w-screen ">
+      {/* <div className="fixed bottom-0 left-0 max-w-screen ">
         <pre style={{fontSize:'.4rem'}}>{JSON.stringify(auth, null, 2)}</pre>
-      </div>
+      </div> */}
       {children}
     </AuthContext.Provider>
   );
