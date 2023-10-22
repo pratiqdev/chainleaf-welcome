@@ -171,7 +171,7 @@ export const GrowerSteps: Step[] = [
 
                 const handleAddress = () => {
                     if(!addressRef.current) return
-                    const parsedVal = addressRef.current.value.replace(/[^0-9a-z]/g, '').substring(0,50)
+                    const parsedVal = addressRef.current.value.replace(/[^0-9a-zA-Z]/g, '').substring(0,50)
                     console.log('parsed address:', parsedVal)
                     addressRef.current.value = parsedVal
                     setAddress(parsedVal)
