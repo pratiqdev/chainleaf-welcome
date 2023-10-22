@@ -2,6 +2,7 @@
 import {  useSessionStorage } from "@/lib/useStorage";
 import { createContext, useState, useContext, ReactNode, useEffect, useCallback } from "react";
 import FLAGS from "@/FLAGS";
+import axiosInstance from "@/lib/axios";
 import _ from 'lodash'
 
 export type LoginData = {
@@ -44,19 +45,33 @@ export const AuthProvider = ({ children }:{ children: ReactNode}) => {
   const [auth, setAuth] = useState<AuthData>({ });
 
   // debounced and callback wrapped function to update the users subscriptiuon details in the db
-  const updater = useCallback(() => {
-    if(!auth.loginData?.user_email || !auth.subData?.email){
-      console.log('No emails found. Skipping user data update...', auth)
-      return;
+  const updater = useCallback(async () => {
+      if(auth.loginData?.user_email || auth.subData?.email){
+        const expectedApiData = {
+          user_email: auth.loginData?.user_email ?? auth.subData?.email,
+          subscribe: auth.loginData?.subscribed ?? auth.subData?.subscribed,
+          user_subscription_details: auth
+        }
+        try{
+          const { data, status } = await axiosInstance.post('/chainleaflabs-usersubscriptions/usersubscriptions/chainleaflabs/subscribeforupdates', expectedApiData)
+          
+          if(status === 200){
+            console.log('user data updated', data)
+          }else{
+            console.log('update failed?', {data, status})
+          }
+        }catch(err){
+          console.log('update error:', err)
+        }
+
+
+      }else{
+        console.log('No emails found. Skipping user data update...', auth)
       }
-      console.log('Updating user data:', auth)
       
     }, [auth])
 
-  const debouncer = useCallback(
-    _.debounce(updater, 1000),
-    [auth]
-  )
+  const debouncer =  _.debounce(updater, 1000)
 
 
 

@@ -17,7 +17,6 @@ const emailRegexp = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const BlastForm = (props: BlastProps) => {
     const [email, setEmail] = useState('')
     const [error, setError] = useState('')
-    const url = 'https://nlb.chainleaflabs.com/chainleaflabs-usersubscriptions/usersubscriptions/chainleaflabs/subscribeforupdates'
     const envData = useEnvironment()
     const userTime = useTime()
     const router = useRouter()
@@ -44,11 +43,21 @@ const BlastForm = (props: BlastProps) => {
                 "subscribe": true
             })
 
-            if(status === 200 && 'UserSubscription' in data){
-                router.push(`/join/subscribed?email=${email}`)
+            
+            if(status === 200){
+                console.log('email sent:', data)
                 ctx.setAuth((x:AuthData) => ({
-
+                    ...x,
+                    subData: {
+                        ...x.subData,
+                        email,
+                        subscribe: true,
+                    }
                 }))
+                router.push(`/join/subscribed?email=${email}`)
+            }else{
+                setError('Email failed...')
+                console.log('request error:', { status, data })
             }
 
         // fetch(url, {
