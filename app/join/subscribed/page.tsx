@@ -18,8 +18,8 @@ export default function Subscribed() {
             <Balancer className="text-md leading-6 my-2 text-center">Hey <b>{params?.get('email') ?? '?'}</b>, thank you for joining our waitlist for Chainleaf Labs!</Balancer>
             
 
-            <div className="flex gap-6 justify-center px-6 mt-2 md:px-0 w-full">
-                <Link href="/" className="text-center hoverline duration-200">Go Home</Link>
+            <div className="flex flex-col gap-6 justify-center px-6 mt-2 md:px-0 w-full">
+                <Link href="/" className="text-center text-primary-5 underline duration-200">Go Home</Link>
                 <Link href="/join/disclaimer/demo" className="text-center text-primary-5 underline duration-200">Register Account</Link>
                 <Link href={links.docs.home} className="text-center text-primary-5 underline duration-200">Read the Docs</Link>
                 <Link href={links.docs.blog} className="text-center text-primary-5 underline duration-200">Check out Blog</Link>

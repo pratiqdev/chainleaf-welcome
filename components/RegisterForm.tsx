@@ -84,17 +84,19 @@ const RegisterForm = ({ type, callback }: { type:keyof UserRoles, callback:strin
                 callback && router.push(callback)
                 return
             }
+            
             // http://nlb.chainleaflabs.com/chainleaflabs-usersubscriptions/userregistration/chainleaflabs/registeruser
             const { data, status } = await axiosInstance.post('/chainleaflabs-usersubscriptions/userregistration/chainleaflabs/registeruser', expectedApiData)
             
             if(status === 200){
                 console.log('login data:', data)
                 setError('')
-                // setAuth({
-                //     email,
-                //     user_id: 1,
-                //     role_id: userRoles[type]
-                // })
+
+                if(data?.UserRegistered){
+                    router.push(`/join/registered?email=${email}`)
+                    return
+                }
+
                 setAuth((x:AuthData) => ({
                     ...x,
                     userId: data.UserEnrollmentRegistrations?.user_subscription_id,

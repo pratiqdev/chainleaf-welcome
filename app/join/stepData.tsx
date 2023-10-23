@@ -52,7 +52,6 @@ export const GrowerSteps: Step[] = [
                 )
             },
 
-
             //! Grower company name
             ({ controller }: { controller: SubstepController }) => {
                 const {auth, setAuth} = useAuth()
@@ -345,8 +344,6 @@ export const GrowerSteps: Step[] = [
                     </div>
                 )
             },
-
-
           
             //! select licenses
             ({ controller }: { controller: SubstepController }) => {
@@ -495,8 +492,6 @@ export const GrowerSteps: Step[] = [
                     </div>
                 )
             },
-
-
 
             //! search for labs
             ({ controller }: { controller: SubstepController }) => {
