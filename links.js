@@ -19,7 +19,7 @@ const links = {
             labs: "https://docs.chainleaflabs.com/docs/usage/labs/",
             consumer: "https://docs.chainleaflabs.com/docs/usage/consumers/",
         },
-        beta: ""
+        beta: "https://docs.chainleaflabs.com/"
     }
 }
 

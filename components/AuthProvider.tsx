@@ -75,7 +75,7 @@ export const AuthProvider = ({ children }:{ children: ReactNode}) => {
 
 
       }else{
-        console.log('No userId found. Skipping user data update...', auth)
+        console.log('No userId found. Skipping user data update...', auth?.userId)
       }
       
     }, [auth])

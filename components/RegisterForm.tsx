@@ -84,7 +84,7 @@ const RegisterForm = ({ type, callback }: { type:keyof UserRoles, callback:strin
                 callback && router.push(callback)
                 return
             }
-            
+
             // http://nlb.chainleaflabs.com/chainleaflabs-usersubscriptions/userregistration/chainleaflabs/registeruser
             const { data, status } = await axiosInstance.post('/chainleaflabs-usersubscriptions/userregistration/chainleaflabs/registeruser', expectedApiData)
             
@@ -96,7 +96,7 @@ const RegisterForm = ({ type, callback }: { type:keyof UserRoles, callback:strin
                     router.push(`/join/registered?email=${email}`)
                     return
                 }
-
+                
                 setAuth((x:AuthData) => ({
                     ...x,
                     userId: data.UserEnrollmentRegistrations?.user_subscription_id,

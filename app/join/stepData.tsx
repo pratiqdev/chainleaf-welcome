@@ -9,6 +9,7 @@ import { useCallback, useRef, useState, useEffect } from "react";
 import SelectSingle from "react-select";
 import Balancer from "react-wrap-balancer";
 import Link from "next/link";
+import links from "@/links";
 
 const baseButton = "px-2 py-2 bg-primary-5 hover:bg-primary-4  text-white dark:text-black rounded text-sm md:text-md"
 const dimButton = "text-grey-800 dark:text-grey-400 bg-transparent hover:bg-gray-200 dark:hover:bg-gray-800"
@@ -28,7 +29,7 @@ const StepNav = ({ controller, callback, last = false }: { controller: SubstepCo
 
 export const GrowerSteps: Step[] = [
     {
-        title: "Complete your profile",
+        title: "Complete your Grower Profile",
         img: "/images/chainleaf/app-mobile.png",
         substeps: [
 
@@ -213,7 +214,7 @@ export const GrowerSteps: Step[] = [
 
                 const handleAddress = () => {
                     if(!addressRef.current) return
-                    const parsedVal = addressRef.current.value.replace(/[^0-9a-zA-Z]/g, '').substring(0,50)
+                    const parsedVal = addressRef.current.value.replace(/[^0-9a-zA-Z\s]/g, '').substring(0,50)
                     console.log('parsed address:', parsedVal)
                     addressRef.current.value = parsedVal
                     setAddress(parsedVal)
@@ -273,8 +274,8 @@ export const GrowerSteps: Step[] = [
 
     },
     {
-        title: "Find Local Labs",
-        img: "/images/chainleaf/app-desktop.png",
+        title: "Find Local Certified Labs",
+        img: "/images/chainleaf/connect-desktop.png",
         substeps: [
 
             ({ controller }: { controller: SubstepController }) => {
@@ -297,7 +298,6 @@ export const GrowerSteps: Step[] = [
                 )
             },
             
-
             //! select product types
             ({ controller }: { controller: SubstepController }) => {
                 const {auth, setAuth} = useAuth()
@@ -549,7 +549,10 @@ export const GrowerSteps: Step[] = [
                             <h4 className="text-center md:text-left text-lg">Search for Local Labs</h4>
                             {/* <Tails.input onChange={(e:any) => setSearch(cleanZip(e.target.value))} value={search} placeholder="Business Location (Zip)" /> */}
                             {/* TODO - refactor all inputs to be uncontrolled and use stateless ref values */}
-                            <input className="bg-white text-black placeholder:text-gray-500 border-[1px] border-gray-300 p-2 py-1 rounded text-lg" onChange={handleZip} ref={zipRef} value={search} placeholder="Business Location (Zip)" />
+                            <Tails.label>
+                                Zip Code
+                                <input className="bg-white text-black placeholder:text-gray-500 border-[1px] border-gray-300 p-2 py-1 rounded text-lg" onChange={handleZip} ref={zipRef} value={search} placeholder="Business Location (Zip)" />
+                            </Tails.label>
 
                             <div className="flex justify-center items-center">
                                 {!done && loading && <p className="text-2xl text-gray-500 mt-8">Loading...</p>}
@@ -575,5 +578,123 @@ export const GrowerSteps: Step[] = [
         ]
 
     },
+    {
+        title: "Submit Products for Validation",
+        img: "/images/chainleaf/browse-desktop.png",
+        substeps: [
+
+            ({ controller }: { controller: SubstepController }) => {
+                const {auth} = useAuth()
+                return (
+                    <div className="flex flex-col flex-1 justify-between">
+                        <div>
+                            <h4 className="mb-6">Submit your products for certification and Laboratories will upload results directly to Chainleaf.</h4>
+                            <div className="text-gray-700 dark:text-gray-400 leading-4 text-xs">
+
+                                <p>Simplified certification and automatic product data and certificate updates</p>
+                                <div className="w-full px-10 md:pl-0 my-2" ><div className="w-full h-[1px] bg-primary-5" /></div>
+                                <p>Secure and reliable data directly from certified lab staff.</p>
+                                <div className="w-full px-10 md:pl-0 my-2" ><div className="w-full h-[1px] bg-primary-5" /></div>
+                                <p>Increase consumer trust in your products.</p>
+                            </div>
+                        </div>
+                        <StepNav controller={controller} />
+                    </div>
+                )
+            },
+            
+        ]
+
+    },
+    {
+        title: "Share Products and Certificates",
+        img: "/images/chainleaf/connect-mobile.png",
+        substeps: [
+
+            ({ controller }: { controller: SubstepController }) => {
+                const {auth} = useAuth()
+                return (
+                    <div className="flex flex-col flex-1 justify-between">
+                        <div>
+                            <h4 className="mb-6">Share your products with certificate data and allow users to validate their authenticity.</h4>
+                            <div className="text-gray-700 dark:text-gray-400 leading-4 text-xs">
+
+                                <p>Provide guaranteed quality to your consumers</p>
+                                <div className="w-full px-10 md:pl-0 my-2" ><div className="w-full h-[1px] bg-primary-5" /></div>
+                                <p>Increase trust in your brand and it&apos;s quality</p>
+                                <div className="w-full px-10 md:pl-0 my-2" ><div className="w-full h-[1px] bg-primary-5" /></div>
+                                <p>Increase consumer trust in your products and services.</p>
+                            </div>
+                        </div>
+                        <StepNav controller={controller} />
+                    </div>
+                )
+            },
+            
+        ]
+
+    },
+    {
+        title: "Track Complete Product History",
+        img: "/images/chainleaf/save-desktop.png",
+        substeps: [
+
+            ({ controller }: { controller: SubstepController }) => {
+                const {auth} = useAuth()
+                return (
+                    <div className="flex flex-col flex-1 justify-between">
+                        <div>
+                            <h4 className="mb-6">Take control of your products lifecycle with complete insight into it&apos; history and production.</h4>
+                            <div className="text-gray-700 dark:text-gray-400 leading-4 text-xs">
+
+                                <p>Make informed choices about the features and actions of your supply-chain</p>
+                                <div className="w-full px-10 md:pl-0 my-2" ><div className="w-full h-[1px] bg-primary-5" /></div>
+                                <p>Support ethical sourcing and practices in your industry</p>
+                                <div className="w-full px-10 md:pl-0 my-2" ><div className="w-full h-[1px] bg-primary-5" /></div>
+                                <p>Promote accountability in your supply-chain and your products</p>
+                            </div>
+                        </div>
+                        <StepNav controller={controller} />
+                    </div>
+                )
+            },
+            
+        ]
+
+    },
+    {
+        title: "Explore Our Services",
+        img: "/images/chainleaf/trust-desktop.png",
+        substeps: [
+
+            ({ controller }: { controller: SubstepController }) => {
+                const {auth} = useAuth()
+                return (
+                    <div className="flex flex-col flex-1 justify-between">
+                        <div>
+                            <h4 className="mb-6">Continue to the Chainleaf Labs Demo App to explore our services</h4>
+                            <div className="text-gray-700 dark:text-gray-400 leading-4 text-xs">
+
+                                <p>Leverage certifications and brand trust to increase presence and sales</p>
+                                <div className="w-full px-10 md:pl-0 my-2" ><div className="w-full h-[1px] bg-primary-5" /></div>
+                                <p>Stay informed on what users purchase and why with immutable history</p>
+                                <div className="w-full px-10 md:pl-0 my-2" ><div className="w-full h-[1px] bg-primary-5" /></div>
+                                <p>Track the performance and quality of products through their lifecycle</p>
+                            </div>
+                        </div>
+                        <div className="flex justify-between font-semibold mt-6">
+                            <button className={clsx(baseButton)} onClick={() => controller.substepDown()}>&lt;- Back</button>
+                            <div className="flex gap-4">
+                                <Link className={clsx(baseButton)} href={links.demo.disclaimer} >Let Go -&gt;</Link>
+                            </div>
+                        </div>
+                    </div>
+                )
+            },
+            
+        ]
+
+    },
+
 
 ]

@@ -49,7 +49,7 @@ const BlastForm = (props: BlastProps) => {
 
                 ctx.setAuth((x:AuthData) => ({
                     ...x,
-                    userId: data?.UserSubscriptions?.user_subscription_id ?? '<no-id-returned-from-api>',
+                    userId: data?.UserSubscriptions?.user_subscription_id,
                     subData: {
                         ...x.subData,
                         email,

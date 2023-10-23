@@ -159,7 +159,7 @@ const Banner = () => {
             </div>
           </Link>
           <div className="max-w-[32rem] mx-6 md:mx-0 flex justify-stretch text-sm md:text-lg">
-            <a href={links.action.whySubscribe} className="bg-fade py-2 md:py-3 px-4 md:px-6 mr-3 rounded-md bg-fade text-white font-semibold hover:underline flex-1" >Join Beta Program</a>
+            <a href={'/join'} className="bg-fade py-2 md:py-3 px-4 md:px-6 mr-3 rounded-md bg-fade text-white font-semibold hover:underline flex-1" >Sign Up Now</a>
             <Link href={links.docs.home} className="bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 duration-300 py-2 md:py-3 px-4 md:px-6 rounded-md  text-primary-5 font-semibold" >Learn More -&gt;</Link>
           </div>
           

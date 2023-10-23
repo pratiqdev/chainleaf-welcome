@@ -22,13 +22,13 @@ export default function Subscribed() {
             <div className="flex flex-col items-between gap-4">
 
               <div className="flex items-center gap-2">
-                <Link href="/join" passHref><Tails.button className="text-sm md:text-md lg:text-md md:py-1 md:px-2 whitespace-nowrap min-w-[10em]">Take a Tour</Tails.button></Link>
-                <p className="text-sm">to get familiar with the application</p>
+                <Link href="/join" passHref><Tails.button className="text-sm md:text-md lg:text-md md:py-1 md:px-2 whitespace-nowrap min-w-[10em]">Sign up Now</Tails.button></Link>
+                <p className="text-sm">to start using the app</p>
               </div>
 
               <div className="flex items-center gap-2">
-                <Link href="/join" passHref><Tails.button className="text-sm md:text-md lg:text-md md:py-1 md:px-2 whitespace-nowrap min-w-[10em]">Sign up Now</Tails.button></Link>
-                <p className="text-sm">to start using the app</p>
+                <Link href="/join" passHref><Tails.button className="text-sm md:text-md lg:text-md md:py-1 md:px-2 whitespace-nowrap min-w-[10em]">Take a Tour</Tails.button></Link>
+                <p className="text-sm">to get familiar with the application</p>
               </div>
 
               <div className="flex items-center gap-2">
