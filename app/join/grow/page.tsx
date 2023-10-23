@@ -2,6 +2,7 @@ import Blast from "@/components/Blast"
 import Link from "next/link"
 import RegisterForm from "@/components/RegisterForm"
 import Balancer from "react-wrap-balancer"
+import FLAGS from "@/FLAGS"
 // https://dev.chainleaflabs.com/auth/register
 
 const Join = () => {

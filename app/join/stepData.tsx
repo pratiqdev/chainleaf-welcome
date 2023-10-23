@@ -11,7 +11,7 @@ import Balancer from "react-wrap-balancer";
 import Link from "next/link";
 
 const baseButton = "px-2 py-2 bg-primary-5 hover:bg-primary-4  text-white dark:text-black rounded text-sm md:text-md"
-const dimButton = "text-gray-700 dark:text-gray-400 bg-transparent hover:bg-gray-200 dark:hover:bg-gray-800"
+const dimButton = "text-grey-800 dark:text-grey-400 bg-transparent hover:bg-gray-200 dark:hover:bg-gray-800"
 
 const StepNav = ({ controller, callback, last = false }: { controller: SubstepController, callback?: Function, last?: boolean }) => {
     return (
@@ -87,6 +87,49 @@ export const GrowerSteps: Step[] = [
                             <Tails.label>
                                 Display Name
                                 <Tails.input  onChange={(e:any) => setDisplay(e.target.value)} defaultValue={display} placeholder="Display Name" />
+                            </Tails.label>
+                            {/* <button onClick={submit} >SUBMIT</button>
+                            <pre>{JSON.stringify(auth)}</pre> */}
+                        </div>
+                        <StepNav controller={controller} callback={submit}/>
+                    </div>
+                )
+            },
+
+            //! Grower contact info
+            ({ controller }: { controller: SubstepController }) => {
+                const {auth, setAuth} = useAuth()
+                const [contact, setContact] = useState(() => auth?.onboardData?.profile?.phone)
+                const [website, setWebsite] = useState(() => auth?.onboardData?.profile?.website)
+    
+
+                const submit = useCallback(() => {
+                    setAuth((x:AuthData) => ({
+                        ...x,
+                        onboardData: {
+                            ...x.onboardData,
+                            profile: {
+                                ...x.onboardData?.profile,
+                                contact,
+                                website
+                            }
+                        }
+                    }))
+                }, [contact, website, setAuth])
+
+                return (
+                    <div className="flex flex-col flex-1 justify-between">
+                        <div>
+                            <h4 className="text-left text-lg">How should we contact you?</h4>
+                            <Tails.label>
+                                Contact Info
+                                <Tails.input onChange={(e:any) => setContact(e.target.value)} defaultValue={contact} placeholder="info@app.com, (313) 123-4567" />
+                            </Tails.label>
+
+                            <h4 className="text-left text-lg mt-4">Do you have a website or platform?</h4>
+                            <Tails.label>
+                                Company Site
+                                <Tails.input  onChange={(e:any) => setWebsite(e.target.value)} defaultValue={website} placeholder="mysite.com" />
                             </Tails.label>
                             {/* <button onClick={submit} >SUBMIT</button>
                             <pre>{JSON.stringify(auth)}</pre> */}
@@ -254,6 +297,7 @@ export const GrowerSteps: Step[] = [
                     </div>
                 )
             },
+            
 
             //! select product types
             ({ controller }: { controller: SubstepController }) => {
@@ -303,7 +347,7 @@ export const GrowerSteps: Step[] = [
             },
 
 
-
+          
             //! select licenses
             ({ controller }: { controller: SubstepController }) => {
                 const {auth, setAuth} = useAuth()
@@ -408,6 +452,50 @@ export const GrowerSteps: Step[] = [
                     </div>
                 )
             },
+
+            //! farm size info
+            ({ controller }: { controller: SubstepController }) => {
+                const {auth, setAuth} = useAuth()
+                const [acres, setAcres] = useState(() => auth?.onboardData?.labRequirements?.acres)
+                const [employees, setEmployees] = useState(() => auth?.onboardData?.labRequirements?.employees)
+    
+
+                const submit = useCallback(() => {
+                    setAuth((x:AuthData) => ({
+                        ...x,
+                        onboardData: {
+                            ...x.onboardData,
+                            labRequirements: {
+                                ...x.onboardData?.labRequirements,
+                                acres,
+                                employees
+                            }
+                        }
+                    }))
+                }, [acres, employees, setAuth])
+
+                return (
+                    <div className="flex flex-col flex-1 justify-between">
+                        <div>
+                            <h4 className="text-left text-lg">What is the approximate size of your Farm?</h4>
+                            <Tails.label>
+                                Farm Size
+                                <Tails.input onChange={(e:any) => setAcres(e.target.value)} defaultValue={acres} placeholder="32 acres, 2, sq mi" />
+                            </Tails.label>
+
+                            <h4 className="text-left text-lg mt-4">How many employees does your company have?</h4>
+                            <Tails.label>
+                                Company Size
+                                <Tails.input  onChange={(e:any) => setEmployees(e.target.value)} defaultValue={employees} placeholder="24" />
+                            </Tails.label>
+                            {/* <button onClick={submit} >SUBMIT</button>
+                            <pre>{JSON.stringify(auth)}</pre> */}
+                        </div>
+                        <StepNav controller={controller} callback={submit}/>
+                    </div>
+                )
+            },
+
 
 
             //! search for labs

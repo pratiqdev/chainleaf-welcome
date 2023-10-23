@@ -97,6 +97,7 @@ const RegisterForm = ({ type, callback }: { type:keyof UserRoles, callback:strin
                 // })
                 setAuth((x:AuthData) => ({
                     ...x,
+                    userId: data.UserEnrollmentRegistrations?.user_subscription_id,
                     loginData: {
                         user_email: email,
                         password: password,

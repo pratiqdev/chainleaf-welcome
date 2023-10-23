@@ -16,6 +16,8 @@ export type OnboardingResponses = {
   profile?: {
     entityName?: string;
     displayName?: string;
+    phone?: string;
+    website?: string;
   },
   location?: {
     address?: string;
@@ -25,6 +27,8 @@ export type OnboardingResponses = {
   labRequirements?: {
     certTypes?: string[];
     licenses?: string[];
+    acres?: string;
+    employees?: string;
   },
 }
 
@@ -34,6 +38,7 @@ export type SubData = {
 }
 
 export type AuthData = {
+  userId?: number;
   subData?: SubData;
   onboardData?: OnboardingResponses;
   loginData?: LoginData;
@@ -46,32 +51,36 @@ export const AuthProvider = ({ children }:{ children: ReactNode}) => {
 
   // debounced and callback wrapped function to update the users subscriptiuon details in the db
   const updater = useCallback(async () => {
-      if(auth.loginData?.user_email || auth.subData?.email){
+      if(auth.userId){
+
         const expectedApiData = {
-          user_email: auth.loginData?.user_email ?? auth.subData?.email,
-          subscribe: auth.loginData?.subscribed ?? auth.subData?.subscribed,
+          // user_email: auth.loginData?.user_email ?? auth.subData?.email,
+          // subscribe: auth.loginData?.subscribed ?? auth.subData?.subscribed,
+          user_subscription_id: auth.userId,
           user_subscription_details: auth
         }
+
         try{
-          const { data, status } = await axiosInstance.post('/chainleaflabs-usersubscriptions/usersubscriptions/chainleaflabs/subscribeforupdates', expectedApiData)
+          const { data, status } = await axiosInstance.post('/chainleaflabs-usersubscriptions/userregistration/chainleaflabs/updateuserdetails', expectedApiData)
           
           if(status === 200){
-            console.log('user data updated', data)
+            console.log('user data updated:', data)
           }else{
             console.log('update failed?', {data, status})
           }
+
         }catch(err){
           console.log('update error:', err)
         }
 
 
       }else{
-        console.log('No emails found. Skipping user data update...', auth)
+        console.log('No userId found. Skipping user data update...', auth)
       }
       
     }, [auth])
 
-  const debouncer =  _.debounce(updater, 1000)
+  const debouncer =  _.debounce(updater, 5000)
 
 
 
