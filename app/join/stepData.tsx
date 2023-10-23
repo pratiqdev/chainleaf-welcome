@@ -557,17 +557,17 @@ export const GrowerSteps: Step[] = [
                             <div className="flex justify-center items-center">
                                 {!done && loading && <p className="text-2xl text-gray-500 mt-8">Loading...</p>}
                                 {done && !loading && 
-                                <div className="mt-8 bg-slate-300 p-4 rounded-lg">
+                                <div className="mt-8 bg-slate-300 dark:bg-slate-800 p-4 rounded-lg">
                                     <h5 className="text-lg">No Labs Found at this Location</h5>
-                                    <Balancer>You can <Link href="" className="text-primary-5 underline">Refer a Lab</Link> or contact your labs tech staff about validating with Chainleaf.</Balancer>
-                                    <Balancer>Read more about integrations <Link href="" className="text-primary-5 underline">here</Link></Balancer>
+                                    <Balancer>You can <Link href="/join/labs/refer" className="text-primary-5 underline">Refer a Lab</Link> or contact your labs tech staff about validating with Chainleaf.</Balancer>
+                                    <Balancer>Read more about integrations <Link href={links.docs.home} className="text-primary-5 underline">here</Link></Balancer>
                                 </div>
                                 }
                             </div>
                       
 
                         </div>
-                        <StepNav controller={controller} />
+                        <StepNav controller={controller} last/>
                     </div>
                 )
             },
@@ -598,7 +598,7 @@ export const GrowerSteps: Step[] = [
                                 <p>Increase consumer trust in your products.</p>
                             </div>
                         </div>
-                        <StepNav controller={controller} />
+                        <StepNav controller={controller} last />
                     </div>
                 )
             },
@@ -626,7 +626,7 @@ export const GrowerSteps: Step[] = [
                                 <p>Increase consumer trust in your products and services.</p>
                             </div>
                         </div>
-                        <StepNav controller={controller} />
+                        <StepNav controller={controller} last/>
                     </div>
                 )
             },
@@ -654,7 +654,7 @@ export const GrowerSteps: Step[] = [
                                 <p>Promote accountability in your supply-chain and your products</p>
                             </div>
                         </div>
-                        <StepNav controller={controller} />
+                        <StepNav controller={controller} last/>
                     </div>
                 )
             },
@@ -662,6 +662,7 @@ export const GrowerSteps: Step[] = [
         ]
 
     },
+    
     {
         title: "Explore Our Services",
         img: "/images/chainleaf/trust-desktop.png",
@@ -672,20 +673,21 @@ export const GrowerSteps: Step[] = [
                 return (
                     <div className="flex flex-col flex-1 justify-between">
                         <div>
-                            <h4 className="mb-6">Continue to the Chainleaf Labs Demo App to explore our services</h4>
-                            <div className="text-gray-700 dark:text-gray-400 leading-4 text-xs">
+                            <h4 className="mb-6">Continue to the Chainleaf Labs Demo App to explore our services and new features.</h4>
+                            <div className="text-gray-700 dark:text-gray-400 leading-4 text-xs flex flex-col gap-4">
 
-                                <p>Leverage certifications and brand trust to increase presence and sales</p>
-                                <div className="w-full px-10 md:pl-0 my-2" ><div className="w-full h-[1px] bg-primary-5" /></div>
-                                <p>Stay informed on what users purchase and why with immutable history</p>
-                                <div className="w-full px-10 md:pl-0 my-2" ><div className="w-full h-[1px] bg-primary-5" /></div>
-                                <p>Track the performance and quality of products through their lifecycle</p>
+                                <p>Check out the <Link className={clsx('text-primary-5 font-semibold underline')} href={links.demo.disclaimer} >Demo App</Link></p>
+                                <p>Read the <Link className={clsx('text-primary-5 font-semibold underline')} href={links.docs.home} >Documentation</Link></p>
+                                <p>Join our <Link className={clsx('text-primary-5 font-semibold underline')} href={links.action.whySubscribe} >Mailing List</Link></p>
+                                <p>Follow us on <Link className={clsx('text-primary-5 font-semibold underline')} href={links.action.whySubscribe} >Social Media</Link></p>
+                                
+                                <p>Or continue to check out our new features!</p>
                             </div>
                         </div>
                         <div className="flex justify-between font-semibold mt-6">
                             <button className={clsx(baseButton)} onClick={() => controller.substepDown()}>&lt;- Back</button>
                             <div className="flex gap-4">
-                                <Link className={clsx(baseButton)} href={links.demo.disclaimer} >Let Go -&gt;</Link>
+                                <Link className={clsx(baseButton)} href={links.demo.disclaimer} >Let&apos;s Go -&gt;</Link>
                             </div>
                         </div>
                     </div>
