@@ -46,8 +46,10 @@ const BlastForm = (props: BlastProps) => {
             
             if(status === 200){
                 console.log('email sent:', data)
+
                 ctx.setAuth((x:AuthData) => ({
                     ...x,
+                    userId: data?.UserSubscriptions?.user_subscription_id,
                     subData: {
                         ...x.subData,
                         email,
