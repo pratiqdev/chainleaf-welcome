@@ -42,6 +42,7 @@ export type AuthData = {
   subData?: SubData;
   onboardData?: OnboardingResponses;
   loginData?: LoginData;
+  feedback?: string;
 }
 
 const AuthContext = createContext<{ auth: AuthData, setAuth:any }>({ auth:{}, setAuth: null });
