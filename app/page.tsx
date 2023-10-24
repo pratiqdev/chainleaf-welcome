@@ -458,7 +458,7 @@ const Platform = () => {
       <div   className="mt-4 mb-2 leading-8 tracking-wide text-xl max-w-auto text-center lg:text-left lg:max-w-[500px] mx-6">
         {truth.sections.solution.content}
         <div className="flex justify-center lg:justify-stretch items-center mt-8">
-        <Link href={'/learn#platform'} className="bg-slate-300 hover:bg-slate-400  dark:bg-slate-800 dark:hover:bg-slate-700 duration-300 duration-300 py-3 px-6 rounded-md  text-primary-6 font-semibold text-lg" >Learn More</Link>
+        <Link href={links.docs.home} className="bg-slate-300 hover:bg-slate-400  dark:bg-slate-800 dark:hover:bg-slate-700 duration-300 duration-300 py-3 px-6 rounded-md  text-primary-6 font-semibold text-lg" >Learn More</Link>
         {/* <Link href={'/learn'} className="bg-slate-300 ml-2 py-3 px-6 rounded-md  text-primary-6 font-semibold text-lg" >Read Lightpaper -&gt;</Link> */}
         </div>
       </div>
@@ -489,7 +489,7 @@ const About = () => {
             </div>
             <div className="flex flex-col gap-2 w-full">
 
-              <Link href={'/learn'} className="border border-primary-6 hover:bg-primary-6 hover:text-white duration-300 py-3 px-6 rounded-md  text-primary-6 font-semibold text-lg text-center" >Learn More About our Platform</Link>
+              <Link href={links.docs.home} className="border border-primary-6 hover:bg-primary-6 hover:text-white duration-300 py-3 px-6 rounded-md  text-primary-6 font-semibold text-lg text-center" >Learn More About our Platform</Link>
               {/* <Link href={'/learn'} className="border border-primary-6 py-3 px-6 rounded-md  text-primary-6 font-semibold text-lg text-center" >Read the Technical Lightpaper</Link> */}
               <a href={truth.hero.link.href} className="bg-fade py-3 px-6 rounded-md hover:underline duration-300 text-white font-semibold text-md  w-full text-center">Get Started with Chainleaf Labs -&gt;</a>
             </div>
