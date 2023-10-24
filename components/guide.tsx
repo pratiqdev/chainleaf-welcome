@@ -54,7 +54,7 @@ const Guide = ({ steps }:{ steps: Step[] }) => {
         searchParams.set('step', `${step ?? 0}`);
         searchParams.set('substep', `${substep ?? 0}`);
         router.push(`${pathname}?${searchParams.toString()}`);
-    }, [step, substep])
+    }, [step, substep, pathname, router])
 
     
     const controller:SubstepController = {

@@ -87,7 +87,7 @@ export const AuthProvider = ({ children }:{ children: ReactNode}) => {
 
   useEffect(() => {
     debouncer()
-  }, [auth])
+  }, [auth, debouncer])
 
 
   return (

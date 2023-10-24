@@ -2,6 +2,7 @@
 import Tails from "@/components/Tails"
 import { useState, useCallback } from "react"
 import { useAuth, AuthData } from "@/components/AuthProvider"
+import { useRouter } from "next/navigation"
 
 const feedbackSuggestions = [
     'How would you rate the quality of our service?',
@@ -15,6 +16,7 @@ const Page = () => {
     const {auth, setAuth} = useAuth()
     const [email, setEmail] = useState(() => auth?.loginData?.user_email ?? auth?.subData?.email)
     const [text, setText] = useState(() => auth?.onboardData?.profile?.displayName)
+    const router = useRouter()
 
 
     const submit = useCallback(() => {
@@ -26,7 +28,8 @@ const Page = () => {
                 email,
             },
         }))
-    }, [email, text, setAuth])
+        router.push('/join/feedback/thanks')
+    }, [email, text, setAuth, router])
 
     return (
         <div className="min-h-[80vh] flex flex-col items-center justify-start">
