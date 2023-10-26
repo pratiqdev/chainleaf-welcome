@@ -43,7 +43,7 @@ const userRoles = {
     'Consumer': 6
 }
 
-const RegisterForm = ({ type, callback }: { type:keyof UserRoles, callback:string }) => {
+const RegisterForm = ({ type, redirectUrl }: { type:keyof UserRoles, redirectUrl:string }) => {
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -81,7 +81,7 @@ const RegisterForm = ({ type, callback }: { type:keyof UserRoles, callback:strin
                         subscribed: subbed,
                     }
                 }))        
-                callback && router.push(callback)
+                redirectUrl && router.push(redirectUrl)
                 return
             }
 
@@ -93,7 +93,9 @@ const RegisterForm = ({ type, callback }: { type:keyof UserRoles, callback:strin
                 setError('')
 
                 if(data?.UserRegistered){
-                    router.push(`/join/registered?email=${email}`)
+                    redirectUrl 
+                        ? router.push(redirectUrl)
+                        : router.push(`/join/registered?email=${email}`)
                     return
                 }
                 
@@ -107,7 +109,7 @@ const RegisterForm = ({ type, callback }: { type:keyof UserRoles, callback:strin
                         subscribed: subbed,
                     }
                 }))    
-                callback && router.push(callback)
+                redirectUrl && router.push(redirectUrl)
             }else{
                 console.log('login failed?', {data, status})
                 setError('There was an error with the request. Please try again.')
