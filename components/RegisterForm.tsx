@@ -93,6 +93,16 @@ const RegisterForm = ({ type, redirectUrl }: { type:keyof UserRoles, redirectUrl
                 setError('')
 
                 if(data?.UserRegistered){
+                    setAuth((x:AuthData) => ({
+                        ...x,
+                        userId: 88888888888,
+                        loginData: {
+                            user_email: email,
+                            role_id: userRoles[type],
+                            subscribed: subbed,
+                        }
+                    })) 
+
                     redirectUrl 
                         ? router.push(redirectUrl)
                         : router.push(`/join/registered?email=${email}`)
