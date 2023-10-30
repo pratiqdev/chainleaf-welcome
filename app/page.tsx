@@ -14,6 +14,9 @@ import useEnvironment from '@/lib/useEnvironment'
 import useTime from '@/lib/useTime'
 import BlastForm from '@/components/Blast'
 import links from '../links'
+import Explain from '@/components/Explain'
+import Balancer from 'react-wrap-balancer'
+import Tails from '@/components/Tails'
 
 const data:any = {
   "Consumers":{
@@ -523,6 +526,7 @@ const Footer = () => {
         <div className="bg-gradient-to-r from-transparent via-primary-4 to-transparent my-8 max-w-1200 mx-auto w-full" style={{height: '1px'}}></div>
         <div className="w-full max-w-1200 mx-auto flex justify-between">
           <div className="text-[.7rem] text-gray-300 mx-6 md:mx-0">{truth.footer.copyright}</div>
+          
           <div>
             {/* {truth.footer.socials.length && truth.footer.socials.map(soc => <a key={soc.text} href="">{soc.text}</a>)} */}
           </div>
@@ -541,6 +545,14 @@ export default function Home() {
       {/* <Nav links={truth.nav.links}/> */}
       <main className="flex min-h-screen flex-col items-center justify-between pt-32 w-full" id="home">
         <Banner />
+        {/* <Explain content={
+                                    <p>When submitting a product for testing, what percentage of the total volume produced is tested? For example:
+                                        <br /><b>100 LBs</b> produced
+                                        <br /><b>.1 LB</b> sent for testing
+                                        <br /><b>.1 %</b> of batch tested
+                                    </p>} 
+                                /> */}
+        {/* <Explain content={<p>This is an <b>explanation</b>. Text here will be shown when hovering.</p>} /> */}
         {/* <Problem /> */}
         {/* <Vision /> */}
         <Onboard />

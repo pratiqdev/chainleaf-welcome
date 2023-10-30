@@ -10,16 +10,17 @@ import SelectSingle from "react-select";
 import Balancer from "react-wrap-balancer";
 import Link from "next/link";
 import links from "@/links";
+import Explain from "@/components/Explain";
 
-const baseButton = "px-2 py-2 bg-primary-5 hover:bg-primary-4  text-white dark:text-black rounded text-sm md:text-md"
-const dimButton = "text-grey-800 dark:text-grey-400 bg-transparent hover:bg-gray-200 dark:hover:bg-gray-800"
+const baseButton = "px-2 py-2 bg-primary-5 hover:bg-primary-4  text-white dark:text-black rounded text-sm md:text-md duration-200"
+const dimButton = "px-2 py-2 rounded text-sm md:text-md text-gray-600 dark:text-grey-400 bg-transparent hover:bg-gray-300 dark:hover:bg-gray-800 duration-200"
 
 const StepNav = ({ controller, callback, last = false }: { controller: SubstepController, callback?: Function, last?: boolean }) => {
     return (
         <div className="flex justify-between font-semibold mt-6" onClick={() => callback && callback()}>
             <button className={clsx(baseButton)} onClick={() => controller.substepDown()}>&lt;- Back</button>
             <div className="flex gap-4">
-                <button className={clsx(baseButton, dimButton)} onClick={() => controller.substepUp()}>Skip</button>
+                <button className={dimButton} onClick={() => controller.substepUp()}>Skip</button>
                 <button className={clsx(baseButton)} onClick={() => last ? controller.stepUp() : controller.substepUp()}>Next -&gt;</button>
             </div>
         </div>
@@ -321,9 +322,15 @@ export const GrowerSteps: Step[] = [
                     <div className="flex flex-col flex-1 justify-between">
                         <div>
                             <h4 className="text-left text-lg">1. What types of products do you need certified?</h4>
+                            <Tails.label>
+                                <div>
+                                    Certificate Types 
+                                    <Explain content={<p>Product types have been grouped into common categories in releation to testing requirements. Please select all that apply.</p>} />
+                                </div>
+                            </Tails.label>
                             <Select 
                                 placeholder="Select multiple or type"
-                                className="mt-4 text-left" 
+                                className="text-left" 
                                 onChange={(v:any) => setCertTypes(v)}
                                 defaultValue={cert_types}
                                 options={[
@@ -417,9 +424,14 @@ export const GrowerSteps: Step[] = [
                     <div className="flex flex-col flex-1 justify-between">
                         <div>
                             <h4 className="text-left text-lg">2. What types of licenses or certifications do you require?</h4>
+                            <Tails.label>
+                                <div>
+                                    License Types
+                                    <Explain content={<p>Common certification and license types have been grouped into related categories. Select all that apply to your testing requirements.</p>} />
+                                </div>
                             <Select 
                                 placeholder="Select multiple or type"
-                                className="mt-4 text-left" 
+                                className="text-left" 
                                 onChange={(v:any) => setLicenses(v)}
                                 defaultValue={licenses}
                                 options={[
@@ -441,7 +453,8 @@ export const GrowerSteps: Step[] = [
                                     'Cheese Manufacturing',
                                     'Meat Processing License',
                                 ]} 
-                            />
+                                />
+                        </Tails.label>
                         
 
                         </div>
@@ -476,14 +489,71 @@ export const GrowerSteps: Step[] = [
                         <div>
                             <h4 className="text-left text-lg">What is the approximate size of your Farm?</h4>
                             <Tails.label>
-                                Farm Size
+                                <div>
+                                    Farm Size <Explain content={<p>Only currently active sections/portions of your farm should be used in this calculation</p>} />
+                                </div>
                                 <Tails.input onChange={(e:any) => setAcres(e.target.value)} defaultValue={acres} placeholder="32 acres, 2, sq mi" />
                             </Tails.label>
 
                             <h4 className="text-left text-lg mt-4">How many employees does your company have?</h4>
                             <Tails.label>
+                                <div>
                                 Company Size
+                                <Explain content={<p>Estimate how many employees your company currently has, or has on average for the period of one year.</p>} />
+                                </div>
                                 <Tails.input  onChange={(e:any) => setEmployees(e.target.value)} defaultValue={employees} placeholder="24" />
+                            </Tails.label>
+                            {/* <button onClick={submit} >SUBMIT</button>
+                            <pre>{JSON.stringify(auth)}</pre> */}
+                        </div>
+                        <StepNav controller={controller} callback={submit}/>
+                    </div>
+                )
+            },
+
+            //! test coverage info
+            ({ controller }: { controller: SubstepController }) => {
+                const {auth, setAuth} = useAuth()
+                const [testCoverage, setTestCoverage] = useState(() => auth?.onboardData?.labRequirements?.testCoverage)
+                const [testFrequency, setTestFrequency] = useState(() => auth?.onboardData?.labRequirements?.testFrequency)
+    
+
+                const submit = useCallback(() => {
+                    setAuth((x:AuthData) => ({
+                        ...x,
+                        onboardData: {
+                            ...x.onboardData,
+                            labRequirements: {
+                                ...x.onboardData?.labRequirements,
+                                testCoverage,
+                                testFrequency
+                            }
+                        }
+                    }))
+                }, [testCoverage, testFrequency, setAuth])
+
+                return (
+                    <div className="flex flex-col flex-1 justify-between">
+                        <div>
+                            <h4 className="text-left text-lg">What percentage of your batches is submitted for testing?</h4>
+                            <Tails.label>
+                                <div>
+                                Test Coverage 
+                                <Explain content={
+                                    <p>When submitting a product for testing, what percentage of the total volume produced is tested? For example:
+                                        <br /><b>100 LBs</b> produced
+                                        <br /><b>.1 LB</b> sent for testing
+                                        <br /><b>.1 %</b> test coverage
+                                    </p>} 
+                                />
+                                </div>
+                                <Tails.input onChange={(e:any) => setTestCoverage(e.target.value)} defaultValue={testCoverage} placeholder="3%" />
+                            </Tails.label>
+
+                            <h4 className="text-left text-lg mt-4">How frequently do you submit products for testing?</h4>
+                            <Tails.label>
+                                Test Frequency
+                                <Tails.input  onChange={(e:any) => setTestFrequency(e.target.value)} defaultValue={testFrequency} placeholder="biweekly, 3 times a month" />
                             </Tails.label>
                             {/* <button onClick={submit} >SUBMIT</button>
                             <pre>{JSON.stringify(auth)}</pre> */}
@@ -655,6 +725,55 @@ export const GrowerSteps: Step[] = [
                             </div>
                         </div>
                         <StepNav controller={controller} last/>
+                    </div>
+                )
+            },
+            
+        ]
+
+    },
+    {
+        title: "Earn Chainleaf Rewards",
+        img: "/images/chainleaf/save-desktop.png",
+        substeps: [
+
+             //! contact info
+             ({ controller }: { controller: SubstepController }) => {
+                const {auth, setAuth} = useAuth()
+                const [contactInfo, setContactInfo] = useState(() => auth?.onboardData?.profile?.contactInfo ?? auth?.loginData?.user_email ?? auth?.subData?.email)
+    
+
+                const submit = useCallback(() => {
+                    setAuth((x:AuthData) => ({
+                        ...x,
+                        onboardData: {
+                            ...x.onboardData,
+                            profile: {
+                                ...x.onboardData?.profile,
+                                contactInfo
+                            }
+                        }
+                    }))
+                }, [contactInfo, setAuth])
+
+                return (
+                    <div className="flex flex-col flex-1 justify-between">
+                        <div>
+                            <h4 className="text-left text-lg">Interested in Using our Services During the Beta?</h4>
+                            <p>Work with us during our early stages to influence our platform in your favor, or help us grow as a community. Let us know if there is anything we can do for you or your farm!</p>
+                            <Tails.label>
+                                <div>
+                                Contact Info
+                                <Explain content={<p>Leave an email or phone number where a Chainleaf Labs representative can contact you in the future.</p>} />
+                                </div>
+                                <Tails.input onChange={(e:any) => setContactInfo(e.target.value)} defaultValue={contactInfo} placeholder="John at Grisham Farms (248) 555-1234" />
+                            </Tails.label>
+
+                     
+                            {/* <button onClick={submit} >SUBMIT</button>
+                            <pre>{JSON.stringify(auth)}</pre> */}
+                        </div>
+                        <StepNav controller={controller} callback={submit}/>
                     </div>
                 )
             },

@@ -18,6 +18,7 @@ export type OnboardingResponses = {
     displayName?: string;
     phone?: string;
     website?: string;
+    contactInfo?: string;
   },
   location?: {
     address?: string;
@@ -29,6 +30,9 @@ export type OnboardingResponses = {
     licenses?: string[];
     acres?: string;
     employees?: string;
+    // the percentage of any batch that is sent for testing: 100 lb batch, .01 lb sent for testing (.01% test coverage)
+    testCoverage?: string;
+    testFrequency?: string;
   },
 }
 

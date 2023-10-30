@@ -56,7 +56,9 @@ const BlastForm = (props: BlastProps) => {
                         subscribe: true,
                     }
                 }))
-                router.push(`/join/subscribed?email=${email}`)
+
+                
+                router.push(`/join/subscribed?email=${email}${data.EmailExists && '&exists=true'}`)
             }else{
                 setError('Email failed...')
                 console.log('request error:', { status, data })
