@@ -429,6 +429,7 @@ export const GrowerSteps: Step[] = [
                                     License Types
                                     <Explain content={<p>Common certification and license types have been grouped into related categories. Select all that apply to your testing requirements.</p>} />
                                 </div>
+                        </Tails.label>
                             <Select 
                                 placeholder="Select multiple or type"
                                 className="text-left" 
@@ -454,7 +455,6 @@ export const GrowerSteps: Step[] = [
                                     'Meat Processing License',
                                 ]} 
                                 />
-                        </Tails.label>
                         
 
                         </div>
