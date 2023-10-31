@@ -151,8 +151,9 @@ const Banner = () => {
   return (
     <div id="home" className="flex flex-col-reverse lg:flex-row lg:py-20 my-10 md:my-20 items-center justify-evenly w-full max-w-1200 pl-0 lg:pl-12 min-h-[60vh]">
         <div className="flex-col flex-1 text-center lg:text-left p-4 z-10 max-w-[32em] items-center w-full">
-          <h2 className="text-dark font-semibold mb-2 text-xs md:text-md w-full">{truth.hero.supheading}</h2>
-          <h3 className="text-2xl md:text-3xl lg:text-5xl font-bold leading-26 mb-6 flex-col md:max-w-[13em] lg:min-w-[13em] text-center md:text-left flex"><span className="w-full">{truth.hero.heading}</span> <span className="text-primary-5 mb-12">{truth.hero.subheading}</span></h3>
+          {/* <h2 className="text-dark font-semibold mb-2 text-xs md:text-md w-full">{truth.hero.supheading}</h2> */}
+          <h3 className="text-2xl md:text-3xl lg:text-5xl font-bold leading-26 flex-col lg:min-w-[13em] flex"><span className="w-full">{truth.hero.heading}</span> <span className="text-primary-5">{truth.hero.subheading}</span></h3>
+          <h2 className="text-dark font-semibold mb-2 text-sm md:text-md w-full mb-6">{truth.hero.subtext}</h2>
          
           {/* <BlastForm placeholder='Enter your email to join the wait list!' /> */}
           <Link passHref href="/join/subscribe">
