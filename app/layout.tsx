@@ -4,11 +4,12 @@ import { Inter } from 'next/font/google'
 import Head from 'next/head'
 import Script from 'next/script'
 import Nav from '@/components/Nav'
+import { Metadata } from 'next'
 
 
 const inter = Inter({ subsets: ['latin'] })
 
-export const metadata = truth.metadata
+export const metadata:Metadata = truth.metadata
 
 
 
